@@ -43,7 +43,7 @@ public class ServiceBeanUtil
     }
     
     private static JdbcType getJDBCType(DataType dataType) {
-        if ("String".equals(dataType.getName())) return JdbcType.VARCHAR;
+        if (DataType.STRING.getName().equals(dataType.getName())) return JdbcType.VARCHAR;
         else if (dataType == DataType.BIGDEECIMAL) return JdbcType.DECIMAL;
         else if (dataType == DataType.INT) return JdbcType.INTEGER;
         else if (dataType == DataType.LONG) return JdbcType.BIGINT;

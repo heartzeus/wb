@@ -23,16 +23,13 @@ public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
     public void setProperties(String properties) {
         String[] keys = StringUtil.string2Array(properties);
         Resource[] resources = new Resource[keys.length];
-        boolean isDebug = ConfigManager.isDebug();
         int i = 0;
         for (String key : keys) {
             String url = null;
-            if (isDebug) {
-                url = ConfigManager.getPropertiesPath(key, true);
-            }
-            //两种情况都会进入if语句：1.debug模式但是找不到debug配置文件，2正常模式
-            if (StringUtil.isEmpty(url)) {
-                url = ConfigManager.getPropertiesPath(key);
+            url = ConfigManager.getPropertiesPath(key);
+            //如果当模式但是找不到debug配置文件，2正常模式
+            if (StringUtil.isEmpty(url) && ConfigManager.getCurrentConfigPattern() != ConfigManager.DEFAULT_CONFIG_PATTERN) {
+                url = ConfigManager.getPropertiesPath(key, ConfigManager.DEFAULT_CONFIG_PATTERN);
             }
             resources[i] = new ClassPathResource(getSimplePath(url));
         }
