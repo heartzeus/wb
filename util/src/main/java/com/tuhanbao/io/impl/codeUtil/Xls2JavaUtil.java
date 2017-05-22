@@ -52,33 +52,33 @@ public class Xls2JavaUtil extends Xls2CodeUtil
         EnumVarInfo varInfo = (EnumVarInfo)varInfos.get(varInfos.size() - 1);
         sb.append(getEnumVarInfoStr(varInfo, isString)).append(Constants.SEMICOLON).append(Constants.ENTER).append(Constants.ENTER);
         
-        sb.append(Xls2CodeUtil.GAP1).append("public final ");
+        sb.append(Constants.GAP1).append("public final ");
         sb.append(typeStr);
         sb.append(" value;").append(Constants.ENTER).append(Constants.ENTER);
         
-        sb.append(Xls2CodeUtil.GAP1).append("private ").append(className).append(Constants.LEFT_PARENTHESE);
+        sb.append(Constants.GAP1).append("private ").append(className).append(Constants.LEFT_PARENTHESE);
         sb.append(typeStr);
         sb.append(Constants.BLANK).append("value").append(Constants.RIGHT_PARENTHESE);
         sb.append(Constants.BLANK).append(Constants.LEFT_BRACE).append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.GAP2).append("this.value = value;").append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.GAP1).append(Constants.RIGHT_BRACE).append(Constants.ENTER).append(Constants.ENTER);
+        sb.append(Constants.GAP2).append("this.value = value;").append(Constants.ENTER);
+        sb.append(Constants.GAP1).append(Constants.RIGHT_BRACE).append(Constants.ENTER).append(Constants.ENTER);
         
-        sb.append(Xls2CodeUtil.GAP1).append("public static ").append(className).append(" get").append(className).append(Constants.LEFT_PARENTHESE);
+        sb.append(Constants.GAP1).append("public static ").append(className).append(" get").append(className).append(Constants.LEFT_PARENTHESE);
         sb.append(typeStr);
         sb.append(Constants.BLANK).append("value").append(Constants.RIGHT_PARENTHESE);
         sb.append(Constants.BLANK).append(Constants.LEFT_BRACE).append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.GAP2).append("for (").append(className).append(" temp : ").append(className).append(".values())");
+        sb.append(Constants.GAP2).append("for (").append(className).append(" temp : ").append(className).append(".values())");
         sb.append(Constants.BLANK).append(Constants.LEFT_BRACE).append(Constants.ENTER);
         
-        if (type == EnumClassInfo.STRING) sb.append(Xls2CodeUtil.GAP3).append("if (temp.value.equals(value))");
-        else sb.append(Xls2CodeUtil.GAP3).append("if (temp.value == value)");
+        if (type == EnumClassInfo.STRING) sb.append(Constants.GAP3).append("if (temp.value.equals(value))");
+        else sb.append(Constants.GAP3).append("if (temp.value == value)");
         
         sb.append(Constants.BLANK).append(Constants.LEFT_BRACE).append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.GAP4).append("return temp;").append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.GAP3).append(Constants.RIGHT_BRACE).append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.GAP2).append(Constants.RIGHT_BRACE).append(Constants.ENTER).append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.GAP2).append("return null;").append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.GAP1).append(Constants.RIGHT_BRACE).append(Constants.ENTER).append(Constants.ENTER);
+        sb.append(Constants.GAP4).append("return temp;").append(Constants.ENTER);
+        sb.append(Constants.GAP3).append(Constants.RIGHT_BRACE).append(Constants.ENTER);
+        sb.append(Constants.GAP2).append(Constants.RIGHT_BRACE).append(Constants.ENTER).append(Constants.ENTER);
+        sb.append(Constants.GAP2).append("return null;").append(Constants.ENTER);
+        sb.append(Constants.GAP1).append(Constants.RIGHT_BRACE).append(Constants.ENTER).append(Constants.ENTER);
         sb.append(Constants.RIGHT_BRACE);
         return sb.toString();
     }
@@ -136,7 +136,7 @@ public class Xls2JavaUtil extends Xls2CodeUtil
     {
         StringBuilder sb = new StringBuilder();
         sb.append(getNoteStr(var.getNote()));
-        sb.append(Xls2CodeUtil.GAP1).append(var.getName().toUpperCase()).append(Constants.LEFT_PARENTHESE);
+        sb.append(Constants.GAP1).append(var.getName().toUpperCase()).append(Constants.LEFT_PARENTHESE);
         if (isString) sb.append("\"" + var.getValue() + "\"").append(Constants.RIGHT_PARENTHESE);
         else sb.append(var.getValue()).append(Constants.RIGHT_PARENTHESE);
         return sb.toString();
@@ -220,9 +220,9 @@ public class Xls2JavaUtil extends Xls2CodeUtil
         }
         
         if (!StringUtil.isEmpty(classInfo.getStaticStr())) {
-        	sb.append(GAP1).append(Constants.STATIC).append(Constants.BLANK).append(Constants.LEFT_BRACE).append(Constants.ENTER);
+        	sb.append(Constants.GAP1).append(Constants.STATIC).append(Constants.BLANK).append(Constants.LEFT_BRACE).append(Constants.ENTER);
         	sb.append(classInfo.getStaticStr()).append(Constants.ENTER);
-        	sb.append(GAP1).append(Constants.RIGHT_BRACE).append(Constants.ENTER).append(Constants.ENTER);
+        	sb.append(Constants.GAP1).append(Constants.RIGHT_BRACE).append(Constants.ENTER).append(Constants.ENTER);
         }
         
         for (MethodInfo method : classInfo.getMethodInfos())

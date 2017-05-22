@@ -8,47 +8,16 @@ import com.tuhanbao.io.txt.util.TxtUtil;
 
 public final class FileUtil
 {
-    public static String appendPath(String ... paths)
-    {
+    public static String appendPath(String ... paths) {
     	if (paths == null || paths.length == 0) return null;
     	
-    	String path0 = paths[0];
-        StringBuilder sb = new StringBuilder();
     	int length = paths.length;
-    	String lastPath = null;
-    	if (!StringUtil.isEmpty(path0)) {
-    	    sb.append(path0);
-    	    lastPath = path0;
-    	}
-    	
-    	for (int i = 1; i < length; i++) {
+    	for (int i = 0; i < length; i++) {
     	    String path = paths[i];
-    	    if (StringUtil.isEmpty(path)) {
-    	        continue;
-    	    }
-    	    
-    		if (lastPath != null && !lastPath.endsWith(Constants.FILE_SEP) && !lastPath.endsWith("\\")) {
-    			sb.append(Constants.FILE_SEP);
-    		}
-    		sb.append(path);
-    		lastPath = path;
+    	    if (StringUtil.isEmpty(path)) continue;
+            paths[i] = path.replace("\\", Constants.FILE_SEP);
     	}
-    	return sb.toString();
-    }
-    
-    public static String appendStr(String gap, String ... paths)
-    {
-    	if (paths == null || paths.length == 0) return null;
-    	
-    	StringBuilder sb = new StringBuilder(paths[0]);
-    	int length = paths.length;
-    	for (int i = 1; i < length; i++) {
-    		if (!paths[i - 1].endsWith(gap)) {
-    			sb.append(gap);
-    		}
-    		sb.append(paths[i]);
-    	}
-    	return sb.toString();
+    	return StringUtil.appendStr(Constants.FILE_SEP, paths);
     }
     
     public static boolean isExists(String url) {
@@ -58,7 +27,6 @@ public final class FileUtil
     public static String[] getMenus(String filePath) {
         if (StringUtil.isEmpty(filePath)) return StringUtil.EMPTY_STRING_ARRAY;
         
-        filePath = filePath.replace("/", Constants.FILE_SEP);
         filePath = filePath.replace("\\", Constants.FILE_SEP);
         return StringUtil.string2Array(filePath, Constants.FILE_SEP);
     }
@@ -104,7 +72,7 @@ public final class FileUtil
 
     public static void createFile(File f) throws IOException {
         File parentFile = f.getParentFile();
-        if (parentFile == null || !parentFile.exists()) createDir(parentFile);
+        if (parentFile != null && !parentFile.exists()) createDir(parentFile);
         f.createNewFile();
     }
     

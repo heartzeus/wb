@@ -48,7 +48,7 @@ public class Xls2CsUtil extends Xls2CodeUtil
     {
         StringBuilder sb = new StringBuilder();
         String noteStr = getNoteStr(var.getNote());
-        if (!StringUtil.isEmpty(noteStr)) sb.append(noteStr).append(Xls2CodeUtil.GAP1);
+        if (!StringUtil.isEmpty(noteStr)) sb.append(noteStr).append(Constants.GAP1);
         sb.append(var.getName().toUpperCase()).append(" = ");
         sb.append(var.getValue()).append(Constants.COMMA);
         return sb.toString();

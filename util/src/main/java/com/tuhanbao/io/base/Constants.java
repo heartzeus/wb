@@ -170,6 +170,8 @@ public class Constants
     public static final String MID = " * ";
     public static final String END = " */";
     
+    public static final String PROPERTIES_SUFFIX = ".properties";
+    
     //注释符号
     public static final char POUND_SIGN = '#';
     
@@ -180,7 +182,16 @@ public class Constants
             "@tuhanbao"
     };
     
+
+    public static final String GAP1 = "    ";
+    public static final String GAP2 = GAP1 + GAP1;
+    public static final String GAP3 = GAP2 + GAP1;
+    public static final String GAP4 = GAP3 + GAP1;
+    public static final String GAP5 = GAP4 + GAP1;
+    
     //0为只写服务端，1为只写客户端，2为全写，默认为2
     public static final int SERVER = 0, CLIENT = 1, ALL = 2;
+    
+    public static final String DEFAULT_PACKAGE_HEAD = "com.tuhanbao";
     
 }

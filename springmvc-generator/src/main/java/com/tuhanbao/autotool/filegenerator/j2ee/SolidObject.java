@@ -1,4 +1,4 @@
-package com.tuhanbao.autotool.mvc.clazz;
+package com.tuhanbao.autotool.filegenerator.j2ee;
 
 import com.tuhanbao.io.objutil.OverwriteStrategy;
 

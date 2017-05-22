@@ -1,6 +1,7 @@
 package com.tuhanbao.thirdapi.pay.zhongjin;
 
 import com.tuhanbao.util.config.ConfigRefreshListener;
+import com.tuhanbao.util.log.LogManager;
 import com.tuhanbao.util.config.ConfigManager;
 import com.tuhanbao.util.config.Config;
 
@@ -30,6 +31,10 @@ public class ZhongjinConfig implements ConfigRefreshListener {
 
     public static void init() {
         Config config = ConfigManager.getConfig(KEY);
+        if (config == null) {
+            LogManager.warn("no config file for : " + KEY);
+            return;
+        }
         SYSTEM_CONFIG_PATH = config.getString(SYSTEM_CONFIG_PATH_NAME);
         PAYMENT_CONFIG_PATH = config.getString(PAYMENT_CONFIG_PATH_NAME);
         INSTITUTION_ID = config.getString(INSTITUTION_ID_NAME);

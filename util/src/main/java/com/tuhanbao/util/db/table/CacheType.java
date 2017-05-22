@@ -15,5 +15,12 @@ public enum CacheType
     /**
      * 强行缓存所有 
      */
-    CACHE_ALL
+    CACHE_ALL;
+    
+
+    public static CacheType getCacheType(String str) {
+        if ("auto".equalsIgnoreCase(str)) return CacheType.AUTO;
+        if ("all".equalsIgnoreCase(str)) return CacheType.CACHE_ALL;
+        return CacheType.NOT_CACHE;
+    }
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.tuhanbao.util.config.Config;
 import com.tuhanbao.util.config.ConfigManager;
 import com.tuhanbao.util.config.ConfigRefreshListener;
+import com.tuhanbao.util.log.LogManager;
 
 public final class ABCConfig implements ConfigRefreshListener {
     
@@ -71,6 +72,11 @@ public final class ABCConfig implements ConfigRefreshListener {
      */
     private static final void init() {
     	config = ConfigManager.getConfig(ABCConfig.KEY);
+    	if (config == null) {
+            LogManager.warn("no config file for : " + KEY);
+            return;
+        }
+    	
     	ORDER_TIME_OUT_HOURS = config.getInt(ORDER_TIME_OUT_HOURS_NAME);
     }
 

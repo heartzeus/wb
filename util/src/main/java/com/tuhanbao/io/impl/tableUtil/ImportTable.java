@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.io.impl.codeUtil.Xls2CodeUtil;
 import com.tuhanbao.util.db.table.CacheType;
 
 
@@ -170,9 +169,9 @@ public class ImportTable
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append(Xls2CodeUtil.getGap(1) + "public static final class " + getTableName()).append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.getGap(1) + "{").append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.getGap(2) + "public static final Table TABLE = new Table(\"").append(name.toUpperCase()).append("\", ")
+        sb.append(Constants.GAP1 + "public static final class " + getTableName()).append(Constants.ENTER);
+        sb.append(Constants.GAP1 + "{").append(Constants.ENTER);
+        sb.append(Constants.GAP2 + "public static final Table TABLE = new Table(\"").append(name.toUpperCase()).append("\", ")
                 .append("CacheType.").append(getCacheTypeStr()).append(");").append(Constants.ENTER);
         sb.append(Constants.ENTER);
         for (ImportColumn c : columns)
@@ -180,7 +179,7 @@ public class ImportTable
             sb.append(c.toString()).append(Constants.ENTER);
         }
         
-        sb.append(Xls2CodeUtil.getGap(1) + "}").append(Constants.ENTER);
+        sb.append(Constants.GAP1 + "}").append(Constants.ENTER);
         
         return sb.toString();
     }

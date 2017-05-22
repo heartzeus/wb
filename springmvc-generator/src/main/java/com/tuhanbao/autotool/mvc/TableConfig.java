@@ -2,13 +2,13 @@ package com.tuhanbao.autotool.mvc;
 
 import java.util.List;
 
-import com.tuhanbao.autotool.mvc.util.GenerateStrategy;
+import com.tuhanbao.io.objutil.OverwriteStrategy;
 import com.tuhanbao.util.db.table.CacheType;
 
 public class TableConfig {
 
 	//生成策略  默认为融合
-	protected GenerateStrategy gs = GenerateStrategy.MEGER;
+	protected OverwriteStrategy os = OverwriteStrategy.MEGER;
 	
 	//需要生成的方法  默认全部
 	protected int crud = 0xF;
@@ -31,8 +31,8 @@ public class TableConfig {
 	//序列号  oracle下才会有
 	private String sequence;
 
-	public GenerateStrategy getGs() {
-		return gs;
+	public OverwriteStrategy getOs() {
+		return os;
 	}
 
 	public int getCrud() {
@@ -69,8 +69,8 @@ public class TableConfig {
 		this.sequence = sequence;
 	}
 
-	public void setGs(GenerateStrategy gs) {
-		this.gs = gs;
+	public void setOs(OverwriteStrategy os) {
+		this.os = os;
 	}
 
 	public void setCrud(int crud) {

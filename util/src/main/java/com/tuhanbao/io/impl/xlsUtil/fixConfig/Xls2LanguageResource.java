@@ -24,8 +24,7 @@ public class Xls2LanguageResource extends Xls2Config
     public static final String ERRORCODE_URL = "com/threetorch/service/base/constant/ErrorCode.java";
     
     
-    public String[] getConfigStrAndCode(ProjectInfo project, String[][] arrays) throws IOException
-    {
+    public String[] getConfigStrAndCode(ProjectInfo project, String[][] arrays) {
     	return getLanguageResource(project, arrays);
     }
     
@@ -34,7 +33,7 @@ public class Xls2LanguageResource extends Xls2Config
         StringBuilder sb = new StringBuilder();
         StringBuilder configStr = new StringBuilder();
         
-        sb.append("package " + project.getConstantsPath() + ";").append(Constants.ENTER);
+        sb.append("package " + project.getConstantsUrl() + ";").append(Constants.ENTER);
         sb.append(Constants.ENTER);
         sb.append("public class LanguageResource").append(Constants.BLANK);
         sb.append(Constants.LEFT_BRACE).append(Constants.ENTER);
@@ -49,7 +48,7 @@ public class Xls2LanguageResource extends Xls2Config
             if (name == null || value == null) continue;
             
             name = name.toUpperCase();
-			sb.append(Xls2CodeUtil.GAP1).append("public static final String ").append(name).append(" = \"")
+			sb.append(Constants.GAP1).append("public static final String ").append(name).append(" = \"")
                 .append(name).append("\";").append(Constants.ENTER).append(Constants.ENTER);
 			configStr.append(name).append(Constants.EQUAL).append(value).append(Constants.ENTER);
         }

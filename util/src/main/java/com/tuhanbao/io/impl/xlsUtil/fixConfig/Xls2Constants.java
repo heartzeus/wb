@@ -18,7 +18,7 @@ public class Xls2Constants implements Xls2Code
     { 
     	List<ClassInfo> classInfos = new ArrayList<ClassInfo>();
     	ClassInfo clazzInfo = new ClassInfo();
-    	clazzInfo.setPackageInfo(project.getConstantsPath());
+    	clazzInfo.setPackageInfo(project.getConstantsUrl());
     	clazzInfo.setName("ConfigConstants");
         for (String[] array : arrays)
         {
@@ -72,16 +72,16 @@ public class Xls2Constants implements Xls2Code
             String desc = Xls2CodeUtil.getString(array, 2);
             if (desc != null && !desc.isEmpty())
             {
-                sb.append(Xls2CodeUtil.GAP1).append("//").append(desc).append(Constants.ENTER);
+                sb.append(Constants.GAP1).append("//").append(desc).append(Constants.ENTER);
             }
             if (value.matches("^[-]{0,1}[0-9]+$"))
             {
-                sb.append(Xls2CodeUtil.GAP1).append("public const int ").append(name.toUpperCase()).append(" = ")
+                sb.append(Constants.GAP1).append("public const int ").append(name.toUpperCase()).append(" = ")
                     .append(value).append(";").append(Constants.ENTER).append(Constants.ENTER);
             }
             else
             {
-                sb.append(Xls2CodeUtil.GAP1).append("public const string ").append(name.toUpperCase()).append(" = \"")
+                sb.append(Constants.GAP1).append("public const string ").append(name.toUpperCase()).append(" = \"")
                     .append(value).append("\";").append(Constants.ENTER).append(Constants.ENTER);
             }
         }

@@ -5,53 +5,52 @@ import java.util.Map;
 
 import com.tuhanbao.io.base.Constants;
 import com.tuhanbao.io.objutil.StringUtil;
+import com.tuhanbao.util.config.ConfigManager;
+import com.tuhanbao.util.config.ConfigPattern;
 import com.tuhanbao.util.db.conn.DBSrc;
 
 public class ModuleManager {
-	private static final Map<String, DBSrc> MODULES = new HashMap<String, DBSrc>();
-
-	private static final Map<String, DBSrc> DEBUG_MODULES = new HashMap<String, DBSrc>();
+	private static final Map<ConfigPattern, Map<String, DBSrc>> MODULES = new HashMap<>();
 	
-	public static void addModule(String module, DBSrc src) {
+	public static void addModule(ConfigPattern cp, String module, DBSrc src) {
 		if (StringUtil.isEmpty(module)) module = Constants.EMPTY;
-		MODULES.put(module, src);
-	}
-
-	public static void addDebugModule(String module, DBSrc src) {
-		if (StringUtil.isEmpty(module)) module = Constants.EMPTY;
-		DEBUG_MODULES.put(module, src);
+		if (!MODULES.containsKey(cp)) {
+		    MODULES.put(cp, new HashMap<String, DBSrc>());
+		}
+		MODULES.get(cp).put(module, src);
 	}
 	
 	public static DBSrc getDBSrc(String module) {
-		if (StringUtil.isEmpty(module)) module = Constants.EMPTY;
-		return MODULES.get(module);
+	    return getDBSrc(ConfigManager.DEFAULT_CONFIG_PATTERN, module);
+	}
+
+	public static DBSrc getDBSrc(ConfigPattern cp, String module) {
+	    if (StringUtil.isEmpty(module)) module = Constants.EMPTY;
+	    Map<String, DBSrc> map = MODULES.get(cp);
+	    if (map == null) return null;
+	    return map.get(module);
 	}
 	
-	public static DBSrc getDebugDBSrc(String module) {
-		if (StringUtil.isEmpty(module)) module = Constants.EMPTY;
-		return DEBUG_MODULES.get(module);
-	}
-
 	public static String getModule(DBSrc src) {
-		for (Map.Entry<String, DBSrc> entry : MODULES.entrySet()) {
+	    return getModule(ConfigManager.DEFAULT_CONFIG_PATTERN, src);
+	}
+
+	public static String getModule(ConfigPattern cp, DBSrc src) {
+		Map<String, DBSrc> allDBSrc = getAllModules(cp);
+		if (allDBSrc == null) return null;
+		
+        for (Map.Entry<String, DBSrc> entry : allDBSrc.entrySet()) {
 			if (entry.getValue() == src) return entry.getKey();
 		}
 		return null;
 	}
-
-	public static String getDebugModule(DBSrc src) {
-		for (Map.Entry<String, DBSrc> entry : DEBUG_MODULES.entrySet()) {
-			if (entry.getValue() == src) return entry.getKey();
-		}
-		return null;
-	}
-
+	
 	public static Map<String, DBSrc> getAllModules() {
-		return MODULES;
+	    return getAllModules(ConfigManager.DEFAULT_CONFIG_PATTERN);
 	}
 
-	public static Map<String, DBSrc> getAllDebugModules() {
-		return DEBUG_MODULES;
+	public static Map<String, DBSrc> getAllModules(ConfigPattern cp) {
+		return MODULES.get(cp);
 	}
 }
 

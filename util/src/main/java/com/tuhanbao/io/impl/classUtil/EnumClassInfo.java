@@ -22,6 +22,6 @@ public class EnumClassInfo extends ClassInfo implements IEnumType
 
 	@Override
 	public String getFullClassName(ProjectInfo projectInfo) {
-		return projectInfo.getConstantsPath() + ".enums." + this.getClassName();
+		return projectInfo.getConstantsUrl() + ".enums." + this.getClassName();
 	}
 }

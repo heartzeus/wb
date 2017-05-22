@@ -18,7 +18,7 @@ public class Xls2Enum implements Xls2Code
 	private StringBuilder properties = new StringBuilder();
 	
     @Override
-    public List<ClassInfo> getClassInfos(ProjectInfo project, String[][] arrays) throws IOException
+    public List<ClassInfo> getClassInfos(ProjectInfo project, String[][] arrays)
     {
         return getEnums(project, arrays);
     }

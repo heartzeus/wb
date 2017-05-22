@@ -121,7 +121,7 @@
     </distributionManagement>
 
     <build>
-        <finalName>third_api</finalName>
+        <finalName>third_api_special</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

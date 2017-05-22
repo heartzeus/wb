@@ -34,8 +34,8 @@ public class DesEncipherTool implements IEncipherTool
 		}
     }
     
-    public static DesEncipherTool getDesEncipherTool(byte[] password) {
-    	return new DesEncipherTool(password);
+    public static DesEncipherTool getDesEncipherTool(String password) {
+    	return new DesEncipherTool(password.getBytes());
     }
     
     @Override

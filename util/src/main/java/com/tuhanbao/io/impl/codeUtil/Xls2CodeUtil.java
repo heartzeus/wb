@@ -9,27 +9,25 @@ import com.tuhanbao.io.objutil.StringUtil;
 
 public abstract class Xls2CodeUtil
 {
-    public static final String GAP1 = "    ", GAP2 = GAP1 + GAP1, GAP3 = GAP2 + GAP1, GAP4 = GAP3 + GAP1, GAP5 = GAP4 + GAP1;
-    
     public static String getGap(int n)
     {
         switch (n)
         {
             case 1:
-                return GAP1;
+                return Constants.GAP1;
             case 2:
-                return GAP2;
+                return Constants.GAP2;
             case 3:
-                return GAP3;
+                return Constants.GAP3;
             case 4:
-                return GAP4;
+                return Constants.GAP4;
             case 5:
-                return GAP5;
+                return Constants.GAP5;
             default:
-                return "";
+                return Constants.EMPTY;
         }
     } 
-
+    
     public static NotesInfo getNotesInfo(String[] arrays, int gap)
     {
         NotesInfo notes = new NotesInfo(0);

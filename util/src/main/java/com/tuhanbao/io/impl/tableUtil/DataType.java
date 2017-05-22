@@ -52,6 +52,11 @@ public enum DataType
 		return bigName;
 	}
 	
+	/**
+	 * 获取框架包的自定义类型
+	 * @see com.tuhanbao.util.db.table.data
+	 * @return
+	 */
 	public String getDIYValue() {
 		if (this == DATE) return "TimeValue";
 		else if (this.name.equals(INT.getName())) return "IntValue";

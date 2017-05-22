@@ -11,9 +11,8 @@ public class EnumManager {
 
 	private static final Map<String, IEnumType> ENUMS = new HashMap<String, IEnumType>();
 	
-	
 	static {
-		//系统有一些初始化的枚举
+		//框架包中有一些公共枚举，在配置数据库字段枚举类型时，可以选择这些公共枚举
 		register("FlowStatus", new EnumType("FlowStatus", "com.tuhanbao.thirdapi.pay.FlowStatus", EnumClassInfo.INT));
 		register("PayPlatform", new EnumType("PayPlatform", "com.tuhanbao.thirdapi.pay.PayPlatform", EnumClassInfo.INT));
 		register("Operator", new EnumType("Operator", "com.tuhanbao.web.filter.operator.Operator", EnumClassInfo.INT));

@@ -201,9 +201,6 @@ public class OracleDBExcutor extends DBExcutor
 		}
 		result = result && StringUtil.isEqual(newCol.getDefaultValue(), oldCol.getDefaultValue())
 			&& StringUtil.isEqual(newCol.getComment(), oldCol.getComment());
-		if (result == false) {
-			System.out.println();
-		}
 		return result;
 	}
 

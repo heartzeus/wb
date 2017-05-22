@@ -15,6 +15,8 @@ public class AESEncipherTool implements IEncipherTool
     
     private Cipher decodeCipher, encodeCipher;
     
+    public static final int PASSWORD_LENGTH = 16;
+    
 	private AESEncipherTool(byte[] password)
     {
 		key = new SecretKeySpec(password, KEY);
@@ -28,9 +30,28 @@ public class AESEncipherTool implements IEncipherTool
 		}
     }
     
-    public static AESEncipherTool getAESEncipherTool(byte[] password) {
-    	return new AESEncipherTool(password);
+	/**
+	 * 长度必须16位
+	 * @param password
+	 * @return
+	 */
+    public static AESEncipherTool getAESEncipherTool(String password) {
+
+        //由于AES的特殊性，密码长度有要求
+        if (password.length() < AESEncipherTool.PASSWORD_LENGTH) {
+            password += Encipher.DEFAULT_PASSWORD;
+        }
+        byte[] aesBytes = new byte[AESEncipherTool.PASSWORD_LENGTH];
+        System.arraycopy(password.getBytes(), 0, aesBytes, 0, AESEncipherTool.PASSWORD_LENGTH);
+    	return new AESEncipherTool(aesBytes);
     }
+    
+//    public static void main(String args[]) {
+//        String s = "1231289391";
+//        getAESEncipherTool(Base64.decode("0ooVTNEDnswZH3tNw/4yEw==".getBytes())).encrypt(s.getBytes());
+////        String newStr = new String(En);
+////        System.out.println(newStr);
+//    }
     
     @Override
     public byte[] decrypt(byte[] bytes)

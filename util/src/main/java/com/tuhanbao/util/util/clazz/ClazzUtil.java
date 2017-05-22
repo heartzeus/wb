@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import org.junit.Test;
+
 import com.tuhanbao.io.base.Constants;
 import com.tuhanbao.io.objutil.StringUtil;
 import com.tuhanbao.util.log.LogManager;
@@ -154,5 +156,9 @@ public class ClazzUtil {
                 }
             }
         }
+    }
+    
+    public static String getPackageName(Class<?> clazz) {
+        return clazz.getPackage().getName();
     }
 }

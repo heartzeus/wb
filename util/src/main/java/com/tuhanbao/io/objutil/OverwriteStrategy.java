@@ -8,7 +8,14 @@ public enum OverwriteStrategy {
     COVER(1), 
     
     //党源文件存在时生成一个bak文件
-    BAK(2);
+    BAK(2),
+    
+    //融合  TODO 暂未实现
+    @Deprecated
+    MEGER(3),
+    
+    //从文件末尾继续写
+    ADD(4);
     
     public int value;
     

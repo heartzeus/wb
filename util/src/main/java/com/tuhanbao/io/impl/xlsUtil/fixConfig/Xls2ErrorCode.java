@@ -21,11 +21,10 @@ import com.tuhanbao.io.objutil.StringUtil;
 public class Xls2ErrorCode implements Xls2Code
 {
 	@Override
-	public List<ClassInfo> getClassInfos(ProjectInfo project, String[][] arrays)
-			throws IOException {
+	public List<ClassInfo> getClassInfos(ProjectInfo project, String[][] arrays) {
 		List<ClassInfo> classInfos = new ArrayList<ClassInfo>();
     	ClassInfo clazzInfo = new ClassInfo();
-    	clazzInfo.setPackageInfo(project.getConstantsPath());
+    	clazzInfo.setPackageInfo(project.getConstantsUrl());
     	clazzInfo.addImportInfo("com.tuhanbao.util.exception.BaseErrorCode");
     	clazzInfo.setName("ErrorCode extends BaseErrorCode");
     	clazzInfo.setFinal(true);

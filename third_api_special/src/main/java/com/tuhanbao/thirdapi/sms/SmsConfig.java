@@ -1,6 +1,7 @@
 package com.tuhanbao.thirdapi.sms;
 
 import com.tuhanbao.util.config.ConfigRefreshListener;
+import com.tuhanbao.util.log.LogManager;
 import com.tuhanbao.util.config.ConfigManager;
 import com.tuhanbao.util.config.Config;
 
@@ -38,6 +39,11 @@ public class SmsConfig implements ConfigRefreshListener {
 
     public static void init() {
         Config config = ConfigManager.getConfig(KEY);
+        if (config == null) {
+            LogManager.warn("no config file for : " + KEY);
+            return;
+        }
+        
         URL = config.getString(URL_NAME);
         USERNAME = config.getString(USERNAME_NAME);
         PASSWORD = config.getString(PASSWORD_NAME);

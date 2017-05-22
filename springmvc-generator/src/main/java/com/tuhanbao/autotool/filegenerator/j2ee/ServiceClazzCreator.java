@@ -1,34 +1,28 @@
-package com.tuhanbao.autotool.mvc.clazz;
+package com.tuhanbao.autotool.filegenerator.j2ee;
 
 import com.tuhanbao.Constants;
-import com.tuhanbao.autotool.mvc.J2EEProjectInfo;
+import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
 import com.tuhanbao.autotool.mvc.J2EETable;
 import com.tuhanbao.io.impl.classUtil.ClassInfo;
+import com.tuhanbao.io.objutil.OverwriteStrategy;
 import com.tuhanbao.io.objutil.StringUtil;
 import com.tuhanbao.util.util.clazz.ClazzUtil;
 
-public class ServiceClazzCreator extends ClazzCreator {
-	public ServiceClazzCreator(J2EEProjectInfo project) {
-		super(project);
+public class ServiceClazzCreator extends J2EETableClazzCreator {
+	public ServiceClazzCreator(SpringMvcProjectInfo project) {
+		super(project, OverwriteStrategy.NEVER_COVER);
 	}
 
-	public ClassInfo toClazz(J2EETable table) {
+	public ClassInfo table2Class(J2EETable table) {
 		ClassInfo clazz = new ClassInfo();
 		String modelName = table.getModelName();
 		clazz.setName(table.getServiceName() + " extends ServiceImpl<" + modelName + "> implements " + table.getIServiceName());
 		String module = table.getModule();
-		clazz.setPackageInfo(project.getServicePath(module));
+		clazz.setPackageInfo(project.getServiceUrl(module));
 		clazz.addImportInfo("org.springframework.stereotype.Service");
 		clazz.addImportInfo("org.springframework.transaction.annotation.Transactional");
-		//固定的serviceImpl
-		if(StringUtil.isEmpty(module)){
-			clazz.addImportInfo(project.getServicePath(null) + Constants.STOP_EN + "ServiceImpl");
-		}else{
-			clazz.addImportInfo(project.getServicePath(null) + Constants.STOP_EN + module + Constants.STOP_EN + "ServiceImpl");
-		}
-		
-		clazz.addImportInfo(project.getServiceBeanPath(module) + Constants.STOP_EN + modelName);
-		clazz.addImportInfo(project.getIServicePath(module) + Constants.STOP_EN + table.getIServiceName());
+		clazz.addImportInfo(project.getServiceBeanUrl(module) + Constants.STOP_EN + modelName);
+		clazz.addImportInfo(project.getIServiceUrl(module) + Constants.STOP_EN + table.getIServiceName());
 		
 		clazz.addAnnotation("@Service(\"" + ClazzUtil.firstCharLowerCase(modelName) + "Service\")");
 		clazz.addAnnotation("@Transactional" + getTransactionManagerName(module));

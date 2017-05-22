@@ -6,6 +6,7 @@ package com.tuhanbao.thirdapi.push.baidu;
 import com.tuhanbao.util.config.Config;
 import com.tuhanbao.util.config.ConfigManager;
 import com.tuhanbao.util.config.ConfigRefreshListener;
+import com.tuhanbao.util.log.LogManager;
 
 /**
  * 2016年10月25日
@@ -26,6 +27,11 @@ public class BaiduPushConfig implements ConfigRefreshListener {
 
     private static void init() {
         Config config = ConfigManager.getConfig(KEY);
+        if (config == null) {
+            LogManager.warn("no config file for : " + KEY);
+            return;
+        }
+        
         APIKEY = config.getString(KEY_APIKEY);
         SECRETKEY = config.getString(KEY_SECRETKEY);
     }

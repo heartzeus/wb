@@ -3,13 +3,17 @@ package com.tuhanbao.util.config;
 public class BaseConfigConstants
 {
     //debug
-    public static final String IS_DEBUG = "is_debug";
+    public static final String PATTERN = "pattern";
+
+    public static final String ALL_PATTERN = "all_pattern";
 
     public static final String IS_MAINTAINING = "is_maintaining";
 
     public static final String WHITE_LIST = "white_list";
 
     public static final String REPAIR_TIME = "REPAIR_TIME";
+    
+    public static final String PASSWORD = "password";
     
     //TCP端口
     public static final String TCP_PORT = "tcpport";

@@ -4,9 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.tuhanbao.io.objutil.StringUtil;
-import com.tuhanbao.util.config.Config;
-import com.tuhanbao.util.config.ConfigManager;
 import com.tuhanbao.util.db.conn.DBSrc;
+import com.tuhanbao.util.log.LogManager;
 
 public class DSConfig {
 	
@@ -30,6 +29,11 @@ public class DSConfig {
 	
 	private static void init() {
 		Config config = ConfigManager.getConfig(KEY);
+        if (config == null) {
+            LogManager.warn("no config file for : " + KEY);
+            return;
+        }
+        
 		DB_DRIVER = config.getString(DB_DRIVER_NAME);
 		DB_URL = config.getString(DB_URL_NAME);
 		

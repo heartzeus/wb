@@ -2,8 +2,6 @@ package com.tuhanbao;
 
 public class Constants extends com.tuhanbao.io.base.Constants {
 	public static final String CONTROLLER = "controller";
-	
-	public static final String PACKAGE_HEAD = "com.tuhanbao";
 
 	public static final String CONSTANTS = "constants";
 	
@@ -25,5 +23,11 @@ public class Constants extends com.tuhanbao.io.base.Constants {
 
 	public static final String ISERVICE_NAME = "com.tuhanbao.web.service.IService";
 
+	
+	public static final String LANGUAGE_PROPERTIES = "language.properties";
+	public static final String LANGUAGE_CLASS = "LanguageResource.java";
 	public static final String TABLE_CONSTANTS_NAME = "TableConstants";
+	public static final String TABLE_CONSTANTS_CLASS = "TableConstants.java";
+
+	public static final String AUTOCREATE = "autocreate";
 }

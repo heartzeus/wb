@@ -12,7 +12,7 @@ public enum GenerateStrategy {
 	 */
 	COVER, 
 	/**
-	 * 跟以前版本进行融合
+	 * 跟以前版本进行融合，TODO 暂时未实现
 	 */
 	MEGER, 
 	/**

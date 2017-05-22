@@ -3,6 +3,7 @@ package com.tuhanbao.thirdapi.ftp;
 import com.tuhanbao.util.config.Config;
 import com.tuhanbao.util.config.ConfigManager;
 import com.tuhanbao.util.config.ConfigRefreshListener;
+import com.tuhanbao.util.log.LogManager;
 
 public class FtpConfig implements ConfigRefreshListener {
     public static final String KEY = "ftp";
@@ -50,6 +51,10 @@ public class FtpConfig implements ConfigRefreshListener {
 
     public static void init() {
         Config config = ConfigManager.getConfig(KEY);
+        if (config == null) {
+            LogManager.warn("no config file for : " + KEY);
+            return;
+        }
         HOSTNAME = config.getString(HOSTNAME_NAME);
         FTPPORT = config.getInt(FTPPORT_NAME);
         USERNAME = config.getString(USERNAME_NAME);

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.tuhanbao.io.objutil.ByteUtil;
 import com.tuhanbao.io.objutil.StringUtil;
 import com.tuhanbao.util.config.BaseConfigConstants;
+import com.tuhanbao.util.config.Config;
 import com.tuhanbao.util.config.ConfigManager;
 
 /**
@@ -18,24 +19,45 @@ public class Encipher
     public static IEncipherTool TCP_TOOL = null;
     public static IEncipherTool HTTP_TOOL = null;
     
+    
     private static Map<EncipherType, IEncipherTool> TOOLS = new HashMap<EncipherType, IEncipherTool>();
     
+    public static final String DEFAULT_PASSWORD = "tuhanbao";
     
     static
     {
-        register(EncipherType.SELF, SelfEncipherTool.INSTANCE);
-        register(EncipherType.DES, SelfEncipherTool.INSTANCE);
-        register(EncipherType.AES, SelfEncipherTool.INSTANCE);
+        Config baseConfig = ConfigManager.getBaseConfig();
+        String password = null;
+        String httpEnclipherType = null;
+        String tcpEnclipherType = null;
+        if (baseConfig != null) {
+            password = baseConfig.getString(BaseConfigConstants.PASSWORD);
+            //初始化加解密
+            httpEnclipherType = baseConfig.getString(BaseConfigConstants.HTTP_ENCLIPHER);
+            tcpEnclipherType = baseConfig.getString(BaseConfigConstants.TCP_ENCLIPHER);
+        }
+        resetPassword(password);
         
-        //初始化加解密
-        String httpEnclipherType = ConfigManager.getBaseConfig().getString(BaseConfigConstants.HTTP_ENCLIPHER);
-        String tcpEnclipherType = ConfigManager.getBaseConfig().getString(BaseConfigConstants.TCP_ENCLIPHER);
         if (!StringUtil.isEmpty(httpEnclipherType)) {
             HTTP_TOOL = getToolByType(EncipherType.valueOf(httpEnclipherType));
         }
         if (!StringUtil.isEmpty(tcpEnclipherType)) {
             TCP_TOOL = getToolByType(EncipherType.valueOf(tcpEnclipherType));
         }
+    }
+    
+    /**
+     * 此方法只允许在工程启动时预先调用
+     * @param password
+     */
+    public static void resetPassword(String password) {
+        if (StringUtil.isEmpty(password)) {
+            password = DEFAULT_PASSWORD;
+        }
+        //密码之所以用byte，因为很可能密码本来就是加密了的，无法用String表示
+        register(EncipherType.SELF, SelfEncipherTool.getInstance(password));
+        register(EncipherType.DES, DesEncipherTool.getDesEncipherTool(password));
+        register(EncipherType.AES, AESEncipherTool.getAESEncipherTool(password));
     }
     
     public static byte[] encrypt(EncipherType type, byte[] bytes) {

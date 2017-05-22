@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.io.impl.codeUtil.Xls2CodeUtil;
 import com.tuhanbao.io.objutil.StringUtil;
 
 public class XlsTable
@@ -36,9 +35,9 @@ public class XlsTable
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append(Xls2CodeUtil.getGap(1) + "public static final class " + name).append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.getGap(1) + "{").append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.getGap(2) + "public static final Table TABLE = new Table(\"").append(tableName.toUpperCase()).append("\", ")
+        sb.append(Constants.GAP1 + "public static final class " + name).append(Constants.ENTER);
+        sb.append(Constants.GAP1 + "{").append(Constants.ENTER);
+        sb.append(Constants.GAP2 + "public static final Table TABLE = new Table(\"").append(tableName.toUpperCase()).append("\", ")
                 .append("CacheType.").append(getCacheTypeStr()).append(");").append(Constants.ENTER);
         sb.append(Constants.ENTER);
         for (XlsColumn c : list)
@@ -46,7 +45,7 @@ public class XlsTable
             sb.append(c.toString()).append(Constants.ENTER);
         }
         
-        sb.append(Xls2CodeUtil.getGap(1) + "}").append(Constants.ENTER);
+        sb.append(Constants.GAP1 + "}").append(Constants.ENTER);
         
         return sb.toString();
     }
@@ -93,7 +92,7 @@ public class XlsTable
         public String toString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.append(Xls2CodeUtil.getGap(2)).append("public static final Column ").append(getName()).append(" = ColumnFactory.createColumn(TABLE, \"").append(colName.toUpperCase())
+            sb.append(Constants.GAP2).append("public static final Column ").append(getName()).append(" = ColumnFactory.createColumn(TABLE, \"").append(colName.toUpperCase())
                     .append("\", DataType.").append(getDataType());
             if (isPK()) sb.append(", true");
             sb.append(");");

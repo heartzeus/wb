@@ -2,7 +2,6 @@ package com.tuhanbao.io.impl.tableUtil;
 
 import com.tuhanbao.io.base.Constants;
 import com.tuhanbao.io.impl.classUtil.IEnumType;
-import com.tuhanbao.io.impl.codeUtil.Xls2CodeUtil;
 import com.tuhanbao.io.objutil.StringUtil;
 import com.tuhanbao.util.db.table.dbtype.DBDataType;
 import com.tuhanbao.util.exception.MyException;
@@ -13,13 +12,14 @@ public class ImportColumn implements IColumn, Comparable<IColumn>
 	
 	protected String defaultValue;
 
+	//DBDataType是指数据库的类型，因为java类型是无法确定该字段在数据库是什么类型，必须记录
 	protected DBDataType dbDataType;
 	
 	protected DataType dataType;
     
 	protected long length = -1L;
     
-    //字段是否需要。些字段虽然在数据库中存在，但是不必生成代码。
+    //字段是否需要。某些字段虽然在数据库中存在，但是不必生成代码。
 	protected boolean isNeed = true;
 	
 	//自己的table
@@ -215,7 +215,7 @@ public class ImportColumn implements IColumn, Comparable<IColumn>
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append(Xls2CodeUtil.getGap(2)).append("public static final Column ").append(getName()).append(" = ColumnFactory.createColumn(TABLE, \"").append(name.toUpperCase())
+        sb.append(Constants.GAP2).append("public static final Column ").append(getName()).append(" = ColumnFactory.createColumn(TABLE, \"").append(name.toUpperCase())
                 .append("\", DataType.").append(getDataType());
         ImportColumn fc = getFkColumn();
         if (isPK()) {

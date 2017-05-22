@@ -359,4 +359,34 @@ public class StringUtil
 //        return s;
 //    }
     
+
+    /**
+     * 与array2String的区别在于，他每次会检查字符串末尾是不是已经有了gap，有的话不会再加
+     * 
+     * @param gap
+     * @param paths
+     * @return
+     */
+    public static String appendStr(String gap, String ... paths)  {
+        if (paths == null || paths.length == 0) return null;
+        
+        StringBuilder sb = new StringBuilder();
+        int length = paths.length;
+        String lastPath = null;
+        for (int i = 0; i < length; i++) {
+            String path = paths[i];
+            if (StringUtil.isEmpty(path)) {
+                continue;
+            }
+            
+            if (!StringUtil.isEmpty(lastPath) && !lastPath.endsWith(gap)) {
+                sb.append(gap);
+            }
+            sb.append(path);
+            lastPath = path;
+        }
+        return sb.toString();
+        
+    }
+    
 }

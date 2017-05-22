@@ -1,38 +1,39 @@
-package com.tuhanbao.autotool.mvc.clazz;
+package com.tuhanbao.autotool.filegenerator.j2ee;
 
-import com.tuhanbao.autotool.mvc.J2EEProjectInfo;
+import com.tuhanbao.Constants;
+import com.tuhanbao.autotool.filegenerator.ClazzCreator;
 import com.tuhanbao.autotool.mvc.J2EETable;
-import com.tuhanbao.io.base.Constants;
+import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
 import com.tuhanbao.io.impl.classUtil.ClassInfo;
 import com.tuhanbao.io.impl.classUtil.IEnumType;
 import com.tuhanbao.io.impl.classUtil.MethodInfo;
 import com.tuhanbao.io.impl.classUtil.PackageEnum;
-import com.tuhanbao.io.impl.codeUtil.Xls2CodeUtil;
 import com.tuhanbao.io.impl.tableUtil.DataType;
 import com.tuhanbao.io.impl.tableUtil.ImportColumn;
 import com.tuhanbao.io.impl.tableUtil.Relation;
+import com.tuhanbao.io.objutil.OverwriteStrategy;
 import com.tuhanbao.io.objutil.StringUtil;
 import com.tuhanbao.util.db.table.data.BooleanValue;
 import com.tuhanbao.util.util.clazz.ClazzUtil;
 
-public class MOClazzCreator extends ClazzCreator {
+public class MOClazzCreator extends J2EETableClazzCreator {
     private static final String MO_CLASS = "com.tuhanbao.base.MetaObject";
     private static final String SERVICE_BEAN_CLASS = "com.tuhanbao.base.ServiceBean";
     private static final String MOCLASS_SUFFIX = "MO";
     
-	public MOClazzCreator(J2EEProjectInfo project) {
+	public MOClazzCreator(SpringMvcProjectInfo project) {
 		super(project);
 	}
 
-	public ClassInfo toClazz(J2EETable table) {
+	public ClassInfo table2Class(J2EETable table) {
 		ClassInfo classInfo = new ClassInfo();
         String modelName = table.getModelName();
         String tableName = table.getTableName();
         String className = modelName + MOCLASS_SUFFIX;
         classInfo.setName(className + " extends ServiceBean");
-        classInfo.setPackageInfo(this.project.getServiceBeanPath(table.getModule()));
+        classInfo.setPackageInfo(this.project.getServiceBeanUrl(table.getModule()));
         classInfo.addImportInfo(SERVICE_BEAN_CLASS);
-        classInfo.addImportInfo(this.project.getConstantsPath() + ".TableConstants");
+        classInfo.addImportInfo(this.project.getConstantsUrl() + ".TableConstants");
         classInfo.addImportInfo(MO_CLASS);
         
         MethodInfo method = new MethodInfo();
@@ -70,11 +71,11 @@ public class MOClazzCreator extends ClazzCreator {
             StringBuilder methodBody = new StringBuilder();
             String methodType = col.getDataType().getDIYValue();
             methodBody.append(methodType).append(" value = (").append(methodType).append(")getValue(TableConstants.").append(tableName).append(".").append(col.getName()).append(");").append(Constants.ENTER);
-            methodBody.append(Xls2CodeUtil.GAP2).append("if (value == null) return ").append(getDefaultValue(col, classInfo)).append(";").append(Constants.ENTER);
-            if (enumInfo == null) methodBody.append(Xls2CodeUtil.GAP2).append("else return value.getValue();");
+            methodBody.append(Constants.GAP2).append("if (value == null) return ").append(getDefaultValue(col, classInfo)).append(";").append(Constants.ENTER);
+            if (enumInfo == null) methodBody.append(Constants.GAP2).append("else return value.getValue();");
             else {
             	String enumName = enumInfo.getClassName();
-            	methodBody.append(Xls2CodeUtil.GAP2).append("else return ").append(enumName).append(".get").append(enumName).append("(value.getValue());");
+            	methodBody.append(Constants.GAP2).append("else return ").append(enumName).append(".get").append(enumName).append("(value.getValue());");
             }
             method.setMethodBody(methodBody.toString());
             classInfo.addMethodInfo(method);
@@ -183,7 +184,7 @@ public class MOClazzCreator extends ClazzCreator {
 		StringBuilder methodBody = new StringBuilder();
 		methodBody.append("List<? extends ServiceBean> result = this.getFKBean(TableConstants.");
 		methodBody.append(col.getTable().name).append(".").append(col.getName()).append(fkMySelfStr + ");").append(Constants.ENTER);
-		methodBody.append(gap2);
+		methodBody.append(Constants.GAP2);
 		if (isSingle) {
 			method.setType(fkModelName);
 			methodBody.append("return result == null || result.isEmpty() ? null : (" + fkModelName + ")result.get(0);");
@@ -209,7 +210,7 @@ public class MOClazzCreator extends ClazzCreator {
 		StringBuilder methodBody = new StringBuilder();
 		methodBody.append("List<? extends ServiceBean> result = this.removeFKBean(TableConstants.");
 		methodBody.append(col.getTable().name).append(".").append(col.getName()).append(fkMySelfStr + ");").append(Constants.ENTER);
-		methodBody.append(gap2);
+		methodBody.append(Constants.GAP2);
 		if (isSingle) {
 			method.setType(fkModelName);
 			methodBody.append("return result == null || result.isEmpty() ? null : (" + fkModelName + ")result.get(0);");

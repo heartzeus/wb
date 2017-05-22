@@ -3,6 +3,7 @@ package com.tuhanbao.thirdapi.aliyun.oss;
 import com.tuhanbao.util.config.Config;
 import com.tuhanbao.util.config.ConfigManager;
 import com.tuhanbao.util.config.ConfigRefreshListener;
+import com.tuhanbao.util.log.LogManager;
 
 public final class OSSConfig implements ConfigRefreshListener {
     public static final String KEY = "oss";
@@ -32,6 +33,10 @@ public final class OSSConfig implements ConfigRefreshListener {
 
     public static void init() {
         Config config = ConfigManager.getConfig(KEY);
+        if (config == null) {
+            LogManager.warn("no config file for : " + KEY);
+            return;
+        }
         BUCKET_NAME = config.getString(BUCKET_NAME_STR);
         ENDPOINT = config.getString(ENDPOINT_STR);
         ACCESS_KEY = config.getString(ACCESS_KEY_STR);

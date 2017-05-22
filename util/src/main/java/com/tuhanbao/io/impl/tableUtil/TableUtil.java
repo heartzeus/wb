@@ -21,6 +21,7 @@ import com.tuhanbao.io.impl.codeUtil.Xls2JavaUtil;
 import com.tuhanbao.io.impl.sqlUtil.DBUtil;
 import com.tuhanbao.io.impl.tableUtil.XlsTable.XlsColumn;
 import com.tuhanbao.io.objutil.FileUtil;
+import com.tuhanbao.io.objutil.StringUtil;
 import com.tuhanbao.io.txt.util.TxtUtil;
 
 /**
@@ -77,7 +78,7 @@ public class TableUtil
     {
         List<XlsTable> tables = getTables(dbXlsUrl);
         
-        String tableConstantsUrl = FileUtil.appendPath(projectInfo.getFullConstantsUrl(), TABLECONSTANTS_CLASS_NAME + ".java");
+        String tableConstantsUrl = FileUtil.appendPath(projectInfo.getConstantsPath(), TABLECONSTANTS_CLASS_NAME + ".java");
         TxtUtil.write(tableConstantsUrl, getConstantClassStr(projectInfo, tables));
         TxtUtil.write(FileUtil.appendPath(projectInfo.getFullServiceBeanUrl(), IDUTIL_CLASS_NAME), 
         		getIdUtilClassStr(projectInfo, tables));
@@ -154,23 +155,23 @@ public class TableUtil
         {
             if (table.getIdIndex() != null && !table.getIdIndex().isEmpty())
             {
-                idUtil.append(Xls2CodeUtil.GAP1).append("public static final int ").append(table.getName().toUpperCase())
+                idUtil.append(Constants.GAP1).append("public static final int ").append(table.getName().toUpperCase())
                     .append(" = ").append(table.getIdIndex()).append(";").append(Constants.ENTER).append(Constants.ENTER);
             }
         }
         
-        idUtil.append(Xls2CodeUtil.GAP1).append("public static long getNextId(int type)");
+        idUtil.append(Constants.GAP1).append("public static long getNextId(int type)");
         idUtil.append(Constants.BLANK).append("{").append(Constants.ENTER);
-        idUtil.append(Xls2CodeUtil.GAP2).append("Ids ids = IdsProxy.getIds(type);").append(Constants.ENTER);
+        idUtil.append(Constants.GAP2).append("Ids ids = IdsProxy.getIds(type);").append(Constants.ENTER);
         
-        idUtil.append(Xls2CodeUtil.GAP2).append("if (ids == null) ids = IdsProxy.createIds(type);").append(Constants.ENTER);
-        idUtil.append(Xls2CodeUtil.GAP2).append("synchronized (ids)");
+        idUtil.append(Constants.GAP2).append("if (ids == null) ids = IdsProxy.createIds(type);").append(Constants.ENTER);
+        idUtil.append(Constants.GAP2).append("synchronized (ids)");
         idUtil.append(Constants.BLANK).append("{").append(Constants.ENTER);
-        idUtil.append(Xls2CodeUtil.GAP3).append("long current = ids.getCurrent();").append(Constants.ENTER);
-        idUtil.append(Xls2CodeUtil.GAP3).append("ids.setCurrent(current + 1);").append(Constants.ENTER);
-        idUtil.append(Xls2CodeUtil.GAP3).append("return current;").append(Constants.ENTER);
-        idUtil.append(Xls2CodeUtil.GAP2).append("}").append(Constants.ENTER);
-        idUtil.append(Xls2CodeUtil.GAP1).append("}").append(Constants.ENTER);
+        idUtil.append(Constants.GAP3).append("long current = ids.getCurrent();").append(Constants.ENTER);
+        idUtil.append(Constants.GAP3).append("ids.setCurrent(current + 1);").append(Constants.ENTER);
+        idUtil.append(Constants.GAP3).append("return current;").append(Constants.ENTER);
+        idUtil.append(Constants.GAP2).append("}").append(Constants.ENTER);
+        idUtil.append(Constants.GAP1).append("}").append(Constants.ENTER);
         idUtil.append("}").append(Constants.ENTER);
         
         return idUtil.toString();
@@ -186,7 +187,7 @@ public class TableUtil
     public static String getConstantClassStr(ProjectInfo4MemCache projectInfo, Collection<XlsTable> tables) throws IOException
     {
         StringBuilder sb = new StringBuilder();
-        sb.append(Constants.PACKAGE).append(Constants.BLANK).append(projectInfo.getConstantsPath()).append(
+        sb.append(Constants.PACKAGE).append(Constants.BLANK).append(projectInfo.getConstantsUrl()).append(
                 Constants.SEMICOLON).append(Constants.ENTER).append(Constants.ENTER);
 
         sb.append("import com.tuhanbao.util.db.table.CacheType;").append(Constants.ENTER);
@@ -201,16 +202,16 @@ public class TableUtil
         		Constants.BLANK);
         sb.append(Constants.LEFT_BRACE).append(Constants.ENTER);
 
-        sb.append(Xls2CodeUtil.getGap(1)).append("public static final Column COUNT = ColumnFactory.createColumn(null, \"COUNT(1)\", DataType.INT);").append(Constants.ENTER);
+        sb.append(Constants.GAP1).append("public static final Column COUNT = ColumnFactory.createColumn(null, \"COUNT(1)\", DataType.INT);").append(Constants.ENTER);
         sb.append(Constants.ENTER);
 
-        sb.append(Xls2CodeUtil.getGap(1)).append("public static void init()");
+        sb.append(Constants.GAP1).append("public static void init()");
         sb.append(Constants.BLANK).append(Constants.LEFT_BRACE).append(Constants.ENTER);
         for (XlsTable table : tables)
-            sb.append(Xls2CodeUtil.getGap(2)).append("TableRegister.register(").append(table.getName()).append(".TABLE);").append(
+            sb.append(Constants.GAP2).append("TableRegister.register(").append(table.getName()).append(".TABLE);").append(
                     Constants.BLANK).append(Constants.ENTER);
         sb.append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.getGap(1)).append(Constants.RIGHT_BRACE).append(Constants.ENTER);
+        sb.append(Constants.GAP1).append(Constants.RIGHT_BRACE).append(Constants.ENTER);
         sb.append(Constants.ENTER);
 
         for (XlsTable t : tables)
@@ -250,43 +251,43 @@ public class TableUtil
         		Constants.BLANK);
         sb.append(Constants.LEFT_BRACE).append(Constants.ENTER);
 
-        sb.append(Xls2CodeUtil.getGap(1)).append("public static final Column COUNT = ColumnFactory.createColumn(null, \"COUNT(1)\", DataType.INT);").append(Constants.ENTER);
+        sb.append(Constants.GAP1).append("public static final Column COUNT = ColumnFactory.createColumn(null, \"COUNT(1)\", DataType.INT);").append(Constants.ENTER);
         sb.append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.getGap(1)).append("public static final Map<String, Table> TABLES = new HashMap<String, Table>();").append(Constants.ENTER);
+        sb.append(Constants.GAP1).append("public static final Map<String, Table> TABLES = new HashMap<String, Table>();").append(Constants.ENTER);
         sb.append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.getGap(1)).append("static { init(); }").append(Constants.ENTER);
+        sb.append(Constants.GAP1).append("static { init(); }").append(Constants.ENTER);
         sb.append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.getGap(1)).append("private TableConstants() {}").append(Constants.ENTER);
-        sb.append(Constants.ENTER);
-
-        sb.append(Xls2CodeUtil.getGap(1)).append("public static final void register(Table table)");
-        sb.append(Constants.BLANK).append("{").append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.getGap(2)).append("TABLES.put(getClassName(table.getName()), table);").append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.getGap(1)).append("}").append(Constants.ENTER);
+        sb.append(Constants.GAP1).append("private TableConstants() {}").append(Constants.ENTER);
         sb.append(Constants.ENTER);
 
-        sb.append(Xls2CodeUtil.getGap(1)).append("public static Table getTableByClassName(String name)");
+        sb.append(Constants.GAP1).append("public static final void register(Table table)");
         sb.append(Constants.BLANK).append("{").append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.getGap(2)).append("return TABLES.get(name);").append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.getGap(1)).append("}").append(Constants.ENTER);
+        sb.append(Constants.GAP2).append("TABLES.put(getClassName(table.getName()), table);").append(Constants.ENTER);
+        sb.append(Constants.GAP1).append("}").append(Constants.ENTER);
         sb.append(Constants.ENTER);
 
-        sb.append(Xls2CodeUtil.getGap(1)).append("private static String getClassName(String tableName)");
+        sb.append(Constants.GAP1).append("public static Table getTableByClassName(String name)");
         sb.append(Constants.BLANK).append("{").append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.getGap(2)).append("if (tableName.startsWith(\"T_\") || tableName.startsWith(\"I_\"))");
-        sb.append(Constants.BLANK).append("{").append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.getGap(3)).append("tableName = tableName.substring(2);").append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.getGap(2)).append("}").append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.getGap(2)).append("return ClazzUtil.getClassName(tableName);").append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.getGap(1)).append("}").append(Constants.ENTER);
+        sb.append(Constants.GAP2).append("return TABLES.get(name);").append(Constants.ENTER);
+        sb.append(Constants.GAP1).append("}").append(Constants.ENTER);
         sb.append(Constants.ENTER);
 
-        sb.append(Xls2CodeUtil.getGap(1)).append("public static void init()");
+        sb.append(Constants.GAP1).append("private static String getClassName(String tableName)");
+        sb.append(Constants.BLANK).append("{").append(Constants.ENTER);
+        sb.append(Constants.GAP2).append("if (tableName.startsWith(\"T_\") || tableName.startsWith(\"I_\"))");
+        sb.append(Constants.BLANK).append("{").append(Constants.ENTER);
+        sb.append(Constants.GAP3).append("tableName = tableName.substring(2);").append(Constants.ENTER);
+        sb.append(Constants.GAP2).append("}").append(Constants.ENTER);
+        sb.append(Constants.GAP2).append("return ClazzUtil.getClassName(tableName);").append(Constants.ENTER);
+        sb.append(Constants.GAP1).append("}").append(Constants.ENTER);
+        sb.append(Constants.ENTER);
+
+        sb.append(Constants.GAP1).append("public static void init()");
         sb.append(Constants.BLANK).append(Constants.LEFT_BRACE).append(Constants.ENTER);
         for (ImportTable table : tables)
-            sb.append(Xls2CodeUtil.getGap(2)).append("register(").append(table.getTableName()).append(".TABLE);").append(
+            sb.append(Constants.GAP2).append("register(").append(table.getTableName()).append(".TABLE);").append(
                     Constants.BLANK).append(Constants.ENTER);
-        sb.append(Xls2CodeUtil.getGap(1)).append(Constants.RIGHT_BRACE).append(Constants.ENTER);
+        sb.append(Constants.GAP1).append(Constants.RIGHT_BRACE).append(Constants.ENTER);
         sb.append(Constants.ENTER);
 
         for (ImportTable t : tables)
@@ -408,8 +409,8 @@ public class TableUtil
             StringBuilder methodBody = new StringBuilder();
             String methodType = getMethodType(col.getDataType());
             methodBody.append(methodType).append(" value = (").append(methodType).append(")getValue(TableConstants.").append(tableName).append(".").append(col.getName()).append(");").append(Constants.ENTER);
-            methodBody.append(Xls2CodeUtil.GAP2).append("if (value == null) return ").append(methodType).append(".NULL_VALUE;").append(Constants.ENTER);
-            methodBody.append(Xls2CodeUtil.GAP2).append("else return value.getValue();");
+            methodBody.append(Constants.GAP2).append("if (value == null) return ").append(methodType).append(".NULL_VALUE;").append(Constants.ENTER);
+            methodBody.append(Constants.GAP2).append("else return value.getValue();");
             method.setMethodBody(methodBody.toString());
             classInfo.addMethodInfo(method);
             
@@ -524,9 +525,9 @@ public class TableUtil
         method.setArgs("Map<Column, Object> properties");
         StringBuilder methodBody = new StringBuilder();
         methodBody.append("long id = IDUtil.getNextId(IDUtil." + tableName.toUpperCase() + ");\n");
-        methodBody.append(Xls2CodeUtil.getGap(2)).append("properties.put(TableConstants." + tableName + ".ID, id);\n");
-        methodBody.append(Xls2CodeUtil.getGap(2)).append("MetaObject mo = MemCacheProxy.createMO(table, properties);\n");
-        methodBody.append(Xls2CodeUtil.getGap(2)).append("return getServiceBean(mo);");
+        methodBody.append(Constants.GAP2).append("properties.put(TableConstants." + tableName + ".ID, id);\n");
+        methodBody.append(Constants.GAP2).append("MetaObject mo = MemCacheProxy.createMO(table, properties);\n");
+        methodBody.append(Constants.GAP2).append("return getServiceBean(mo);");
         method.setMethodBody(methodBody.toString());
         classInfo.addMethodInfo(method);
         
@@ -544,8 +545,8 @@ public class TableUtil
         method.setArgs(getPKArgs(table));
         methodBody = new StringBuilder();
         methodBody.append("if (key == LongValue.NULL_VALUE) return null;\n");
-        methodBody.append(Xls2CodeUtil.getGap(2)).append("MetaObject mo = MemCacheProxy.getMOByKey(table, " + getPKArgsStr(table, classInfo) + ");\n");
-        methodBody.append(Xls2CodeUtil.getGap(2)).append("return getServiceBean" + "(mo);");
+        methodBody.append(Constants.GAP2).append("MetaObject mo = MemCacheProxy.getMOByKey(table, " + getPKArgsStr(table, classInfo) + ");\n");
+        methodBody.append(Constants.GAP2).append("return getServiceBean" + "(mo);");
         method.setMethodBody(methodBody.toString());
         classInfo.addMethodInfo(method);
         
@@ -565,11 +566,11 @@ public class TableUtil
         method.setArgs("MetaObject mo");
         methodBody = new StringBuilder();
         methodBody.append("if (mo == null) return null;").append(Constants.ENTER);
-        methodBody.append(Xls2CodeUtil.getGap(2)).append("if (mo.getServiceBean() == null)");
+        methodBody.append(Constants.GAP2).append("if (mo.getServiceBean() == null)");
         methodBody.append(Constants.BLANK).append(Constants.LEFT_BRACE).append(Constants.ENTER);
-        methodBody.append(Xls2CodeUtil.getGap(3) + "new " + tableName + "(mo);").append(Constants.ENTER);
-        methodBody.append(Xls2CodeUtil.getGap(2)).append(Constants.RIGHT_BRACE).append(Constants.ENTER);
-        methodBody.append(Xls2CodeUtil.getGap(2)).append("return (" + tableName + ")mo.getServiceBean();");
+        methodBody.append(Constants.GAP3 + "new " + tableName + "(mo);").append(Constants.ENTER);
+        methodBody.append(Constants.GAP2).append(Constants.RIGHT_BRACE).append(Constants.ENTER);
+        methodBody.append(Constants.GAP2).append("return (" + tableName + ")mo.getServiceBean();");
         method.setMethodBody(methodBody.toString());
         classInfo.addMethodInfo(method);
 
@@ -592,12 +593,12 @@ public class TableUtil
         method.setStatic(true);
         method.setArgs("SelectorFilter filter");
         method.setMethodBody("List<MetaObject> mos = MemCacheProxy.getMOs(table, filter);" + Constants.ENTER
-                + Xls2CodeUtil.getGap(2) + "List<" + tableName + "> result = new ArrayList<" + tableName + ">(mos.size());" + Constants.ENTER
-                + Xls2CodeUtil.getGap(2) + "for (MetaObject mo : mos)" +  Constants.ENTER
-                + Xls2CodeUtil.getGap(2) + "{" +  Constants.ENTER
-                + Xls2CodeUtil.getGap(3) + "result.add(getServiceBean(mo));" + Constants.ENTER
-                + Xls2CodeUtil.getGap(2) + "}" +  Constants.ENTER
-                + Xls2CodeUtil.getGap(2) + "return result;" + Constants.ENTER);
+                + Constants.GAP2 + "List<" + tableName + "> result = new ArrayList<" + tableName + ">(mos.size());" + Constants.ENTER
+                + Constants.GAP2 + "for (MetaObject mo : mos)" +  Constants.ENTER
+                + Constants.GAP2 + "{" +  Constants.ENTER
+                + Constants.GAP3 + "result.add(getServiceBean(mo));" + Constants.ENTER
+                + Constants.GAP2 + "}" +  Constants.ENTER
+                + Constants.GAP2 + "return result;" + Constants.ENTER);
         classInfo.addMethodInfo(method);
         
         
@@ -617,12 +618,12 @@ public class TableUtil
         method.setType("List<" + tableName + ">");
         method.setStatic(true);
         method.setMethodBody("List<MetaObject> mos = MemCacheProxy.getMOs(table, null);" + Constants.ENTER
-                + Xls2CodeUtil.getGap(2) + "List<" + tableName + "> list = new ArrayList<" + tableName + ">();" + Constants.ENTER
-                + Xls2CodeUtil.getGap(2) + "for (MetaObject mo : mos)" +  Constants.ENTER
-                + Xls2CodeUtil.getGap(2) + "{" +  Constants.ENTER
-                + Xls2CodeUtil.getGap(3) + "list.add(getServiceBean(mo));" +  Constants.ENTER
-                + Xls2CodeUtil.getGap(2) + "}" +  Constants.ENTER
-                + Xls2CodeUtil.getGap(2) + "return list;" + Constants.ENTER);
+                + Constants.GAP2 + "List<" + tableName + "> list = new ArrayList<" + tableName + ">();" + Constants.ENTER
+                + Constants.GAP2 + "for (MetaObject mo : mos)" +  Constants.ENTER
+                + Constants.GAP2 + "{" +  Constants.ENTER
+                + Constants.GAP3 + "list.add(getServiceBean(mo));" +  Constants.ENTER
+                + Constants.GAP2 + "}" +  Constants.ENTER
+                + Constants.GAP2 + "return list;" + Constants.ENTER);
         classInfo.addMethodInfo(method);
         
         return classInfo;
@@ -664,6 +665,6 @@ public class TableUtil
 
     private static String getTableConstantsClassPath(
 			ProjectInfo4MemCache projectInfo) {
-		return FileUtil.appendStr(".", projectInfo.getConstantsPath(), TABLECONSTANTS_CLASS_NAME);
+		return StringUtil.appendStr(Constants.STOP_EN, projectInfo.getConstantsUrl(), TABLECONSTANTS_CLASS_NAME);
 	}
 }

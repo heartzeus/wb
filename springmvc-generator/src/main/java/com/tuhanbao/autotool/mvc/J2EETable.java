@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tuhanbao.Constants;
-import com.tuhanbao.autotool.mvc.clazz.ClazzCreator;
+import com.tuhanbao.autotool.filegenerator.ClazzCreator;
 import com.tuhanbao.io.base.BinaryUtil;
-import com.tuhanbao.io.impl.codeUtil.Xls2CodeUtil;
 import com.tuhanbao.io.impl.tableUtil.ColumnEntry;
 import com.tuhanbao.io.impl.tableUtil.ImportColumn;
 import com.tuhanbao.io.impl.tableUtil.ImportTable;
@@ -168,16 +167,16 @@ public class J2EETable implements Comparable<J2EETable>{
 		return table.isView();
 	}
     
-    public String toString(J2EEProjectInfo project)
+    public String toString(SpringMvcProjectInfo project)
     {
         StringBuilder sb = new StringBuilder();
-        sb.append(Xls2CodeUtil.getGap(1) + "public static final class " + getTableName());
+        sb.append(Constants.GAP1 + "public static final class " + getTableName());
         sb.append(Constants.BLANK).append("{").append(Constants.ENTER);
         List<ImportColumn> columns = table.getColumns();
-        sb.append(Xls2CodeUtil.getGap(2) + "public static final Table TABLE = new Table(").append(columns.size()).append(", \"")
+        sb.append(Constants.GAP2 + "public static final Table TABLE = new Table(").append(columns.size()).append(", \"")
         		.append(getName().toUpperCase()).append("\", ")
                 .append("CacheType.").append(table.getCacheTypeStr())
-                .append(", \"").append(project.getServiceBeanPath(this.getModule())).append(".").append(modelName).append("\"");
+                .append(", \"").append(project.getServiceBeanUrl(this.getModule())).append(".").append(modelName).append("\"");
         if (!StringUtil.isEmpty(this.getSeqName())) {
         	sb.append(", \"").append(this.getSeqName()).append("\"");
         }
@@ -188,7 +187,7 @@ public class J2EETable implements Comparable<J2EETable>{
             sb.append(c.toString()).append(Constants.ENTER);
         }
         
-        sb.append(Xls2CodeUtil.getGap(1) + "}").append(Constants.ENTER);
+        sb.append(Constants.GAP1 + "}").append(Constants.ENTER);
         
         return sb.toString();
     }

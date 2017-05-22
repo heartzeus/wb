@@ -4,21 +4,22 @@ import org.apache.xmlbeans.impl.util.Base64;
 
 import com.tuhanbao.io.objutil.NumberUtil;
 
-public class SelfEncipherTool implements IEncipherTool
-{
-    private static final String PASSWORD = "ccw1881314";
+public class SelfEncipherTool implements IEncipherTool {
 
-    private static final byte[] PASSWORD_BYTES = PASSWORD.getBytes();
+    private byte[] password;
 
-    private static final int PASSWORD_LENGTH = PASSWORD_BYTES.length;
+    private int passwordLength;
 
     private static final int GROUP_LENGTH = 11;
     
-    public static final SelfEncipherTool INSTANCE = new SelfEncipherTool();
-    
-    private SelfEncipherTool()
+    private SelfEncipherTool(byte[] password)
     {
-        
+        this.password = password;
+        passwordLength = this.password.length;
+    }
+
+    public static IEncipherTool getInstance(String password) {
+        return new SelfEncipherTool(password.getBytes());
     }
     
     public byte[] encrypt(byte[] bytes)
@@ -29,7 +30,7 @@ public class SelfEncipherTool implements IEncipherTool
         int length = bytes.length;
         for (int i = 0; i < length; i++)
         {
-            bytes[i] ^= PASSWORD_BYTES[i % PASSWORD_LENGTH];
+            bytes[i] ^= password[i % passwordLength];
         }
         
         //将异或后的bytes按11位进行分组
@@ -95,7 +96,7 @@ public class SelfEncipherTool implements IEncipherTool
         
         for (int i = 0; i < length; i++)
         {
-            bytes[i] ^= PASSWORD_BYTES[i % PASSWORD_LENGTH];
+            bytes[i] ^= password[i % passwordLength];
         }
         return bytes;
     }

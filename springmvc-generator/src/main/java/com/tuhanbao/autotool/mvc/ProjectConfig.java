@@ -13,6 +13,7 @@ public class ProjectConfig implements ConfigRefreshListener {
 	public static boolean NEED_CREATE_WEB;
 	public static boolean NEED_SYNC_DB;
 	public static boolean NEED_AUTOCREATE_AM;
+	public static String FILTERS;
 
 	private static final String CONFIG_URL_NAME = "config_url";
 	private static final String PROJECT_URL_NAME = "project_url";
@@ -22,6 +23,7 @@ public class ProjectConfig implements ConfigRefreshListener {
 	private static final String NEED_CREATE_WEB_NAME = "need_create_web";
 	private static final String NEED_SYNC_DB_NAME = "need_sync_db";
 	private static final String NEED_AUTOCREATE_AM_NAME = "need_autocreate_am";
+	private static final String FILTERS_NAME = "filters";
 	
 	private static final String KEY = "project";
 	
@@ -40,6 +42,7 @@ public class ProjectConfig implements ConfigRefreshListener {
 		NEED_CREATE_WEB = config.getInt(NEED_CREATE_WEB_NAME) == 1;
 		NEED_SYNC_DB = config.getInt(NEED_SYNC_DB_NAME) == 1;
 		NEED_AUTOCREATE_AM = config.getInt(NEED_AUTOCREATE_AM_NAME) == 1;
+		FILTERS = config.getString(FILTERS_NAME);
 	}
 	
 	/**

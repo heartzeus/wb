@@ -19,7 +19,16 @@ public final class ErrorCodeMsgManager implements ConfigRefreshListener {
      */
     public static final String getErrMsg(int errCode, String ... args)
     {
-        if (config == null) init();
+        if (config == null) {
+            init();
+            
+            //初始化后还未空，直接return
+            if (config == null) {
+                if (errCode == BaseErrorCode.ERROR) {
+                    return "system error!";
+                }
+            }
+        }
         String msg = config.getString(errCode + "");
         
         if (args == null) return msg;
@@ -46,9 +55,6 @@ public final class ErrorCodeMsgManager implements ConfigRefreshListener {
     
     private static final void init() {
         config = ConfigManager.getConfig(KEY);
-        if (config == null) {
-            throw new MyException(BaseErrorCode.INIT_CONFIGFILE_ERROR, KEY);
-        }
     }
 
     @Override

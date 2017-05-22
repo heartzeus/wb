@@ -6,6 +6,7 @@ import com.tuhanbao.util.config.ConfigManager;
 import com.tuhanbao.util.config.ConfigRefreshListener;
 import com.tuhanbao.util.exception.BaseErrorCode;
 import com.tuhanbao.util.exception.MyException;
+import com.tuhanbao.util.log.LogManager;
 
 import redis.clients.jedis.Protocol;
 
@@ -55,7 +56,10 @@ public final class RedisConfig implements ConfigRefreshListener {
      */
     private static final void init() {
     	Config config = ConfigManager.getConfig(RedisConfig.KEY);
-    	if (config == null) throw new MyException(BaseErrorCode.INIT_CONFIGFILE_ERROR, KEY);
+        if (config == null) {
+            LogManager.warn("no config file for : " + KEY);
+            return;
+        }
     	
     	IP = config.getString(RedisConfig.IP_NAME);
     	PORT = config.getInt(RedisConfig.PORT_NAME);

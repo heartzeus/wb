@@ -1,34 +1,35 @@
-package com.tuhanbao.autotool.mvc.clazz;
+package com.tuhanbao.autotool.filegenerator.j2ee;
 
 import com.tuhanbao.Constants;
-import com.tuhanbao.autotool.mvc.J2EEProjectInfo;
 import com.tuhanbao.autotool.mvc.J2EETable;
 import com.tuhanbao.autotool.mvc.ProjectConfig;
+import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
 import com.tuhanbao.io.impl.classUtil.ClassInfo;
 import com.tuhanbao.io.impl.classUtil.MethodInfo;
 import com.tuhanbao.io.impl.classUtil.PackageEnum;
 import com.tuhanbao.io.impl.classUtil.VarInfo;
 import com.tuhanbao.io.impl.tableUtil.ImportColumn;
+import com.tuhanbao.io.objutil.OverwriteStrategy;
 import com.tuhanbao.util.util.clazz.ClazzUtil;
 
 
-public class ControllerClazzCreator extends ClazzCreator{
+public class ControllerClazzCreator extends J2EETableClazzCreator {
 
-	public ControllerClazzCreator(J2EEProjectInfo project) {
-		super(project);
+	public ControllerClazzCreator(SpringMvcProjectInfo project) {
+		super(project, OverwriteStrategy.NEVER_COVER);
 	}
 
 	@Override
-	public ClassInfo toClazz(J2EETable table) {
+	public ClassInfo table2Class(J2EETable table) {
 		ClassInfo clazz = new ClassInfo();
 		clazz.setName(table.getControllerName());
-		clazz.setPackageInfo(project.getControllerPath(table.getModule()));
+		clazz.setPackageInfo(project.getControllerUrl(table.getModule()));
 		clazz.addImportInfo("org.springframework.stereotype.Controller");
 		clazz.addImportInfo("org.springframework.web.bind.annotation.RequestMapping");
 		clazz.addImportInfo("org.springframework.web.bind.annotation.ResponseBody");
 		clazz.addImportInfo("org.springframework.beans.factory.annotation.Autowired");
-		clazz.addImportInfo(project.getIServicePath(table.getModule()) + Constants.STOP_EN + table.getIServiceName());
-		clazz.addImportInfo(project.getServiceBeanPath(table.getModule()) + Constants.STOP_EN + table.getModelName());
+		clazz.addImportInfo(project.getIServiceUrl(table.getModule()) + Constants.STOP_EN + table.getIServiceName());
+		clazz.addImportInfo(project.getServiceBeanUrl(table.getModule()) + Constants.STOP_EN + table.getModelName());
 		clazz.addAnnotation("@Controller");
 		String requestMap = "@RequestMapping(\""+ ClazzUtil.firstCharLowerCase(table.getModelName()) + "\")";
 		clazz.addAnnotation(requestMap);
@@ -82,7 +83,7 @@ public class ControllerClazzCreator extends ClazzCreator{
 		method.setArgs(modelName +" " + ClazzUtil.getVarName(modelName));
 		StringBuilder methodBody = new StringBuilder();
 		methodBody.append( serviceName +".add(" + ClazzUtil.getVarName(modelName) + ");").append(Constants.ENTER);
-		methodBody.append(gap2).append("return null;").append(Constants.ENTER);
+		methodBody.append(Constants.GAP2).append("return null;").append(Constants.ENTER);
 		method.setMethodBody(methodBody.toString());
 		return method;
 	}
