@@ -10,12 +10,12 @@ import java.util.Map.Entry;
 
 import com.tuhanbao.Constants;
 import com.tuhanbao.autotool.filegenerator.IFileGenerator;
-import com.tuhanbao.autotool.mvc.J2EETable;
 import com.tuhanbao.autotool.mvc.ModuleManager;
 import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
 import com.tuhanbao.base.chain.IEvent;
 import com.tuhanbao.base.chain.event.CreateFileEvent;
 import com.tuhanbao.io.impl.tableUtil.DBType;
+import com.tuhanbao.io.impl.tableUtil.ImportTable;
 import com.tuhanbao.io.objutil.FileUtil;
 import com.tuhanbao.io.objutil.StringUtil;
 import com.tuhanbao.io.txt.util.TxtUtil;
@@ -37,7 +37,7 @@ public class SolidClazzCreator implements IFileGenerator {
 
     private List<SolidObject> solidObjects;
 
-    private List<J2EETable> tables;
+    private List<ImportTable> tables;
 
     private SpringMvcProjectInfo project;
 
@@ -65,7 +65,7 @@ public class SolidClazzCreator implements IFileGenerator {
         MYSQL_CUT_PAGE = sb.toString();
     }
 
-    public SolidClazzCreator(SpringMvcProjectInfo project, List<J2EETable> tables, List<SolidObject> solidObjects) {
+    public SolidClazzCreator(SpringMvcProjectInfo project, List<ImportTable> tables, List<SolidObject> solidObjects) {
         this.project = project;
         this.tables = tables;
         this.solidObjects = solidObjects;
@@ -271,7 +271,7 @@ public class SolidClazzCreator implements IFileGenerator {
         return sb.toString();
     }
 
-    private CreateFileEvent getServerManager(List<J2EETable> tables) {
+    private CreateFileEvent getServerManager(List<ImportTable> tables) {
         try {
             String url = FileUtil.appendPath(project.getSrcPath(), ((SpringMvcProjectInfo)this.project).getImplUrl().replace(".", Constants.FILE_SEP),
                     "ServerManager.java");
@@ -282,7 +282,7 @@ public class SolidClazzCreator implements IFileGenerator {
             StringBuilder redis = new StringBuilder();
 
             List<String> modules = new ArrayList<String>();
-            for (J2EETable table : tables) {
+            for (ImportTable table : tables) {
                 if (table.getCacheType() == CacheType.CACHE_ALL) {
                     String module = table.getModule();
                     if (!modules.contains(module)) modules.add(module);

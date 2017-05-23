@@ -3,10 +3,10 @@ package com.tuhanbao.autotool.mvc.excel;
 import java.util.List;
 import java.util.Map;
 
-import com.tuhanbao.autotool.mvc.J2EETable;
 import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
 import com.tuhanbao.base.chain.Context;
 import com.tuhanbao.base.chain.IChainFilter;
+import com.tuhanbao.io.impl.tableUtil.ImportTable;
 
 /**
  * 通过excel模板生成代码的filter模板父类
@@ -37,8 +37,8 @@ public abstract class ExcelAGCFilter implements IChainFilter {
         return (Map<String, String[]>)context.get(TABLE_CONFIG);
     }
     
-    public List<J2EETable> getTables(Context context) {
-        return (List<J2EETable>)context.get(TABLES);
+    public List<ImportTable> getTables(Context context) {
+        return (List<ImportTable>)context.get(TABLES);
     }
 
     public String[][] getConfig(Context context, String key) {

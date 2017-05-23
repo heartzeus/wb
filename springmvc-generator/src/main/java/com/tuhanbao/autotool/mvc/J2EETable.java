@@ -1,68 +1,29 @@
 package com.tuhanbao.autotool.mvc;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.tuhanbao.Constants;
-import com.tuhanbao.autotool.filegenerator.ClazzCreator;
 import com.tuhanbao.io.base.BinaryUtil;
-import com.tuhanbao.io.impl.tableUtil.ColumnEntry;
 import com.tuhanbao.io.impl.tableUtil.ImportColumn;
 import com.tuhanbao.io.impl.tableUtil.ImportTable;
-import com.tuhanbao.io.impl.tableUtil.Relation;
-import com.tuhanbao.io.objutil.StringUtil;
-import com.tuhanbao.util.db.table.CacheType;
+import com.tuhanbao.io.impl.tableUtil.TableConfig;
 
-public class J2EETable implements Comparable<J2EETable>{
-	/*
-	 * j2ee的一些属性
-	 */
-	//对象所在模块
-	private String module;
-	
-	private String modelName;
-	
-	private boolean hasBlobCol = false;
-	
-	public ImportTable table;
-	
-	public J2EETable(ImportTable table) {
-		this.table = table;
-		
-		//最前面的一般是T_,I_是不需要解析的
-		String tableName = table.name;
-		if (table.name.startsWith("T_") || table.name.startsWith("I_")) {
-			tableName = table.name.substring(2);
-		}
-		modelName = ClazzCreator.getClassName(tableName);
-		
+public class J2EETable extends ImportTable {
 
-    	J2EETableManager.addTable(this);
-	}
+    private boolean hasBlobCol = false;
 	
-	public J2EETable(ImportTable table, String module) {
-		this(table);
-		this.module = module;
-	}
+    public J2EETable(String name, String module) {
+        this(name, module, new TableConfig());
+    }
+    
+    public J2EETable(String name, String module, TableConfig tableConfig) {
+        super(name, module, tableConfig);
+    }
+    
 
 	public void addColumn(ImportColumn col) {
-		table.addColumn(col);
+		super.addColumn(col);
 		
 		if (col.isBlob()) {
 			this.hasBlobCol = true;
 		}
-	}
-	
-	public void setModule(String module) {
-		this.module = module;
-	}
-
-	public String getModule() {
-		return this.module;
-	}
-
-	public String getModelName() {
-		return this.modelName;
 	}
 
 	public String getExampleName() {
@@ -86,131 +47,27 @@ public class J2EETable implements Comparable<J2EETable>{
 	}
 	
 	public boolean needC() {
-		return !BinaryUtil.isZero(table.getTableConfig().getCrud(), 3);
+		return !BinaryUtil.isZero(getTableConfig().getCrud(), 3);
 	}
 	public boolean needR() {
-		return !BinaryUtil.isZero(table.getTableConfig().getCrud(), 2);
+		return !BinaryUtil.isZero(getTableConfig().getCrud(), 2);
 	}
 	public boolean needU() {
-		return !BinaryUtil.isZero(table.getTableConfig().getCrud(), 1);
+		return !BinaryUtil.isZero(getTableConfig().getCrud(), 1);
 	}
 	public boolean needD() {
-		return !BinaryUtil.isZero(table.getTableConfig().getCrud(), 0);
+		return !BinaryUtil.isZero(getTableConfig().getCrud(), 0);
 	}
 	
 	public boolean hasBlobCol() {
 		return this.hasBlobCol;
 	}
 
-	public void setPK(ImportColumn column) {
-		table.setPK(column);
-	}
-
-	public String getName() {
-		return table.getName();
-	}
-
-	public List<ImportColumn> getColumns() {
-		return table.getColumns();
-	}
-
-	public ImportColumn getPK() {
-		return table.getPK();
-	}
-
-	public String getSeqName() {
-		return table.getSeqName();
-	}
-
 	public boolean needCutPage() {
-		return table.getTableConfig().isNeedCutPage();
+		return getTableConfig().isNeedCutPage();
 	}
 
 	public ImportColumn getDefaultOrderCol() {
-		return table.getColumn(table.getTableConfig().getDefaultOrderColName());
+		return getColumn(getTableConfig().getDefaultOrderColName());
 	}
-	
-	public List<ColumnEntry[]> getSelectKeys() {
-		List<ColumnEntry[]> list = new ArrayList<ColumnEntry[]>();
-		if (this.table.getTableConfig().getSelectKeys() != null) {
-			for (String[] array : this.table.getTableConfig().getSelectKeys()) {
-				int length = array.length;
-				ColumnEntry[] entrys = new ColumnEntry[length];
-				for (int i = 0; i < length; i++) {
-					String s = array[i];
-					ImportColumn col = null;
-					//默认1对多
-					Relation relation = Relation.One2N;
-					//格式  fk_id(1:1)  
-					int index = s.indexOf(Constants.LEFT_PARENTHESE);
-					if (index == -1) {
-						col = table.getColumn(s);
-					} else {
-						String colName = s.substring(0, index);
-						col = table.getColumn(colName);
-						int endIndex = s.indexOf(Constants.RIGHT_PARENTHESE);
-						relation = Relation.getRelation(s.substring(index + 1, endIndex));
-					}
-					entrys[i] = new ColumnEntry(col, relation);
-				}
-				list.add(entrys);
-			}
-		}
-		return list;
-	}
-
-	public String getTableName() {
-		return table.getTableName();
-	}
-
-	public boolean isView() {
-		return table.isView();
-	}
-    
-    public String toString(SpringMvcProjectInfo project)
-    {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Constants.GAP1 + "public static final class " + getTableName());
-        sb.append(Constants.BLANK).append("{").append(Constants.ENTER);
-        List<ImportColumn> columns = table.getColumns();
-        sb.append(Constants.GAP2 + "public static final Table TABLE = new Table(").append(columns.size()).append(", \"")
-        		.append(getName().toUpperCase()).append("\", ")
-                .append("CacheType.").append(table.getCacheTypeStr())
-                .append(", \"").append(project.getServiceBeanUrl(this.getModule())).append(".").append(modelName).append("\"");
-        if (!StringUtil.isEmpty(this.getSeqName())) {
-        	sb.append(", \"").append(this.getSeqName()).append("\"");
-        }
-        sb.append(");").append(Constants.ENTER);
-        sb.append(Constants.ENTER);
-        for (ImportColumn c : columns)
-        {
-            sb.append(c.toString()).append(Constants.ENTER);
-        }
-        
-        sb.append(Constants.GAP1 + "}").append(Constants.ENTER);
-        
-        return sb.toString();
-    }
-	
-	public String getComment(){
-		return table.getComment();
-	}
-
-	public List<ImportColumn> getFKColumns() {
-		return this.table.getFKColumns();
-	}
-
-	public CacheType getCacheType() {
-		return table.getCacheType();
-	}
-	
-	public ImportTable getTable() {
-		return this.table;
-	}
-
-    @Override
-    public int compareTo(J2EETable o) {
-        if (this.getName() == null) return -1;
-        return this.getName().compareTo(o.getName());
-    }
 }

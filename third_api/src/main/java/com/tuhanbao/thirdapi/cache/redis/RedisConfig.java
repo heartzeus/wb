@@ -4,8 +4,6 @@ import com.tuhanbao.io.objutil.StringUtil;
 import com.tuhanbao.util.config.Config;
 import com.tuhanbao.util.config.ConfigManager;
 import com.tuhanbao.util.config.ConfigRefreshListener;
-import com.tuhanbao.util.exception.BaseErrorCode;
-import com.tuhanbao.util.exception.MyException;
 import com.tuhanbao.util.log.LogManager;
 
 import redis.clients.jedis.Protocol;

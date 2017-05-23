@@ -7,16 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.io.impl.classUtil.EnumClassInfo;
-import com.tuhanbao.io.impl.classUtil.IEnumType;
-import com.tuhanbao.io.impl.codeUtil.Xls2CodeUtil;
 import com.tuhanbao.io.impl.sqlUtil.DBUtil;
 import com.tuhanbao.io.impl.tableUtil.DBType;
-import com.tuhanbao.io.impl.tableUtil.DataType;
-import com.tuhanbao.io.impl.tableUtil.EnumManager;
 import com.tuhanbao.io.impl.tableUtil.ImportColumn;
 import com.tuhanbao.io.impl.tableUtil.ImportTable;
-import com.tuhanbao.io.objutil.ArrayUtil;
 import com.tuhanbao.io.objutil.StringUtil;
 import com.tuhanbao.util.db.conn.DBSrc;
 import com.tuhanbao.util.db.conn.MyConnection;
@@ -99,69 +93,6 @@ public class MysqlTableSrcUtil implements ITableSrcUtil{
 		if (table.getColumns() == null || table.getColumns().isEmpty()) return null;
     	return table;
     }
-    
-    public ImportTable getTable(String tableName, String[][] arrays, DBType dbType) throws Exception {
-		ImportTable table = new ImportTable(tableName);
-		int length = arrays.length;
-		//首行是列标
-		for (int i = 1; i < length; i++) {
-			String[] array = arrays[i];
-			if (Xls2CodeUtil.isEmptyLine(array)) continue;
-			ImportColumn column = getColumn(table, array, dbType);
-			if (column.isPK()) table.setPK(column);
-			else table.addColumn(column);
-		}
-    	
-    	return table;
-    }
-    
-	private static ImportColumn getColumn(ImportTable table, String[] array, DBType dbType) {
-		String colName = array[0];
-		String dataType = array[1];
-		String dataLengthStr = ArrayUtil.indexOf(array, 2);
-		String canFilterStr = ArrayUtil.indexOf(array, 3);
-		long dataLength = 0;
-		
-		if (!StringUtil.isEmpty(dataLengthStr)) dataLength = Long.valueOf(dataLengthStr);
-		
-		IEnumType enumInfo = EnumManager.getEnum(dataType);
-		ImportColumn col = null;
-		if (enumInfo != null) {
-			int enumDt = enumInfo.getType();
-			if (enumDt == EnumClassInfo.INT) {
-				dataType = "int";
-				if (dataLength == 0) dataLength = 4;
-			}
-			else {
-				dataType = "String";
-				if (dataLength == 0) dataLength = 63;
-			}
-			
-			col = new ImportColumn(table, colName, TableSrcUtilFactory.getDBDataType(dataType, dbType), dataLength);
-			col.setEnumInfo(enumInfo);
-		}
-		else {
-			DataType dt = DataType.valueOf(dataType.toUpperCase());
-			col = new ImportColumn(table, colName, dt, TableSrcUtilFactory.getDBDataType(dataType, dbType), dataLength);
-		}
-		String pkfkInfo = ArrayUtil.indexOf(array, 4);
-		if (!StringUtil.isEmpty(pkfkInfo)) {
-			if (pkfkInfo.startsWith("PK")) {
-				col.setPK(true);
-			} 
-			else if (pkfkInfo.startsWith("FK")) {
-	//			FK(T_CABLES_ROLE.ROLE_ID)
-				int start = pkfkInfo.indexOf(Constants.LEFT_PARENTHESE);
-				int end = pkfkInfo.indexOf(Constants.RIGHT_PARENTHESE);
-				String FK = pkfkInfo.substring(start + 1, end);
-				col.setFK(FK);
-			}
-		}
-		col.setDefaultValue(ArrayUtil.indexOf(array, 5));
-		col.setComment(ArrayUtil.indexOf(array, 6));
-		col.setCanFilter("true".equalsIgnoreCase(canFilterStr) || "1".equalsIgnoreCase(canFilterStr));
-		return col;
-	}
 
 	private static ImportColumn getColumn(ImportTable table, ResultSet rs, DBType dbType) throws SQLException {
 		String colName = rs.getString(1);

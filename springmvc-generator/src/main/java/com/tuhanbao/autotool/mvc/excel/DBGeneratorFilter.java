@@ -10,10 +10,16 @@ import com.tuhanbao.autotool.mvc.J2EETable;
 import com.tuhanbao.autotool.mvc.ModuleManager;
 import com.tuhanbao.base.chain.Context;
 import com.tuhanbao.base.chain.FilterAnnotation;
+import com.tuhanbao.io.impl.classUtil.EnumClassInfo;
+import com.tuhanbao.io.impl.classUtil.IEnumType;
+import com.tuhanbao.io.impl.codeUtil.Xls2CodeUtil;
 import com.tuhanbao.io.impl.tableUtil.DBType;
+import com.tuhanbao.io.impl.tableUtil.DataType;
+import com.tuhanbao.io.impl.tableUtil.EnumManager;
 import com.tuhanbao.io.impl.tableUtil.ImportColumn;
 import com.tuhanbao.io.impl.tableUtil.ImportTable;
 import com.tuhanbao.io.impl.tableUtil.TableConfig;
+import com.tuhanbao.io.impl.tableUtil.TableManager;
 import com.tuhanbao.io.impl.tableUtil.src.TableSrcUtilFactory;
 import com.tuhanbao.io.objutil.ArrayUtil;
 import com.tuhanbao.io.objutil.StringUtil;
@@ -43,21 +49,24 @@ public class DBGeneratorFilter extends ExcelAGCFilter {
             }
         }
         
-        List<J2EETable> tables = initTables(context);
+        List<ImportTable> tables = initTables(context);
         Collections.sort(tables);
         context.putAttr(TABLES, tables);
     }
     
-    private List<J2EETable> initTables(Context context) {
-        List<J2EETable> list = new ArrayList<J2EETable>();
+    private List<ImportTable> initTables(Context context) {
+        List<ImportTable> list = new ArrayList<>();
         Map<String, String[]> tableConfigs = getTableConfigs(context);
         for (String tableName : tableConfigs.keySet()) {
             String[][] arrays = removeConfig(context, tableName);
-            list.add(getTable(tableName, tableConfigs.get(tableName), arrays));
+            ImportTable table = getTable(tableName, tableConfigs.get(tableName), arrays);
+            list.add(table);
+            //必须先将table放入tableManager，不然fk到时候可能找不到
+            TableManager.addTable(table);
         }
         
         //这里需要初始化一下所有的table外键
-        for (J2EETable table : list) {
+        for (ImportTable table : list) {
             List<ImportColumn> cols = table.getColumns();
             for (ImportColumn ic : cols) {
                 ic.getFkColumn();
@@ -66,7 +75,7 @@ public class DBGeneratorFilter extends ExcelAGCFilter {
         return list;
     }
     
-    private J2EETable getTable(String tableName, String[] tableConfig, String[][] arrays) {
+    private ImportTable getTable(String tableName, String[] tableConfig, String[][] arrays) {
         //tableConfig
         //#表名 中文描述    缓存(NOT/ALL/AUTO)默认为NO   序列号（oracle数据库可配置，非必填，填autocreate，会根据表名自动生成序列）   默认排序字段（可不填）
         //T_CRAWLER_CLASS     NO  autocreate  
@@ -77,8 +86,6 @@ public class DBGeneratorFilter extends ExcelAGCFilter {
         String orderCol = ArrayUtil.indexOf(tableConfig, 5);
         DBType dbType = ModuleManager.getDBSrc(module).getDbType();
 
-        ImportTable table = TableSrcUtilFactory.getTable(tableName, arrays, dbType);
-        table.setComment(comment);
         TableConfig tcfg = new TableConfig();
         tcfg.setCacheType(cacheType);
         tcfg.setDefaultOrderColName(orderCol);
@@ -88,8 +95,10 @@ public class DBGeneratorFilter extends ExcelAGCFilter {
         else if (dbType == DBType.MYSQL) {
             tcfg.setAutoIncrement(Constants.AUTOCREATE.equalsIgnoreCase(seq));
         }
-        table.setTableConfig(tcfg);
-        return new J2EETable(table, module);
+        ImportTable table = new J2EETable(tableName, module, tcfg);
+        initColumns(table, arrays, dbType);
+        table.setComment(comment);
+        return table;
     }
     
     private static String getSeqName(String seqName, String tableName) {
@@ -108,6 +117,65 @@ public class DBGeneratorFilter extends ExcelAGCFilter {
             return "oracle.jdbc.driver.OracleDriver";
         }
         return "com.mysql.jdbc.Driver";
+    }
+    
+    private void initColumns(ImportTable table, String[][] arrays, DBType dbType) {
+        int length = arrays.length;
+        //首行是列标
+        for (int i = 1; i < length; i++) {
+            String[] array = arrays[i];
+            if (Xls2CodeUtil.isEmptyLine(array)) continue;
+            ImportColumn column = getColumn(table, array, dbType);
+            if (column.isPK()) table.setPK(column);
+            else table.addColumn(column);
+        }
+    }
+    
+    private static ImportColumn getColumn(ImportTable table, String[] array, DBType dbType) {
+        String colName = array[0];
+        String dataType = array[1];
+        String dataLengthStr = ArrayUtil.indexOf(array, 2);
+        String canFilterStr = ArrayUtil.indexOf(array, 3);
+        long dataLength = 0;
+        
+        if (!StringUtil.isEmpty(dataLengthStr)) dataLength = Long.valueOf(dataLengthStr);
+        
+        IEnumType enumInfo = EnumManager.getEnum(dataType);
+        ImportColumn col = null;
+        if (enumInfo != null) {
+            int enumDt = enumInfo.getType();
+            if (enumDt == EnumClassInfo.INT) {
+                dataType = "int";
+                if (dataLength == 0) dataLength = 4;
+            }
+            else {
+                dataType = "String";
+                if (dataLength == 0) dataLength = 63;
+            }
+            
+            col = new ImportColumn(table, colName, TableSrcUtilFactory.getDBDataType(dataType, dbType), dataLength);
+            col.setEnumInfo(enumInfo);
+        }
+        else {
+            DataType dt = DataType.valueOf(dataType.toUpperCase());
+            col = new ImportColumn(table, colName, dt, TableSrcUtilFactory.getDBDataType(dataType, dbType), dataLength);
+        }
+        String pkfkInfo = ArrayUtil.indexOf(array, 4);
+        if (!StringUtil.isEmpty(pkfkInfo)) {
+            if (pkfkInfo.startsWith("PK")) {
+                col.setPK(true);
+            } 
+            else if (pkfkInfo.startsWith("FK")) {
+                int start = pkfkInfo.indexOf(Constants.LEFT_PARENTHESE);
+                int end = pkfkInfo.indexOf(Constants.RIGHT_PARENTHESE);
+                String FK = pkfkInfo.substring(start + 1, end);
+                col.setFK(FK);
+            }
+        }
+        col.setDefaultValue(ArrayUtil.indexOf(array, 5));
+        col.setComment(ArrayUtil.indexOf(array, 6));
+        col.setCanFilter("true".equalsIgnoreCase(canFilterStr) || "1".equalsIgnoreCase(canFilterStr));
+        return col;
     }
 
 }

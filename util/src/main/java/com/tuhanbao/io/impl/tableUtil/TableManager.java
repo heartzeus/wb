@@ -23,4 +23,8 @@ public class TableManager {
 		TxtUtil.write(FileUtil.appendPath(fullPath, "TableConstants.java"), 
 				TableUtil.getConstantClassStr(url, TABLES.values()));
 	}
+
+    public static Map<String, ImportTable> getAllTables() {
+        return TABLES;
+    }
 }

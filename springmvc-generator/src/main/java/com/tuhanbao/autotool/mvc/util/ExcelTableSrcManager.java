@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.tuhanbao.Constants;
-import com.tuhanbao.autotool.mvc.TableConfig;
 import com.tuhanbao.io.excel.util.Excel2007Util;
 import com.tuhanbao.io.impl.tableUtil.DBType;
 import com.tuhanbao.io.impl.tableUtil.ImportColumn;
@@ -15,7 +14,7 @@ import com.tuhanbao.io.objutil.StringUtil;
 
 public class ExcelTableSrcManager {
 	private static Map<String, ImportTable> TABLES = new HashMap<String, ImportTable>();
-	private static Map<String, TableConfig> CONFIGS = new HashMap<String, TableConfig>();
+
 	private static DBType DB_TYPE = DBType.MYSQL;
 	
 	/**

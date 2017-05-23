@@ -20,7 +20,9 @@ public class ModelClazzCreator extends J2EETableClazzCreator {
         String moClassName = modelName + MOCLASS_SUFFIX;
         classInfo.setName(modelName + " extends " + moClassName);
         classInfo.setPackageInfo(this.project.getServiceBeanUrl(table.getModule()));
-        classInfo.addImportInfo(this.project.getServiceBeanUrl(table.getModule()) + "." + moClassName);
+        
+        //不需要import，在同一个包下面
+//        classInfo.addImportInfo(this.project.getServiceBeanUrl(table.getModule()) + "." + moClassName);
         MethodInfo method = new MethodInfo();
         method.setName(modelName);
         method.setPe(PackageEnum.PUBLIC);

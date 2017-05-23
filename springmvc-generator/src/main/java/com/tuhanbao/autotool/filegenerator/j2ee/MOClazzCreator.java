@@ -11,7 +11,6 @@ import com.tuhanbao.io.impl.classUtil.PackageEnum;
 import com.tuhanbao.io.impl.tableUtil.DataType;
 import com.tuhanbao.io.impl.tableUtil.ImportColumn;
 import com.tuhanbao.io.impl.tableUtil.Relation;
-import com.tuhanbao.io.objutil.OverwriteStrategy;
 import com.tuhanbao.io.objutil.StringUtil;
 import com.tuhanbao.util.db.table.data.BooleanValue;
 import com.tuhanbao.util.util.clazz.ClazzUtil;
@@ -121,7 +120,7 @@ public class MOClazzCreator extends J2EETableClazzCreator {
             String fkModelName = ClazzCreator.getClassName(fkTableName);
             
             Relation fkRT = col.getFkRT();
-            boolean isFkMySelf = col.getTable() == table.getTable();
+            boolean isFkMySelf = col.getTable() == table;
             boolean isSingle = fkRT == Relation.One2One || fkRT == Relation.One2N;
 			classInfo.addMethodInfo(getGetMethod(col, fkModelName, fkModelName, classInfo, isSingle, isFkMySelf));
             classInfo.addMethodInfo(getRemoveMethod(col, fkModelName, fkModelName, classInfo, isSingle, isFkMySelf));

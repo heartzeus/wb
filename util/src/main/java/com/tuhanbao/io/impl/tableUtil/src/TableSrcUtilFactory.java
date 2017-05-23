@@ -48,17 +48,6 @@ public class TableSrcUtilFactory {
 		return null;
 	}
 	
-	public static ImportTable getTable(String tableName, String[][] arrays, DBType dbType) {
-		ITableSrcUtil tableSrcUtil = getTableSrcUtil(dbType);
-		if (tableSrcUtil == null) throw new MyException("cannot support this dbtype!");
-		try {
-			return tableSrcUtil.getTable(tableName, arrays, dbType);
-		} catch (Exception e) {
-			LogManager.error(e);
-		}
-		return null;
-	}
-	
 	public static DBDataType getDBDataType(String typeName, DBType dbType) {
 		if (dbType == DBType.ORACLE) return OracleDataType.getDBDataType(typeName);
 		if (dbType == DBType.MYSQL) return MysqlDataType.getDBDataType(typeName);

@@ -2,11 +2,8 @@ package com.tuhanbao.autotool.mvc.web;
 
 import java.io.IOException;
 
-import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
 import com.tuhanbao.autotool.mvc.J2EETable;
-import com.tuhanbao.io.txt.util.TxtUtil;
-
-import com.tuhanbao.util.util.clazz.ClazzUtil;
+import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
 
 @Deprecated
 public class WebManager {

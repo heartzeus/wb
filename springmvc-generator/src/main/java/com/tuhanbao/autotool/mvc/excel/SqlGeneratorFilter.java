@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.tuhanbao.autotool.mvc.J2EETable;
 import com.tuhanbao.autotool.mvc.ModuleManager;
 import com.tuhanbao.autotool.mvc.ProjectConfig;
 import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
@@ -35,21 +34,21 @@ public class SqlGeneratorFilter extends ExcelAGCFilter {
                         moduleSb.put(module, new StringBuilder());
                     }
                     
-                    Map<DBSrc, List<J2EETable>> newTables = new HashMap<DBSrc, List<J2EETable>>();
-                    for (J2EETable table : getTables(context)) {
+                    Map<DBSrc, List<ImportTable>> newTables = new HashMap<DBSrc, List<ImportTable>>();
+                    for (ImportTable table : getTables(context)) {
                         String module = table.getModule();
                         DBSrc dbSrc = ModuleManager.getDBSrc(cp, module);
-                        if (!newTables.containsKey(dbSrc)) newTables.put(dbSrc, new ArrayList<J2EETable>());
+                        if (!newTables.containsKey(dbSrc)) newTables.put(dbSrc, new ArrayList<ImportTable>());
                         newTables.get(dbSrc).add(table);
-                        moduleSb.get(module).append(DBUtil.getSql(table.table, dbSrc));
+                        moduleSb.get(module).append(DBUtil.getSql(table, dbSrc));
                     }
                     
                     //删除多余的表
-                    for (Entry<DBSrc, List<J2EETable>> entry : newTables.entrySet()) {
+                    for (Entry<DBSrc, List<ImportTable>> entry : newTables.entrySet()) {
                         List<ImportTable> oldTables = DBUtil.getTables(entry.getKey());
                         
                         A : for (ImportTable oldTable : oldTables) {
-                            for (J2EETable newTable : entry.getValue()) {
+                            for (ImportTable newTable : entry.getValue()) {
                                 if (oldTable.getTableName().equals(newTable.getTableName())) {
                                     continue A;
                                 }

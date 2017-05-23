@@ -7,14 +7,14 @@ import java.util.Collections;
 import java.util.List;
 
 import com.tuhanbao.Constants;
-import com.tuhanbao.autotool.mvc.J2EETable;
-import com.tuhanbao.autotool.mvc.J2EETableManager;
 import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
 import com.tuhanbao.base.chain.Context;
 import com.tuhanbao.base.chain.FilterAnnotation;
 import com.tuhanbao.base.chain.event.CreateFileEvent;
 import com.tuhanbao.io.impl.codeUtil.Xls2CodeUtil;
 import com.tuhanbao.io.impl.tableUtil.ImportColumn;
+import com.tuhanbao.io.impl.tableUtil.ImportTable;
+import com.tuhanbao.io.impl.tableUtil.TableManager;
 import com.tuhanbao.io.impl.tableUtil.TableUtil;
 import com.tuhanbao.io.objutil.FileUtil;
 import com.tuhanbao.io.objutil.OverwriteStrategy;
@@ -31,7 +31,7 @@ public class TableConstantsGeneratorFilter extends ExcelAGCFilter {
             String url = project.getConstantsUrl();
             String fullPath = project.getConstantsPath();
             context.addEvent(new CreateFileEvent(FileUtil.appendPath(fullPath, Constants.TABLE_CONSTANTS_CLASS), 
-                    getConstantClassStr(url, J2EETableManager.getAllTables().values(), project)));
+                    getConstantClassStr(url, TableManager.getAllTables().values(), project)));
             writeTableLanguage(project, context);
         }
         catch (Exception e) {
@@ -46,7 +46,7 @@ public class TableConstantsGeneratorFilter extends ExcelAGCFilter {
      * @return
      * @throws IOException
      */
-    private static String getConstantClassStr(String url, Collection<J2EETable> tables, SpringMvcProjectInfo project) throws IOException
+    private static String getConstantClassStr(String url, Collection<ImportTable> tables, SpringMvcProjectInfo project) throws IOException
     {
         StringBuilder sb = new StringBuilder();
         sb.append(Constants.PACKAGE).append(Constants.BLANK).append(url).append(
@@ -102,26 +102,51 @@ public class TableConstantsGeneratorFilter extends ExcelAGCFilter {
 
         sb.append(Constants.GAP1).append("public static void init()");
         sb.append(Constants.BLANK).append(Constants.LEFT_BRACE).append(Constants.ENTER);
-        List<J2EETable> list = new ArrayList<J2EETable>();
+        List<ImportTable> list = new ArrayList<ImportTable>();
         list.addAll(tables);
         Collections.sort(list);
-        for (J2EETable table : list)
+        for (ImportTable table : list)
             sb.append(Constants.GAP2).append("register(").append(table.getTableName()).append(".TABLE);").append(
                     Constants.BLANK).append(Constants.ENTER);
         sb.append(Constants.GAP1).append(Constants.RIGHT_BRACE).append(Constants.ENTER);
         sb.append(Constants.ENTER);
 
-        for (J2EETable t : list)
+        for (ImportTable t : list)
         {
-            sb.append(t.toString(project)).append(Constants.ENTER);
+            sb.append(getTableClass(t, project)).append(Constants.ENTER);
         }
         sb.append(Constants.RIGHT_BRACE);
         return sb.toString();
     }
     
+    private static String getTableClass(ImportTable table, SpringMvcProjectInfo project)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append(Constants.GAP1 + "public static final class " + table.getTableName());
+        sb.append(Constants.BLANK).append("{").append(Constants.ENTER);
+        List<ImportColumn> columns = table.getColumns();
+        sb.append(Constants.GAP2 + "public static final Table TABLE = new Table(").append(columns.size()).append(", \"")
+                .append(table.getName().toUpperCase()).append("\", ")
+                .append("CacheType.").append(table.getCacheTypeStr())
+                .append(", \"").append(project.getServiceBeanUrl(table.getModule())).append(".").append(table.getModelName()).append("\"");
+        if (!StringUtil.isEmpty(table.getSeqName())) {
+            sb.append(", \"").append(table.getSeqName()).append("\"");
+        }
+        sb.append(");").append(Constants.ENTER);
+        sb.append(Constants.ENTER);
+        for (ImportColumn c : columns)
+        {
+            sb.append(c.toString()).append(Constants.ENTER);
+        }
+        
+        sb.append(Constants.GAP1 + "}").append(Constants.ENTER);
+        
+        return sb.toString();
+    }
+    
     private static void writeTableLanguage(SpringMvcProjectInfo project, Context context) throws IOException {
         StringBuilder sb = new StringBuilder();
-        for (J2EETable table : J2EETableManager.getAllTables().values()) {
+        for (ImportTable table : TableManager.getAllTables().values()) {
             sb.append(getTableLanguage(table));
         }
         String url = FileUtil.appendPath(project.getRootPath(), project.getConfigUrl(),
@@ -129,7 +154,7 @@ public class TableConstantsGeneratorFilter extends ExcelAGCFilter {
         context.addEvent(new CreateFileEvent(url, sb.toString(), OverwriteStrategy.ADD));
     }
     
-    private static String getTableLanguage(J2EETable table) {
+    private static String getTableLanguage(ImportTable table) {
         StringBuilder sb = new StringBuilder();
         String comment = table.getComment();
         String tableName = table.getName();

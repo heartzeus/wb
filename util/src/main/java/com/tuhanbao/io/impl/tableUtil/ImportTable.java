@@ -3,10 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tuhanbao.io.base.Constants;
+import com.tuhanbao.io.objutil.StringUtil;
 import com.tuhanbao.util.db.table.CacheType;
 
 
-public class ImportTable
+public class ImportTable implements Comparable<ImportTable>
 {
 	public final String name;
     
@@ -16,21 +17,38 @@ public class ImportTable
     
     protected ImportColumn PK;
     
-    private TableConfig tableConfig;
+    protected TableConfig tableConfig;
     
-    private boolean isView = false;
+    protected boolean isView = false;
+    
+    //对象所在模块
+    protected String module;
+    
+    //对象的mo名称
+    protected String modelName;
     
     //用于生成代码，别人外键过来的列
     protected List<ImportColumn> fkColumns = new ArrayList<ImportColumn>();
     
     public ImportTable(String name) {
-    	this(name, new TableConfig());
+    	this(name, null, new TableConfig());
+    }
+
+    public ImportTable(String name, TableConfig tableConfig) {
+        this(name, null, tableConfig);
     }
     
-    public ImportTable(String name, TableConfig tableConfig) {
+    public ImportTable(String name, String module, TableConfig tableConfig) {
     	this.name = name;
-    	TableManager.addTable(this);
+    	this.module = module;
     	this.tableConfig = tableConfig;
+
+        //最前面的一般是T_,I_是不需要解析的
+        String tableName = this.name;
+        if (this.name.startsWith("T_") || this.name.startsWith("I_")) {
+            tableName = this.name.substring(2);
+        }
+        modelName = getClassName(tableName);
     }
     
 	public static ImportTable getTableBySql(String s)
@@ -79,6 +97,10 @@ public class ImportTable
     		addColumn(col);
     	}
     }
+
+    public String getModelName() {
+        return this.modelName;
+    }
     
     public ImportColumn getPK() {
     	return this.PK;
@@ -87,6 +109,14 @@ public class ImportTable
     public List<ImportColumn> getColumns()
     {
         return columns;
+    }
+    
+    public void setModule(String module) {
+        this.module = module;
+    }
+
+    public String getModule() {
+        return this.module;
     }
     
     public ImportColumn getColumn(String colName)
@@ -231,4 +261,27 @@ public class ImportTable
 	public int getIndex(ImportColumn col) {
 		return this.columns.indexOf(col);
 	}
+
+    @Override
+    public int compareTo(ImportTable o) {
+        if (this.getName() == null) return -1;
+        return this.getName().compareTo(o.getName());
+    }    
+    
+    public static String getClassName(String name) {
+        String[] names = StringUtil.string2Array(name, "_");
+        //将names转换成驼峰
+        StringBuilder sb = new StringBuilder();
+        for (String n : names) {
+            sb.append(str2ClassName(n));
+        }
+        return sb.toString();
+    }
+    
+    private static String str2ClassName(String s)
+    {
+        if (s == null) return s;
+        s = s.toLowerCase();
+        return s.substring(0, 1).toUpperCase() + s.substring(1);
+    }
 }

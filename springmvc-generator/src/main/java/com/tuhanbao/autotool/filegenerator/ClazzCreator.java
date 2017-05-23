@@ -48,7 +48,7 @@ public abstract class ClazzCreator implements IFileGenerator {
 		//将names转换成驼峰
 		StringBuilder sb = new StringBuilder();
 		for (String n : names) {
-			sb.append(ClazzCreator.str2ClassName(n));
+			sb.append(str2ClassName(n));
 		}
 		return sb.toString();
 	}

@@ -8,7 +8,7 @@ import com.tuhanbao.util.db.table.CacheType;
 public class TableConfig {
 
 	//生成策略  默认为融合
-	protected OverwriteStrategy os = OverwriteStrategy.MEGER;
+    protected OverwriteStrategy os = OverwriteStrategy.COVER;
 	
 	//需要生成的方法  默认全部
 	protected int crud = 0xF;

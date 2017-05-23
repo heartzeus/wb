@@ -5,11 +5,11 @@ import com.tuhanbao.autotool.filegenerator.j2ee.IServiceClazzCreator;
 import com.tuhanbao.autotool.filegenerator.j2ee.MOClazzCreator;
 import com.tuhanbao.autotool.filegenerator.j2ee.ModelClazzCreator;
 import com.tuhanbao.autotool.filegenerator.j2ee.ServiceClazzCreator;
-import com.tuhanbao.autotool.mvc.J2EETable;
 import com.tuhanbao.autotool.mvc.ProjectConfig;
 import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
 import com.tuhanbao.base.chain.Context;
 import com.tuhanbao.base.chain.FilterAnnotation;
+import com.tuhanbao.io.impl.tableUtil.ImportTable;
 
 @FilterAnnotation("table")
 public class TableGeneratorFilter extends ExcelAGCFilter {
@@ -24,7 +24,7 @@ public class TableGeneratorFilter extends ExcelAGCFilter {
             IFileGenerator modelFG = new ModelClazzCreator(project);
             IFileGenerator MOFG = new MOClazzCreator(project);
             
-            for (J2EETable table : getTables(context)) {
+            for (ImportTable table : getTables(context)) {
                 context.addEvent(serviceFG.getFileBean(table));
                 context.addEvent(iServiceFG.getFileBean(table));
                 context.addEvent(modelFG.getFileBean(table));

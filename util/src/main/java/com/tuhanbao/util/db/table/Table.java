@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 工程用Table
+ * 业务项目用到的Table
+ * 与ImportTable不同
+ * 
  * @author Administrator
  *
  */
