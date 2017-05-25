@@ -20,7 +20,7 @@ import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.parser.deserializer.FieldDeserializer;
 import com.alibaba.fastjson.parser.deserializer.JavaBeanDeserializer;
 import com.alibaba.fastjson.util.TypeUtils;
-import com.tuhanbao.base.ServiceBean;
+import com.tuhanbao.base.dataservice.ServiceBean;
 
 /**
  * @author wenshao[szujobs@hotmail.com]

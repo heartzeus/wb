@@ -1,6 +1,6 @@
 package com.tuhanbao.thirdapi.cache.mem;
 
-import com.tuhanbao.thirdapi.cache.CacheResource;
+import com.tuhanbao.thirdapi.cache.ICacheResource;
 import com.tuhanbao.thirdapi.cache.CacheResourceFactory;
 import com.tuhanbao.util.IResource;
 import com.tuhanbao.util.IResourceManager;
@@ -22,7 +22,7 @@ public class MemCacheManager extends IResourceManager implements CacheResourceFa
     }
 
     @Override
-    public CacheResource getCacheResource() {
+    public ICacheResource getCacheResource() {
         return RESOURCE;
     }
     

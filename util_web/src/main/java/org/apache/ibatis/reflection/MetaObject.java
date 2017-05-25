@@ -27,7 +27,7 @@ import org.apache.ibatis.reflection.wrapper.MapWrapper;
 import org.apache.ibatis.reflection.wrapper.ObjectWrapper;
 import org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory;
 
-import com.tuhanbao.base.ServiceBean;
+import com.tuhanbao.base.dataservice.ServiceBean;
 import com.tuhanbao.util.db.table.data.DataValue;
 
 /**

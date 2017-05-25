@@ -144,7 +144,7 @@ public final class ConfigManager implements ConfigRefreshListener {
 
     private static void addConfig(File configFile) {
         //取出文件名字
-        String name = configFile.getName().toLowerCase();
+        String name = configFile.getName();
         String key = name.substring(0, name.indexOf(Constants.STOP_EN));
 
         for (ConfigPattern cp : getAllConfigPatternWithoutDefault()) {

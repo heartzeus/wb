@@ -1,5 +1,9 @@
 package com.tuhanbao.thirdapi.cache;
 
+import java.util.List;
+
+import com.tuhanbao.util.db.IField;
+
 public enum CacheKey implements ICacheKey {
     TOKEN(60 * 60 * 24 * 7), 
     
@@ -30,6 +34,16 @@ public enum CacheKey implements ICacheKey {
     @Override
     public String getName() {
         return name();
+    }
+
+    @Override
+    public Class<?> getModelClassName() {
+        return null;
+    }
+
+    @Override
+    public List<IField> getFields() {
+        return null;
     }
     
 }

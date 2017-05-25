@@ -3,6 +3,9 @@ package com.tuhanbao.util.db.table;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tuhanbao.base.dataservice.IDataGroup;
+import com.tuhanbao.util.log.LogManager;
+
 /**
  * 业务项目用到的Table
  * 与ImportTable不同
@@ -10,7 +13,7 @@ import java.util.List;
  * @author Administrator
  *
  */
-public class Table
+public class Table implements IDataGroup<Column>
 {
     private String name;
     
@@ -76,6 +79,11 @@ public class Table
 	public List<Column> getColumns() {
 		return list;
 	}
+
+    @Override
+    public List<Column> getFields() {
+        return getColumns();
+    }
 	
 	public String toString() {
 		return this.getName();
@@ -114,4 +122,15 @@ public class Table
 		}
 		return null;
 	}
+
+    @Override
+    public Class<?> getModelClassName() {
+        try {
+            return Class.forName(this.getModelName());
+        }
+        catch (ClassNotFoundException e) {
+            LogManager.error(e);
+            return null;
+        }
+    }
 }

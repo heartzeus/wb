@@ -6,17 +6,22 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.alibaba.fastjson.JSONObject;
-import com.tuhanbao.base.ServiceBean;
+import com.tuhanbao.base.dataservice.IDataGroup;
 import com.tuhanbao.thirdapi.cache.CacheResource;
-import com.tuhanbao.thirdapi.cache.ICacheKey;
-import com.tuhanbao.util.IResource;
-import com.tuhanbao.util.db.table.Table;
 import com.tuhanbao.util.exception.MyException;
 import com.tuhanbao.util.util.json.JsonUtil;
 
 import redis.clients.jedis.Jedis;
 
-public class RedisResource extends IResource implements CacheResource {
+/**
+ * redis的hget和hset有两级key，但是无法做到expire控制
+ * 
+ * 所以很多两级相关的方法对于设置过期的IDataGroup来说无效
+ * 
+ * @author Administrator
+ *
+ */
+public class RedisResource extends CacheResource {
 
     private Jedis jedis;
 
@@ -28,13 +33,14 @@ public class RedisResource extends IResource implements CacheResource {
     }
 
     @Override
-    public int set(ICacheKey ck, String key, Object value) {
+    public int set(IDataGroup<?> dg, Object key, Object value) {
         Object jsonObject = JsonUtil.toJSON(value);
-        if (ck.isExpire()) {
-            return setex(ck, key, ck.getExpireTime(), jsonObject.toString());
+        int expireTime = getExpireTime(dg);
+        if (expireTime > 0) { 
+            return setex(dg, key.toString(), expireTime, jsonObject.toString());
         }
         else {
-            return (int)jedis.hset(ck.getName(), key, jsonObject.toString()).longValue();
+            return (int)jedis.hset(dg.getName(), key.toString(), jsonObject.toString()).longValue();
         }
     }
 
@@ -45,106 +51,103 @@ public class RedisResource extends IResource implements CacheResource {
     }
 
     @Override
-    public int setex(ICacheKey ck, String key, int seconds, Object value) {
+    public int setex(IDataGroup<?> dg, Object key, int seconds, Object value) {
         Object jsonObject = JsonUtil.toJSON(value);
-        if (ck.isExpire()) {
-            String result = jedis.setex(getKey(ck, key), seconds, jsonObject.toString());
+        if (seconds > 0) {
+            String result = jedis.setex(getKey(dg, key.toString()), seconds, jsonObject.toString());
             return isSuccess(result) ? 1 : -1;
         }
         throw new MyException("you cannot expire a value for a not expire ICacheKey");
     }
 
     @Override
-    public int del(ICacheKey ck, String key) {
-        if (ck.isExpire()) {
-            return (int)jedis.del(getKey(ck, key)).longValue();
+    public int del(IDataGroup<?> dg, Object key) {
+        if (isExpire(dg)) {
+            return (int)jedis.del(getKey(dg, key.toString())).longValue();
         }
         else {
-            return (int)jedis.hdel(ck.getName(), key).longValue();
+            return (int)jedis.hdel(dg.getName(), key.toString()).longValue();
+        }
+    }
+    
+
+    @Override
+    public Object get(IDataGroup<?> dg, Object key) {
+        if (getExpireTime(dg) > 0) {
+            return jedis.get(getKey(dg, key.toString()));
+        }
+        else {
+            Class<?> modelClassName = dg.getModelClassName();
+            if (modelClassName != null) {
+                return get(dg, key, modelClassName);
+            }
+            else {
+                return jedis.hget(dg.getName(), key.toString());
+            }
         }
     }
 
     @Override
-    public String get(ICacheKey ck, String key) {
-        if (ck.isExpire()) {
-            return jedis.get(getKey(ck, key));
-        }
-        else {
-            return jedis.hget(ck.getName(), key);
-        }
-    }
-
-    @Override
-    public <T> T get(ICacheKey ck, String key, Class<T> clazz) {
-        Object result = get(ck, key);
+    public <T> T get(IDataGroup<?> dg, Object key, Class<T> clazz) {
+        Object result = get(dg, key);
         if (result == null) return null;
         return JsonUtil.getBean(JSONObject.parseObject(result.toString()), clazz);
     }
 
     @Override
-    public boolean exists(ICacheKey ck, String key) {
-        if (ck.isExpire()) {
-            return jedis.exists(getKey(ck, key));
+    public boolean exists(IDataGroup<?> dg, Object key) {
+        if (isExpire(dg)) {
+            return jedis.exists(getKey(dg, key.toString()));
         }
         else {
-            return jedis.hexists(ck.getName(), key);
+            return jedis.hexists(dg.getName(), key.toString());
         }
     }
 
     @Override
-    public int len(ICacheKey ck) {
-        if (ck.isExpire()) {
+    public int len(IDataGroup<?> dg) {
+        if (isExpire(dg)) {
             throw new MyException("you cannot get length for a expire ICacheKey");
         }
         else {
-            return (int)jedis.hlen(ck.getName()).longValue();
+            //重写父类会节约很多性能
+            return (int)jedis.hlen(dg.getName()).longValue();
         }
     }
 
     @Override
-    public ServiceBean get(Table table, Object pkValue) throws ClassNotFoundException {
-        String result = jedis.hget(table.getName(), pkValue.toString());
-        return (ServiceBean)JsonUtil.getBean(JSONObject.parseObject(result), Class.forName(table.getModelName()));
-    }
-
-    @Override
-    public List<ServiceBean> get(Table table) throws ClassNotFoundException {
-        Map<String, String> result = jedis.hgetAll(table.getName());
-        List<ServiceBean> list = new ArrayList<ServiceBean>(result.size());
-        for (Entry<String, String> entry : result.entrySet()) {
-            ServiceBean serviceBean = (ServiceBean)JsonUtil.getBean(JSONObject.parseObject(entry.getValue()), Class.forName(table.getModelName()));
-            list.add(serviceBean);
+    public List<Object> get(IDataGroup<?> dg) {
+        if (isExpire(dg)) {
+            throw new MyException("you cannot get length for a expire ICacheKey");
         }
-        return list;
+        else {
+            Map<String, String> result = jedis.hgetAll(dg.getName());
+            List<Object> list = new ArrayList<>(result.size());
+            for (Entry<String, String> entry : result.entrySet()) {
+                Class<?> modelClassName = dg.getModelClassName();
+                if (modelClassName == null) {
+                    list.add(JSONObject.parseObject(entry.getValue()));
+                }
+                else {
+                    Object object = JsonUtil.getBean(JSONObject.parseObject(entry.getValue()), modelClassName);
+                    list.add(object);
+                }
+            }
+            return list;
+        }
     }
 
     @Override
-    public void save(ServiceBean bean) {
-        Table table = bean.getTable();
-        jedis.hset(table.getName(), bean.getKeyValue().toString(), bean.toJson().toJSONString());
-    }
-
-    @Override
-    public boolean hasCacheTable(Table table) {
-        return jedis.exists(table.getName());
-    }
-
-    @Override
-    public int len(Table table) {
-        return (int)jedis.hlen(table.getName()).longValue();
-    }
-
-    @Override
-    public void del(Table table, Object pkValue) {
-        jedis.hdel(table.getName(), pkValue.toString());
+    public boolean hasCacheDataGroup(IDataGroup<?> dg) {
+        return jedis.exists(dg.getName());
     }
 
     private static boolean isSuccess(String result) {
         return OK.equals(result);
     }
 
-    private static final String getKey(ICacheKey ck, String key) {
-        return ck + "_" + key;
+    private static final String getKey(IDataGroup<?> ck, String key) {
+        return ck.getName() + "_" + key;
     }
 
     @Override

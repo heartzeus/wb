@@ -61,7 +61,7 @@ import org.apache.ibatis.type.TypeHandler;
 import org.apache.ibatis.type.TypeHandlerRegistry;
 
 import com.alibaba.druid.pool.DruidPooledPreparedStatement;
-import com.tuhanbao.base.ServiceBean;
+import com.tuhanbao.base.dataservice.ServiceBean;
 import com.tuhanbao.util.log.LogManager;
 import com.tuhanbao.web.filter.SelectorFilter;
 

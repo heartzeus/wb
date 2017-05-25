@@ -1,6 +1,6 @@
 package com.tuhanbao.thirdapi.cache;
 
-public class NoExpireCacheKey implements ICacheKey {
+public class NoExpireCacheKey extends AbstractCacheKey {
     
     private String name;
     

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.tuhanbao.base.ServiceBean;
+import com.tuhanbao.base.dataservice.ServiceBean;
 import com.tuhanbao.util.db.table.Column;
 import com.tuhanbao.util.db.table.DataValueFactory;
 import com.tuhanbao.util.db.table.Table;

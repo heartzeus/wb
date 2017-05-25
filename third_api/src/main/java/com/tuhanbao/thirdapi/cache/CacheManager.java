@@ -2,12 +2,12 @@ package com.tuhanbao.thirdapi.cache;
 
 import java.util.List;
 
-import com.tuhanbao.base.ServiceBean;
+import com.tuhanbao.base.dataservice.IData;
+import com.tuhanbao.base.dataservice.IDataGroup;
+import com.tuhanbao.base.dataservice.ISyncData;
 import com.tuhanbao.thirdapi.cache.mem.MemCacheManager;
 import com.tuhanbao.thirdapi.cache.redis.RedisResourceManager;
 import com.tuhanbao.util.config.ConfigManager;
-import com.tuhanbao.util.db.table.Table;
-import com.tuhanbao.util.exception.MyException;
 
 public class CacheManager {
     private static final String REDIS_KEY = "redis";
@@ -29,7 +29,7 @@ public class CacheManager {
      * @return
      */
     public static int set(ICacheKey ck, String key, Object value) {
-        CacheResource cacheResource = getCacheResourceFactory().getCacheResource();
+        ICacheResource cacheResource = getCacheResourceFactory().getCacheResource();
         int result = cacheResource.set(ck, key, value);
         cacheResource.release();
         return result;
@@ -46,7 +46,7 @@ public class CacheManager {
      * @return
      */
     public static int setex(ICacheKey ck, String key, int seconds, Object value) {
-        CacheResource cacheResource = getCacheResourceFactory().getCacheResource();
+        ICacheResource cacheResource = getCacheResourceFactory().getCacheResource();
         int result = cacheResource.setex(ck, key, seconds, value);
         cacheResource.release();
         return result;
@@ -60,7 +60,7 @@ public class CacheManager {
      */
     public static int delete(ICacheKey ck, String key) {
         // 返回的是删除的条数
-        CacheResource cacheResource = getCacheResourceFactory().getCacheResource();
+        ICacheResource cacheResource = getCacheResourceFactory().getCacheResource();
         int result = cacheResource.del(ck, key);
         cacheResource.release();
         return result;
@@ -73,7 +73,7 @@ public class CacheManager {
      * @return
      */
     public static Object get(ICacheKey ck, String key) {
-        CacheResource cacheResource = getCacheResourceFactory().getCacheResource();
+        ICacheResource cacheResource = getCacheResourceFactory().getCacheResource();
         Object result = cacheResource.get(ck, key);
         cacheResource.release();
         return result;
@@ -87,7 +87,7 @@ public class CacheManager {
      * @return
      */
     public static boolean isExist(ICacheKey ck, String key) {
-        CacheResource cacheResource = getCacheResourceFactory().getCacheResource();
+        ICacheResource cacheResource = getCacheResourceFactory().getCacheResource();
         boolean result = cacheResource.exists(ck, key);
         cacheResource.release();
         return result;
@@ -100,7 +100,7 @@ public class CacheManager {
      * @return
      */
     public static <T> T get(ICacheKey ck, String key, Class<T> clazz) {
-        CacheResource cacheResource = getCacheResourceFactory().getCacheResource();
+        ICacheResource cacheResource = getCacheResourceFactory().getCacheResource();
         T result = cacheResource.get(ck, key, clazz);
         cacheResource.release();
         return result;
@@ -109,28 +109,28 @@ public class CacheManager {
     /*
      * servicebean的操作
      */
-    public static void save(List<ServiceBean> beans) {
+    public static void save(List<? extends IData> beans) {
         if (beans == null || beans.isEmpty()) return;
 
-        CacheResource cacheResource = getCacheResourceFactory().getCacheResource();
-        for (ServiceBean bean : beans) {
-            cacheResource.save(bean);
+        ICacheResource cacheResource = getCacheResourceFactory().getCacheResource();
+        for (IData bean : beans) {
+            cacheResource.add(bean);
         }
         cacheResource.release();
     }
 
-    public static boolean hasCacheTable(Table table) {
-        CacheResource cacheResource = getCacheResourceFactory().getCacheResource();
-        boolean result = cacheResource.hasCacheTable(table);
+    public static boolean hasCacheDataGroup(IDataGroup<?> table) {
+        ICacheResource cacheResource = getCacheResourceFactory().getCacheResource();
+        boolean result = cacheResource.hasCacheDataGroup(table);
         cacheResource.release();
         return result;
     }
 
-    public static void save(ServiceBean bean) {
+    public static void save(IData bean) {
         if (bean == null) return;
 
-        CacheResource cacheResource = getCacheResourceFactory().getCacheResource();
-        cacheResource.save(bean);
+        ICacheResource cacheResource = getCacheResourceFactory().getCacheResource();
+        cacheResource.add(bean);
         cacheResource.release();
     }
 
@@ -140,13 +140,13 @@ public class CacheManager {
      * @param bean
      * @param filter
      */
-    public static void saveSelective(ServiceBean bean) {
-        if (bean == null) return;
-        Table table = bean.getTable();
-        ServiceBean oldValue = get(table, bean.getKeyValue());
-        if (oldValue == null) save(bean);
+    public static void saveSelective(ISyncData data) {
+        if (data == null) return;
+        IDataGroup<?> dg = data.getDataGroup();
+        ISyncData oldValue = (ISyncData)get(dg, data.getKeyValue());
+        if (oldValue == null) save(data);
         else {
-            oldValue.sync(bean);
+            oldValue.sync(data);
             save(oldValue);
         }
     }
@@ -157,43 +157,37 @@ public class CacheManager {
      * @param filter
      * @return
      */
-    public static ServiceBean get(Table table, Object pkValue) {
+    public static Object get(IDataGroup<?> dg, Object pkValue) {
 
-        CacheResource cacheResource = getCacheResourceFactory().getCacheResource();
+        ICacheResource cacheResource = getCacheResourceFactory().getCacheResource();
         try {
-            return cacheResource.get(table, pkValue);
-        }
-        catch (ClassNotFoundException e) {
-            throw MyException.getMyException(e);
+            return cacheResource.get(dg, pkValue.toString());
         }
         finally {
             cacheResource.release();
         }
     }
 
-    public static List<ServiceBean> get(Table table) {
+    public static List<Object> get(IDataGroup<?> dg) {
 
-        CacheResource cacheResource = getCacheResourceFactory().getCacheResource();
+        ICacheResource cacheResource = getCacheResourceFactory().getCacheResource();
         try {
-            return cacheResource.get(table);
-        }
-        catch (ClassNotFoundException e) {
-            throw MyException.getMyException(e);
+            return cacheResource.get(dg);
         }
         finally {
             cacheResource.release();
         }
     }
 
-    public static int count(Table table) {
-        CacheResource cacheResource = getCacheResourceFactory().getCacheResource();
+    public static int count(IDataGroup<?> table) {
+        ICacheResource cacheResource = getCacheResourceFactory().getCacheResource();
         int result = cacheResource.len(table);
         cacheResource.release();
         return result;
     }
 
-    public static void delete(Table table, Object pkValue) {
-        CacheResource cacheResource = getCacheResourceFactory().getCacheResource();
+    public static void delete(IDataGroup<?> table, Object pkValue) {
+        ICacheResource cacheResource = getCacheResourceFactory().getCacheResource();
         cacheResource.del(table, pkValue);
         cacheResource.release();
     }

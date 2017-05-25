@@ -4,9 +4,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import com.tuhanbao.base.ServiceBean;
+import com.tuhanbao.base.dataservice.ServiceBean;
+import com.tuhanbao.base.dataservice.filter.Filter;
 import com.tuhanbao.util.db.table.data.DataValue;
-import com.tuhanbao.web.filter.Filter;
 import com.tuhanbao.web.filter.SelectorFilter;
 
 public interface IService<T extends ServiceBean>

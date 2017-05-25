@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.tuhanbao</groupId>
 	<artifactId>web</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<properties>
 		<spring.version>3.2.2.RELEASE</spring.version>
 	</properties>
@@ -11,7 +11,7 @@
 		<dependency>
 			<groupId>com.tuhanbao</groupId>
 			<artifactId>third_api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 		
 		<!-- ibatis依赖的包 -->

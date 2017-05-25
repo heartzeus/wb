@@ -1,9 +1,11 @@
 package com.tuhanbao.util.db.table;
 
+import com.tuhanbao.base.dataservice.IDataGroup;
 import com.tuhanbao.io.impl.tableUtil.DataType;
 import com.tuhanbao.io.impl.tableUtil.Relation;
+import com.tuhanbao.util.db.IField;
 
-public class Column implements Cloneable
+public class Column implements Cloneable, IField
 {
 	protected String name;
     
@@ -52,7 +54,7 @@ public class Column implements Cloneable
 	}
 	
 	public String getNameWithTable() {
-		return table.getName() + "." + name;
+		return getDataGroup().getName() + "." + name;
 	}	
 	
 	/**
@@ -131,5 +133,15 @@ public class Column implements Cloneable
 
     public void setEnumStr(String enumStr) {
         this.enumStr = enumStr;
+    }
+
+    @Override
+    public IDataGroup<Column> getDataGroup() {
+        return this.getTable();
+    }
+
+    @Override
+    public String getNameWithDataGroup() {
+        return this.getNameWithTable();
     }
 }

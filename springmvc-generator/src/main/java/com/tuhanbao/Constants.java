@@ -1,5 +1,7 @@
 package com.tuhanbao;
 
+import com.tuhanbao.web.service.IService;
+
 public class Constants extends com.tuhanbao.io.base.Constants {
 	public static final String CONTROLLER = "controller";
 
@@ -21,7 +23,7 @@ public class Constants extends com.tuhanbao.io.base.Constants {
 
 	public static final String CRITERIA = "Criteria";
 
-	public static final String ISERVICE_NAME = "com.tuhanbao.web.service.IService";
+	public static final String ISERVICE_NAME = IService.class.getName();
 
 	
 	public static final String LANGUAGE_PROPERTIES = "language.properties";

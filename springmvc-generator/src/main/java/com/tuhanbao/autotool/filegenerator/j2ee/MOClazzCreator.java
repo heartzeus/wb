@@ -4,6 +4,8 @@ import com.tuhanbao.Constants;
 import com.tuhanbao.autotool.filegenerator.ClazzCreator;
 import com.tuhanbao.autotool.mvc.J2EETable;
 import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
+import com.tuhanbao.base.dataservice.MetaObject;
+import com.tuhanbao.base.dataservice.ServiceBean;
 import com.tuhanbao.io.impl.classUtil.ClassInfo;
 import com.tuhanbao.io.impl.classUtil.IEnumType;
 import com.tuhanbao.io.impl.classUtil.MethodInfo;
@@ -16,8 +18,8 @@ import com.tuhanbao.util.db.table.data.BooleanValue;
 import com.tuhanbao.util.util.clazz.ClazzUtil;
 
 public class MOClazzCreator extends J2EETableClazzCreator {
-    private static final String MO_CLASS = "com.tuhanbao.base.MetaObject";
-    private static final String SERVICE_BEAN_CLASS = "com.tuhanbao.base.ServiceBean";
+    private static final String MO_CLASS = MetaObject.class.getName();
+    private static final String SERVICE_BEAN_CLASS = ServiceBean.class.getName();
     private static final String MOCLASS_SUFFIX = "MO";
     
 	public MOClazzCreator(SpringMvcProjectInfo project) {

@@ -21,7 +21,7 @@ import com.alibaba.fastjson.serializer.JavaBeanSerializer;
 import com.alibaba.fastjson.serializer.ObjectSerializer;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.util.TypeUtils;
-import com.tuhanbao.base.ServiceBean;
+import com.tuhanbao.base.dataservice.ServiceBean;
 import com.tuhanbao.io.objutil.StringUtil;
 import com.tuhanbao.util.exception.MyException;
 

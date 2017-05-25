@@ -3,6 +3,8 @@ package com.tuhanbao.io.impl.tableUtil;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.tuhanbao.base.dataservice.filter.LogicType;
+import com.tuhanbao.base.dataservice.filter.operator.Operator;
 import com.tuhanbao.io.impl.classUtil.EnumClassInfo;
 import com.tuhanbao.io.impl.classUtil.EnumType;
 import com.tuhanbao.io.impl.classUtil.IEnumType;
@@ -15,8 +17,8 @@ public class EnumManager {
 		//框架包中有一些公共枚举，在配置数据库字段枚举类型时，可以选择这些公共枚举
 		register("FlowStatus", new EnumType("FlowStatus", "com.tuhanbao.thirdapi.pay.FlowStatus", EnumClassInfo.INT));
 		register("PayPlatform", new EnumType("PayPlatform", "com.tuhanbao.thirdapi.pay.PayPlatform", EnumClassInfo.INT));
-		register("Operator", new EnumType("Operator", "com.tuhanbao.web.filter.operator.Operator", EnumClassInfo.INT));
-		register("LogicType", new EnumType("LogicType", "com.tuhanbao.web.filter.LogicType", EnumClassInfo.INT));
+		register("Operator", new EnumType("Operator", Operator.class.getName(), EnumClassInfo.INT));
+		register("LogicType", new EnumType("LogicType", LogicType.class.getName(), EnumClassInfo.INT));
 	}
 	
 	public static void register(String key, IEnumType enumInfo) {

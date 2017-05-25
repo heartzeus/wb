@@ -2,7 +2,7 @@ package com.tuhanbao.thirdapi.cache.redis;
 
 import java.sql.SQLException;
 
-import com.tuhanbao.thirdapi.cache.CacheResource;
+import com.tuhanbao.thirdapi.cache.ICacheResource;
 import com.tuhanbao.thirdapi.cache.CacheResourceFactory;
 import com.tuhanbao.util.IResource;
 import com.tuhanbao.util.IResourceManager;
@@ -51,7 +51,7 @@ public class RedisResourceManager extends IResourceManager implements CacheResou
     }
 
     @Override
-    public CacheResource getCacheResource() {
+    public ICacheResource getCacheResource() {
         try {
             return (RedisResource)getResource();
         }

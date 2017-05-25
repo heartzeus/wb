@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.alibaba.fastjson.JSON;
-import com.tuhanbao.base.ServiceBean;
+import com.tuhanbao.base.dataservice.ServiceBean;
 import com.tuhanbao.util.db.table.Column;
 import com.tuhanbao.util.db.table.data.DataValue;
 import com.tuhanbao.util.exception.BaseErrorCode;

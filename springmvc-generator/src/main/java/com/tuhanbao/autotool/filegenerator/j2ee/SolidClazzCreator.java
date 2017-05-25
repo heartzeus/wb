@@ -14,17 +14,21 @@ import com.tuhanbao.autotool.mvc.ModuleManager;
 import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
 import com.tuhanbao.base.chain.IEvent;
 import com.tuhanbao.base.chain.event.CreateFileEvent;
+import com.tuhanbao.base.dataservice.ServiceBean;
 import com.tuhanbao.io.impl.tableUtil.DBType;
 import com.tuhanbao.io.impl.tableUtil.ImportTable;
 import com.tuhanbao.io.objutil.FileUtil;
 import com.tuhanbao.io.objutil.StringUtil;
 import com.tuhanbao.io.txt.util.TxtUtil;
+import com.tuhanbao.thirdapi.cache.CacheManager;
 import com.tuhanbao.util.config.ConfigManager;
 import com.tuhanbao.util.config.ConfigPattern;
 import com.tuhanbao.util.db.conn.DBSrc;
 import com.tuhanbao.util.db.table.CacheType;
 import com.tuhanbao.util.exception.MyException;
 import com.tuhanbao.util.util.clazz.ClazzUtil;
+import com.tuhanbao.web.filter.SelectorFactory;
+import com.tuhanbao.web.filter.SelectorFilter;
 
 public class SolidClazzCreator implements IFileGenerator {
 
@@ -288,7 +292,7 @@ public class SolidClazzCreator implements IFileGenerator {
                     if (!modules.contains(module)) modules.add(module);
                     String mapperName = getMapperName(module);
 
-                    redis.append(Constants.GAP3).append("if (!CacheManager.hasCacheTable(TableConstants.").append(table.getName())
+                    redis.append(Constants.GAP3).append("if (!CacheManager.hasCacheDataGroup(TableConstants.").append(table.getName())
                             .append(".TABLE)) {").append(Constants.ENTER);
                     redis.append(Constants.GAP4).append("CacheManager.save(").append(ClazzUtil.firstCharLowerCase(mapperName))
                             .append(".select(new SelectorFilter(SelectorFactory.getTablesSelector(TableConstants.").append(table.getName())
@@ -307,10 +311,10 @@ public class SolidClazzCreator implements IFileGenerator {
             }
 
             if (!modules.isEmpty()) {
-                importMapper.append("import com.tuhanbao.web.filter.SelectorFactory;").append(Constants.ENTER);
-                importMapper.append("import com.tuhanbao.web.filter.SelectorFilter;").append(Constants.ENTER);
-                importMapper.append("import com.tuhanbao.base.ServiceBean;").append(Constants.ENTER);
-                importMapper.append("import com.tuhanbao.thirdapi.cache.CacheManager;").append(Constants.ENTER);
+                importMapper.append("import ").append(SelectorFactory.class.getName()).append(";").append(Constants.ENTER);
+                importMapper.append("import ").append(SelectorFilter.class.getName()).append(";").append(Constants.ENTER);
+                importMapper.append("import ").append(ServiceBean.class.getName()).append(";").append(Constants.ENTER);
+                importMapper.append("import ").append(CacheManager.class.getName()).append(";").append(Constants.ENTER);
                 importMapper.append("import com.hhnz.api.{projectName}.constants.TableConstants;").append(Constants.ENTER);
             }
             String newTxt = oldTxt.replace("{mapperImport}", importMapper.toString());
