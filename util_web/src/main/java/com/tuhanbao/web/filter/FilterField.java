@@ -1,5 +1,7 @@
 package com.tuhanbao.web.filter;
 
+import com.tuhanbao.util.db.table.Column;
+
 /**
  * 不需要特定转换的column
  * 用于自定义过滤条件
@@ -8,13 +10,24 @@ package com.tuhanbao.web.filter;
  *
  */
 public class FilterField implements IFilterField {
+    private Column column;
+    
     private String sqlName;
     
-    public FilterField(String sqlName) {
+    public FilterField(Column col, String sqlName) {
+        this.column = col;
         this.sqlName = sqlName;
     }
     
     public String getSqlName() {
+        return this.sqlName;
+    }
+    
+    public Column getColumn() {
+        return this.column;
+    }
+
+    public String toString() {
         return this.sqlName;
     }
 }

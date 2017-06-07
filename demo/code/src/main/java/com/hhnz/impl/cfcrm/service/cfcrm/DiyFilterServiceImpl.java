@@ -18,6 +18,7 @@ import com.tuhanbao.base.dataservice.filter.LogicType;
 import com.tuhanbao.base.dataservice.filter.operator.Operator;
 import com.tuhanbao.io.base.Constants;
 import com.tuhanbao.io.objutil.StringUtil;
+import com.tuhanbao.util.db.table.Column;
 import com.tuhanbao.util.exception.MyException;
 import com.tuhanbao.web.filter.FilterField;
 import com.tuhanbao.web.filter.MyBatisSelector;
@@ -50,26 +51,26 @@ public class DiyFilterServiceImpl extends ServiceImpl<DiyFilter> implements IDiy
             Operator operator = item.getOperator();
             String value = item.getValue();
             
-//            String[] tableAndCol = StringUtil.string2Array(name);
-//            Column col = TableConstants.getTableByClassName(tableAndCol[0]).getColumn(tableAndCol[1]);
+            String[] tableAndCol = StringUtil.string2Array(name);
+            Column col = TableConstants.getTableByClassName(tableAndCol[0]).getColumn(tableAndCol[1]);
             if (item.getLogicType() == LogicType.AND) {
                 if (operator == Operator.LIKE) {
                     StringBuilder sb = new StringBuilder();
                     sb.append(Constants.PERCENT_SIGN).append(value).append(Constants.PERCENT_SIGN);
-                    result.andFilter(Operator.LIKE, new FilterField(name), sb.toString());
+                    result.andFilter(Operator.LIKE, new FilterField(col, name), sb.toString());
                 }
                 else {
-                    result.andFilter(operator, new FilterField(name), value);
+                    result.andFilter(operator, new FilterField(col, name), value);
                 }
             }
             else {
                 if (operator == Operator.LIKE) {
                     StringBuilder sb = new StringBuilder();
                     sb.append(Constants.PERCENT_SIGN).append(value).append(Constants.PERCENT_SIGN);
-                    result.orFilter(Operator.LIKE, new FilterField(name), sb.toString());
+                    result.orFilter(Operator.LIKE, new FilterField(col, name), sb.toString());
                 }
                 else {
-                    result.orFilter(operator, new FilterField(name), value);
+                    result.orFilter(operator, new FilterField(col, name), value);
                 }
             }
         }

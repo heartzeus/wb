@@ -53,7 +53,6 @@ public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
             f = new ClassPathResource(Constants.CONFIG_URL, ServerManager.class.getClassLoader()).getFile();
         }
         catch (IOException e) {
-            LogManager.error(e);
             System.exit(0);
         }
         // 启动LogManager

@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import {tableConstants};
 import {mapper};
+import com.tuhanbao.base.dataservice.IDataGroup;
 import com.tuhanbao.base.dataservice.ServiceBean;
 import com.tuhanbao.base.dataservice.filter.Filter;
 import com.tuhanbao.base.dataservice.filter.FilterItem;
@@ -270,5 +271,15 @@ public class ServiceImpl<E extends ServiceBean> implements IService<E> {
         List<Map<String, Object>> result = this.mapper.excuteSql(new MyBatisSqlSentence(sql, args));
         ArrayUtil.removeNullItem(result);
         return result;
+    }
+
+    @Override
+    public int deleteByKey(IDataGroup<?> dg, Object pkValue) {
+        return this.deleteById(pkValue);
+    }
+
+    @Override
+    public E selectByKey(IDataGroup<?> dg, Object pkValue) {
+        return this.selectById(pkValue);
     }
 }
