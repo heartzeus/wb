@@ -166,13 +166,17 @@ public class PermissionManager {
         }
         else {
             //默认情况下，过滤登陆
-            if (url.matches(LOGIN)) {
+            if (IS_LOGIN(url)) {
                 return false;
             }
         }
         //默认需要过滤所有
         if (StringUtil.isEmpty(regex)) return true;
         return url.matches(regex);
+    }
+
+    public boolean IS_LOGIN(String url) {
+        return url.matches(LOGIN);
     }
 
     private void check() {

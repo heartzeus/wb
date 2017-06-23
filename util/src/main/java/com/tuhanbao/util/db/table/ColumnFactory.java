@@ -38,12 +38,17 @@ public class ColumnFactory
     public static Column createColumn(Table table, String name, DataType dataType, Table fkTable, Relation relation) {
         return createColumn(table, name, dataType, fkTable, relation, false);
     }
+
+    public static Column createColumn(Table table, String name, DataType dataType, Table fkTable, Relation relation, boolean canFilter) {
+        return createColumn(table, name, dataType, fkTable, relation, canFilter, null);
+    }
     
-    public static Column createColumn(Table table, String name, DataType dataType, Table fkTable, Relation relation, boolean canFilter)
+    public static Column createColumn(Table table, String name, DataType dataType, Table fkTable, Relation relation, boolean canFilter, String enumName)
     {
     	Column col = createColumn(table, name, dataType, false, canFilter);
     	col.setFk(fkTable);
     	col.setRelation(relation);
+    	col.setEnumStr(enumName);
     	
     	//一个表只需要执行一次
     	if (fkTable != table) {

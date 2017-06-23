@@ -6,6 +6,8 @@ public interface IPermission {
 
     String getUrl();
     
+    String getHtml();
+    
     long getParentId();
     
     boolean isMenu();

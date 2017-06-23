@@ -98,11 +98,14 @@ public class UserAccessApiInterceptor extends HandlerInterceptorAdapter {
         //role权限过滤
         if (permissionManager != null) {
             String requestUrl = buildRequestUrl(request);
+            if (user == null && !permissionManager.IS_LOGIN(requestUrl)) {
+                throw new MyException(BaseErrorCode.PLEASE_LOGIN_FIRST);
+            }
             if (permissionManager.needCheckPermission(requestUrl)) {
-                if (user == null) {
-                    throw new MyException(BaseErrorCode.PLEASE_LOGIN_FIRST);
-                }
-                
+                /**
+                 * TODO 如果数据库存的是通配符呢？
+                 * 这里可能后续要支持通配符
+                 */
                 List<Integer> roles = permissionManager.getHasPermissionRole(requestUrl);
                 if (roles == null || !roles.contains(user.getAuthority())) {
                     throw new MyException(BaseErrorCode.HAVE_NO_RIGHT);

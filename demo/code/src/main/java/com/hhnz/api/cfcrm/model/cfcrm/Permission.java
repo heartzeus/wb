@@ -13,4 +13,10 @@ public class Permission extends PermissionMO implements IPermission {
         return null;
     }
 
+    @Override
+    public String getHtml() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

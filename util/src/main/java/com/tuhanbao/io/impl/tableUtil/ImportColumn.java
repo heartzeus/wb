@@ -218,14 +218,14 @@ public class ImportColumn implements IColumn, Comparable<IColumn>
         sb.append(Constants.GAP2).append("public static final Column ").append(getName()).append(" = ColumnFactory.createColumn(TABLE, \"").append(name.toUpperCase())
                 .append("\", DataType.").append(getDataType());
         ImportColumn fc = getFkColumn();
-        if (isPK()) {
-            sb.append(", true");
-        }
-        else if (fc != null) {
+        if (fc != null) {
             sb.append(", " + fc.getTable().getName() + ".TABLE, Relation." + fkRT.name());
         }
-        else if (this.isCanFilter()) {
-            sb.append(", false, true");
+        else {
+            sb.append(", ").append(isPK());
+        }
+        if (this.isCanFilter()) {
+            sb.append(", ").append(this.isCanFilter());
             if (this.getEnumInfo() != null) {
                 sb.append(", \""+ this.getEnumInfo().getClassName() + "\"");
             }

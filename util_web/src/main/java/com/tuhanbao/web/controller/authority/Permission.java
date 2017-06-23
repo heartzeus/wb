@@ -8,6 +8,8 @@ public class Permission implements IPermission{
     private Long id;
     
     private String url;
+
+    private String html;
     
     private Long parentId;
     
@@ -26,6 +28,7 @@ public class Permission implements IPermission{
     private Permission(IPermission iPermission) {
         this.id = iPermission.getId();
         this.url = iPermission.getUrl();
+        this.html = iPermission.getHtml();
         this.parentId = iPermission.getParentId();
         this.isMenu = BooleanValue.getIntValue(iPermission.isMenu());
         this.name = iPermission.getName();
@@ -110,5 +113,10 @@ public class Permission implements IPermission{
     @Override
     public int getSort() {
         return sort;
+    }
+
+    @Override
+    public String getHtml() {
+        return this.html;
     }
 }
