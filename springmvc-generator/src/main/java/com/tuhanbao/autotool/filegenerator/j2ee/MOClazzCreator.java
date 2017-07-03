@@ -6,16 +6,16 @@ import com.tuhanbao.autotool.mvc.J2EETable;
 import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
 import com.tuhanbao.base.dataservice.MetaObject;
 import com.tuhanbao.base.dataservice.ServiceBean;
-import com.tuhanbao.io.impl.classUtil.ClassInfo;
-import com.tuhanbao.io.impl.classUtil.IEnumType;
-import com.tuhanbao.io.impl.classUtil.MethodInfo;
-import com.tuhanbao.io.impl.classUtil.PackageEnum;
-import com.tuhanbao.io.impl.tableUtil.DataType;
-import com.tuhanbao.io.impl.tableUtil.ImportColumn;
-import com.tuhanbao.io.impl.tableUtil.Relation;
-import com.tuhanbao.io.objutil.StringUtil;
-import com.tuhanbao.util.db.table.data.BooleanValue;
-import com.tuhanbao.util.util.clazz.ClazzUtil;
+import com.tuhanbao.base.util.clazz.ClazzUtil;
+import com.tuhanbao.base.util.db.table.data.BooleanValue;
+import com.tuhanbao.base.util.io.codeGenarator.classUtil.ClassInfo;
+import com.tuhanbao.base.util.io.codeGenarator.classUtil.IEnumType;
+import com.tuhanbao.base.util.io.codeGenarator.classUtil.MethodInfo;
+import com.tuhanbao.base.util.io.codeGenarator.classUtil.PackageEnum;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.DataType;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportColumn;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.Relation;
+import com.tuhanbao.base.util.objutil.StringUtil;
 
 public class MOClazzCreator extends J2EETableClazzCreator {
     private static final String MO_CLASS = MetaObject.class.getName();

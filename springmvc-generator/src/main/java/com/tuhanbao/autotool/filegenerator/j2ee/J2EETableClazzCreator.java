@@ -8,9 +8,9 @@ import com.tuhanbao.autotool.mvc.J2EETable;
 import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
 import com.tuhanbao.base.chain.IEvent;
 import com.tuhanbao.base.chain.event.CreateFileEvent;
-import com.tuhanbao.io.impl.classUtil.ClassInfo;
-import com.tuhanbao.io.objutil.OverwriteStrategy;
-import com.tuhanbao.util.exception.MyException;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.io.codeGenarator.classUtil.ClassInfo;
+import com.tuhanbao.base.util.objutil.OverwriteStrategy;
 
 public abstract class J2EETableClazzCreator extends ClazzCreator {
 	

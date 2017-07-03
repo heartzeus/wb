@@ -16,9 +16,9 @@ import com.hhnz.api.cfcrm.model.cfcrm.SendToVip;
 import com.hhnz.api.cfcrm.model.cfcrm.VipMsgSendingHistory;
 import com.hhnz.api.cfcrm.service.cfcrm.ISendHistoryVipService;
 import com.hhnz.api.cfcrm.service.cfcrm.IVipMsgSendingHistoryService;
+import com.tuhanbao.base.Constants;
 import com.tuhanbao.base.dataservice.filter.Filter;
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.util.exception.MyException;
+import com.tuhanbao.base.util.exception.MyException;
 import com.tuhanbao.web.filter.MyBatisSelector;
 
 @Service("vipMsgSendingHistoryService")

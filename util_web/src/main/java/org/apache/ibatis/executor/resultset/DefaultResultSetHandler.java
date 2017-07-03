@@ -62,8 +62,8 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
 
 import com.alibaba.druid.pool.DruidPooledPreparedStatement;
 import com.tuhanbao.base.dataservice.ServiceBean;
-import com.tuhanbao.util.log.LogManager;
-import com.tuhanbao.web.filter.SelectorFilter;
+import com.tuhanbao.base.util.log.LogManager;
+import com.tuhanbao.web.filter.MyBatisSelectorFilter;
 
 /**
  * @author Clinton Begin
@@ -191,7 +191,7 @@ public class DefaultResultSetHandler implements ResultSetHandler {
 
 		if (needHandlerMySelf(selector)) {
 			if (rsw != null) {
-				multipleResults.addAll(handleResultSet(rsw, (SelectorFilter) selector));
+				multipleResults.addAll(handleResultSet(rsw, (MyBatisSelectorFilter) selector));
 				rsw = getNextResultSet(stmt);
 				cleanUpAfterHandlingResultSet();
 				resultSetCount++;
@@ -233,7 +233,7 @@ public class DefaultResultSetHandler implements ResultSetHandler {
 	}
 
     private boolean needHandlerMySelf(Object selector) {
-        return selector instanceof SelectorFilter && !((SelectorFilter)selector).isIs4Count();
+        return selector instanceof MyBatisSelectorFilter && !((MyBatisSelectorFilter)selector).isIs4Count();
     }
 
 	@Override
@@ -330,7 +330,7 @@ public class DefaultResultSetHandler implements ResultSetHandler {
 		}
 	}
 
-	private List<ServiceBean> handleResultSet(ResultSetWrapper rsw, SelectorFilter selector)
+	private List<ServiceBean> handleResultSet(ResultSetWrapper rsw, MyBatisSelectorFilter selector)
 			throws SQLException {
 		try {
 			return SelectorResultParser.parser(selector, rsw);

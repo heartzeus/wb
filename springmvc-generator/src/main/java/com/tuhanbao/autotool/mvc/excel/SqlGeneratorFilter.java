@@ -12,13 +12,13 @@ import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
 import com.tuhanbao.base.chain.Context;
 import com.tuhanbao.base.chain.FilterAnnotation;
 import com.tuhanbao.base.chain.event.CreateFileEvent;
-import com.tuhanbao.io.impl.sqlUtil.DBUtil;
-import com.tuhanbao.io.impl.tableUtil.ImportTable;
-import com.tuhanbao.io.objutil.FileUtil;
-import com.tuhanbao.util.config.ConfigManager;
-import com.tuhanbao.util.config.ConfigPattern;
-import com.tuhanbao.util.db.conn.DBSrc;
-import com.tuhanbao.util.log.LogManager;
+import com.tuhanbao.base.util.config.ConfigManager;
+import com.tuhanbao.base.util.config.ConfigPattern;
+import com.tuhanbao.base.util.db.conn.DBSrc;
+import com.tuhanbao.base.util.io.codeGenarator.sqlUtil.DBUtil;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportTable;
+import com.tuhanbao.base.util.log.LogManager;
+import com.tuhanbao.base.util.objutil.FileUtil;
 
 @FilterAnnotation("sql")
 public class SqlGeneratorFilter extends ExcelAGCFilter {

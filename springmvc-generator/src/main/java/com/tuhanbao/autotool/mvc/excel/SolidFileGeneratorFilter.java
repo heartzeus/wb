@@ -9,10 +9,10 @@ import com.tuhanbao.autotool.filegenerator.j2ee.SolidClazzCreator;
 import com.tuhanbao.autotool.filegenerator.j2ee.SolidObject;
 import com.tuhanbao.base.chain.Context;
 import com.tuhanbao.base.chain.FilterAnnotation;
-import com.tuhanbao.io.objutil.ArrayUtil;
-import com.tuhanbao.io.objutil.OverwriteStrategy;
-import com.tuhanbao.io.objutil.StringUtil;
-import com.tuhanbao.util.config.Config;
+import com.tuhanbao.base.util.config.Config;
+import com.tuhanbao.base.util.objutil.ArrayUtil;
+import com.tuhanbao.base.util.objutil.OverwriteStrategy;
+import com.tuhanbao.base.util.objutil.StringUtil;
 
 @FilterAnnotation("solid")
 public class SolidFileGeneratorFilter extends ExcelAGCFilter {

@@ -2,7 +2,7 @@ package com.hhnz.api.cfcrm.tool;
 
 import java.io.InputStream;
 
-import com.tuhanbao.io.excel.util.Excel2007Util;
+import com.tuhanbao.base.util.io.excel.Excel2007Util;
 
 public class ImportTool {
     public static void importCustomInfo(InputStream is) {

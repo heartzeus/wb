@@ -2,9 +2,9 @@ package com.tuhanbao.autotool.filegenerator.j2ee;
 
 import com.tuhanbao.Constants;
 import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
+import com.tuhanbao.base.util.io.codeGenarator.classUtil.ClassInfo;
+import com.tuhanbao.base.util.objutil.OverwriteStrategy;
 import com.tuhanbao.autotool.mvc.J2EETable;
-import com.tuhanbao.io.impl.classUtil.ClassInfo;
-import com.tuhanbao.io.objutil.OverwriteStrategy;
 
 public class IServiceClazzCreator extends J2EETableClazzCreator {
 	public IServiceClazzCreator(SpringMvcProjectInfo project) {

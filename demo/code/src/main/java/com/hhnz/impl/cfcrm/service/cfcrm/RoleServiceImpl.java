@@ -14,7 +14,7 @@ import com.hhnz.api.cfcrm.service.cfcrm.IPermissionService;
 import com.hhnz.api.cfcrm.service.cfcrm.IRolePermissionService;
 import com.hhnz.api.cfcrm.service.cfcrm.IRoleService;
 import com.tuhanbao.base.dataservice.filter.Filter;
-import com.tuhanbao.util.exception.MyException;
+import com.tuhanbao.base.util.exception.MyException;
 import com.tuhanbao.web.controller.authority.IPermission;
 import com.tuhanbao.web.controller.authority.IPermissionManagerService;
 import com.tuhanbao.web.controller.authority.IRole;

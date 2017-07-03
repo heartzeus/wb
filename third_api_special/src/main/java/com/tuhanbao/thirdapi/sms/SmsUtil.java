@@ -4,17 +4,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.io.base.RandomUtil;
-import com.tuhanbao.io.http.HttpUtil;
-import com.tuhanbao.io.objutil.TimeUtil;
+import com.tuhanbao.base.Constants;
+import com.tuhanbao.base.util.exception.BaseErrorCode;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.http.HttpUtil;
+import com.tuhanbao.base.util.log.LogManager;
+import com.tuhanbao.base.util.objutil.RandomUtil;
+import com.tuhanbao.base.util.objutil.TimeUtil;
+import com.tuhanbao.base.util.rm.ResourceManager;
 import com.tuhanbao.thirdapi.cache.CacheKey;
 import com.tuhanbao.thirdapi.cache.CacheManager;
 import com.tuhanbao.thirdapi.cache.ICacheKey;
-import com.tuhanbao.util.ResourceManager;
-import com.tuhanbao.util.exception.BaseErrorCode;
-import com.tuhanbao.util.exception.MyException;
-import com.tuhanbao.util.log.LogManager;
 
 /**
  * 短信工具依赖于缓存

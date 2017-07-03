@@ -2,7 +2,7 @@ package com.tuhanbao.thirdapi.cache;
 
 import java.util.List;
 
-import com.tuhanbao.util.db.IField;
+import com.tuhanbao.base.util.db.IField;
 
 public enum CacheKey implements ICacheKey {
     TOKEN(60 * 60 * 24 * 7), 

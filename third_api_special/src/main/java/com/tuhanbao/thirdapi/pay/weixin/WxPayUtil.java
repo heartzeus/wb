@@ -22,16 +22,16 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.io.base.RandomUtil;
-import com.tuhanbao.io.objutil.StringUtil;
+import com.tuhanbao.base.Constants;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.log.LogManager;
+import com.tuhanbao.base.util.objutil.RandomUtil;
+import com.tuhanbao.base.util.objutil.StringUtil;
 import com.tuhanbao.thirdapi.pay.FlowStatus;
 import com.tuhanbao.thirdapi.pay.PayResultBean;
 import com.tuhanbao.thirdapi.pay.PayType;
 import com.tuhanbao.thirdapi.pay.PayUtil;
 import com.tuhanbao.thirdapi.pay.RefundBean;
-import com.tuhanbao.util.exception.MyException;
-import com.tuhanbao.util.log.LogManager;
 
 public class WxPayUtil extends PayUtil {
     private static final Map<String, String> DEFAULT_VALUES = new HashMap<String, String>();

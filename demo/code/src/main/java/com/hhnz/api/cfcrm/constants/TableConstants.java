@@ -2,13 +2,14 @@ package com.hhnz.api.cfcrm.constants;
 
 import java.util.HashMap;
 import java.util.Map;
-import com.tuhanbao.util.util.clazz.ClazzUtil;
-import com.tuhanbao.io.impl.tableUtil.DataType;
-import com.tuhanbao.io.impl.tableUtil.Relation;
-import com.tuhanbao.util.db.table.CacheType;
-import com.tuhanbao.util.db.table.Column;
-import com.tuhanbao.util.db.table.ColumnFactory;
-import com.tuhanbao.util.db.table.Table;
+
+import com.tuhanbao.base.util.clazz.ClazzUtil;
+import com.tuhanbao.base.util.db.table.CacheType;
+import com.tuhanbao.base.util.db.table.Column;
+import com.tuhanbao.base.util.db.table.ColumnFactory;
+import com.tuhanbao.base.util.db.table.Table;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.DataType;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.Relation;
 
 /**
  * 本来为自动生成的常量类

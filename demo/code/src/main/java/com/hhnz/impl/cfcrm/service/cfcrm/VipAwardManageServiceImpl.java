@@ -29,19 +29,19 @@ import com.hhnz.api.cfcrm.service.cfcrm.IAwardVipService;
 import com.hhnz.api.cfcrm.service.cfcrm.IVipAwardManageService;
 import com.hhnz.api.cfcrm.tool.HttpRequest;
 import com.hhnz.impl.cfcrm.AutoSendAwardTask;
+import com.tuhanbao.base.Constants;
 import com.tuhanbao.base.dataservice.filter.Filter;
 import com.tuhanbao.base.dataservice.filter.operator.Operator;
-import com.tuhanbao.io.MD5Util;
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.io.objutil.Duration;
-import com.tuhanbao.io.objutil.TimeUtil;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.io.MD5Util;
+import com.tuhanbao.base.util.log.LogManager;
+import com.tuhanbao.base.util.objutil.Duration;
+import com.tuhanbao.base.util.objutil.TimeUtil;
+import com.tuhanbao.base.util.rm.ResourceManager;
+import com.tuhanbao.base.util.thread.ScheduledThreadManager;
 import com.tuhanbao.thirdapi.cache.AbstractCacheKey;
 import com.tuhanbao.thirdapi.cache.CacheManager;
 import com.tuhanbao.thirdapi.cache.ICacheKey;
-import com.tuhanbao.util.ResourceManager;
-import com.tuhanbao.util.exception.MyException;
-import com.tuhanbao.util.log.LogManager;
-import com.tuhanbao.util.thread.ScheduledThreadManager;
 import com.tuhanbao.web.filter.MyBatisSelector;
 
 @Service("vipAwardManageService")

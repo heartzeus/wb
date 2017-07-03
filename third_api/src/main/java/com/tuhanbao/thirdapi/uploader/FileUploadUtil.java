@@ -7,12 +7,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import com.tuhanbao.io.objutil.FileUtil;
+import com.tuhanbao.base.util.config.ConfigManager;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.objutil.FileUtil;
 import com.tuhanbao.thirdapi.ProjectType;
 import com.tuhanbao.thirdapi.ftp.FTPManager;
 import com.tuhanbao.thirdapi.ftp.FtpConfig;
-import com.tuhanbao.util.config.ConfigManager;
-import com.tuhanbao.util.exception.MyException;
 
 public class FileUploadUtil {
     private static Map<ProjectType, FileUploader> UPLOADERS = new HashMap<ProjectType, FileUploader>();

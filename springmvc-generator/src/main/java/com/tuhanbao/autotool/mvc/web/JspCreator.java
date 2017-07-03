@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.tuhanbao.Constants;
 import com.tuhanbao.autotool.mvc.J2EETable;
-import com.tuhanbao.util.util.clazz.ClazzUtil;
+import com.tuhanbao.base.util.clazz.ClazzUtil;
 public class JspCreator{
 
 	private static final String gap = "    ";
@@ -85,14 +85,14 @@ public class JspCreator{
 		if(operate.equals("edit")){
 			sb.append(gap5).append("<input type=\"hidden\" id=\"editid\" name=\"id\">").append(Constants.ENTER);
 		}
-		List<com.tuhanbao.io.impl.tableUtil.ImportColumn> list  = table.getColumns();
+		List<com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportColumn> list  = table.getColumns();
 		boolean edit = false;
 		if(operate.equals("edit")){
 			edit = true;
 		}
-		for(com.tuhanbao.io.impl.tableUtil.ImportColumn column : list){
+		for(com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportColumn column : list){
 			if(!column.isPK()){
-				if(column.getDataType().equals(com.tuhanbao.io.impl.tableUtil.DataType.BOOLEAN)){
+				if(column.getDataType().equals(com.tuhanbao.base.util.io.codeGenarator.tableUtil.DataType.BOOLEAN)){
 					getFieldBoolModel(sb, column.getComment(), ClazzUtil.getVarName(column.getName()), edit);
 				}else{
 					getFieldCommonModel(sb, column.getComment(), ClazzUtil.getVarName(column.getName()), edit);

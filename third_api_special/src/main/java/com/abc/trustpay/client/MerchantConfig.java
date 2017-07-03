@@ -31,12 +31,12 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 
-import com.tuhanbao.io.IOUtil;
-import com.tuhanbao.io.objutil.StringUtil;
+import com.tuhanbao.base.util.io.IOUtil;
+import com.tuhanbao.base.util.log.LogManager;
+import com.tuhanbao.base.util.objutil.StringUtil;
 import com.tuhanbao.thirdapi.pay.abc.ABCConfig;
 import com.tuhanbao.thirdapi.pay.abc.ABCConstants;
 import com.tuhanbao.thirdapi.pay.abc.MerchantInfo;
-import com.tuhanbao.util.log.LogManager;
 
 /**
  * 农行源码移植

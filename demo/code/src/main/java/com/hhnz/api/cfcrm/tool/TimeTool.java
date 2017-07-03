@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import com.hhnz.api.cfcrm.constants.ConstantsConfig;
-import com.tuhanbao.io.objutil.TimeUtil;
+import com.tuhanbao.base.util.objutil.TimeUtil;
 
 public class TimeTool {
     

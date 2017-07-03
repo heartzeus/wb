@@ -1,6 +1,6 @@
 package com.hhnz.api.cfcrm.constants;
 
-import com.tuhanbao.util.exception.BaseErrorCode;
+import com.tuhanbao.base.util.exception.BaseErrorCode;
 
 public final class ErrorCode extends BaseErrorCode {
     /**

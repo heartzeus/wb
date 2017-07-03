@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.hhnz.api.cfcrm.constants.ConstantsConfig;
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.util.log.LogManager;
+import com.tuhanbao.base.Constants;
+import com.tuhanbao.base.util.log.LogManager;
 
 /**
  * 高梓恒一次性使用

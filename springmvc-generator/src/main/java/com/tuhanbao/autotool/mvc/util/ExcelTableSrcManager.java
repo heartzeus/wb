@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.tuhanbao.Constants;
-import com.tuhanbao.io.excel.util.Excel2007Util;
-import com.tuhanbao.io.impl.tableUtil.DBType;
-import com.tuhanbao.io.impl.tableUtil.ImportColumn;
-import com.tuhanbao.io.impl.tableUtil.ImportTable;
-import com.tuhanbao.io.impl.tableUtil.src.TableSrcUtilFactory;
-import com.tuhanbao.io.objutil.ArrayUtil;
-import com.tuhanbao.io.objutil.StringUtil;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.DBType;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportColumn;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportTable;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.src.TableSrcUtilFactory;
+import com.tuhanbao.base.util.io.excel.Excel2007Util;
+import com.tuhanbao.base.util.objutil.ArrayUtil;
+import com.tuhanbao.base.util.objutil.StringUtil;
 
 public class ExcelTableSrcManager {
 	private static Map<String, ImportTable> TABLES = new HashMap<String, ImportTable>();

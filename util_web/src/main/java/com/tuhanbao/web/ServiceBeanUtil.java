@@ -2,10 +2,10 @@ package com.tuhanbao.web;
 
 import org.apache.ibatis.type.JdbcType;
 
+import com.tuhanbao.base.Constants;
 import com.tuhanbao.base.dataservice.ServiceBean;
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.io.impl.tableUtil.DataType;
-import com.tuhanbao.util.db.table.Column;
+import com.tuhanbao.base.util.db.table.Column;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.DataType;
 
 public class ServiceBeanUtil
 {

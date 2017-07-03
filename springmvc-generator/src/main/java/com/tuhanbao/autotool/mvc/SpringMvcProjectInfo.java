@@ -1,8 +1,8 @@
 package com.tuhanbao.autotool.mvc;
 import com.tuhanbao.Constants;
-import com.tuhanbao.io.impl.ProjectInfo;
-import com.tuhanbao.io.objutil.FileUtil;
-import com.tuhanbao.io.objutil.StringUtil;
+import com.tuhanbao.base.util.io.codeGenarator.ProjectInfo;
+import com.tuhanbao.base.util.objutil.FileUtil;
+import com.tuhanbao.base.util.objutil.StringUtil;
 
 
 public class SpringMvcProjectInfo extends ProjectInfo {

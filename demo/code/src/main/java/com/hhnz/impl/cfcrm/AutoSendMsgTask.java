@@ -8,8 +8,8 @@ import com.hhnz.api.cfcrm.model.cfcrm.SendHistoryVip;
 import com.hhnz.api.cfcrm.model.cfcrm.SendToVip;
 import com.hhnz.api.cfcrm.service.cfcrm.IMsgAutoSendService;
 import com.hhnz.api.cfcrm.service.cfcrm.ISendHistoryVipService;
+import com.tuhanbao.base.util.thread.ExcuteOnceTimerTask;
 import com.tuhanbao.thirdapi.sms.SmsUtil;
-import com.tuhanbao.util.thread.ExcuteOnceTimerTask;
 
 public class AutoSendMsgTask extends ExcuteOnceTimerTask {
 

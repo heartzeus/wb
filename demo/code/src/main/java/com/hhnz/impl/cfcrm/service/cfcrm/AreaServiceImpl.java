@@ -12,8 +12,8 @@ import com.hhnz.api.cfcrm.constants.TableConstants;
 import com.hhnz.api.cfcrm.model.cfcrm.Area;
 import com.hhnz.api.cfcrm.service.cfcrm.IAreaService;
 import com.tuhanbao.base.dataservice.filter.Filter;
-import com.tuhanbao.io.objutil.StringUtil;
-import com.tuhanbao.util.exception.MyException;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.objutil.StringUtil;
 import com.tuhanbao.web.filter.MyBatisSelector;
 
 @Service("areaService")

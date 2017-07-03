@@ -7,7 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.tuhanbao.util.config.ConfigManager;
+import com.tuhanbao.base.util.config.ConfigManager;
 
 /**
  * 2016年11月22日

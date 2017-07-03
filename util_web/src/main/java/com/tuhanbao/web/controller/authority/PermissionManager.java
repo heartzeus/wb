@@ -9,13 +9,13 @@ import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.alibaba.fastjson.JSON;
-import com.tuhanbao.io.objutil.StringUtil;
+import com.tuhanbao.base.util.exception.BaseErrorCode;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.json.JsonUtil;
+import com.tuhanbao.base.util.objutil.StringUtil;
 import com.tuhanbao.thirdapi.cache.CacheManager;
 import com.tuhanbao.thirdapi.cache.ICacheKey;
 import com.tuhanbao.thirdapi.cache.NoExpireCacheKey;
-import com.tuhanbao.util.exception.BaseErrorCode;
-import com.tuhanbao.util.exception.MyException;
-import com.tuhanbao.util.util.json.JsonUtil;
 
 public class PermissionManager {
     

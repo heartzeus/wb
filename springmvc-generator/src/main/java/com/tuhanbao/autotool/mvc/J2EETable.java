@@ -1,9 +1,9 @@
 package com.tuhanbao.autotool.mvc;
 
-import com.tuhanbao.io.base.BinaryUtil;
-import com.tuhanbao.io.impl.tableUtil.ImportColumn;
-import com.tuhanbao.io.impl.tableUtil.ImportTable;
-import com.tuhanbao.io.impl.tableUtil.TableConfig;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportColumn;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportTable;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.TableConfig;
+import com.tuhanbao.base.util.objutil.BinaryUtil;
 
 public class J2EETable extends ImportTable {
 

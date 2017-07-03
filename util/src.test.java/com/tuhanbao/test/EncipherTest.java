@@ -3,9 +3,9 @@ package com.tuhanbao.test;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.tuhanbao.io.base.RandomUtil;
-import com.tuhanbao.io.impl.encipherUtil.Encipher;
-import com.tuhanbao.io.impl.encipherUtil.EncipherType;
+import com.tuhanbao.base.util.encipher.Encipher;
+import com.tuhanbao.base.util.encipher.EncipherType;
+import com.tuhanbao.base.util.objutil.RandomUtil;
 
 public class EncipherTest extends ITest {
     @Test

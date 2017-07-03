@@ -1,9 +1,10 @@
 package com.hhnz.api.cfcrm.model.cfcrm;
 
 import com.tuhanbao.base.dataservice.ServiceBean;
+import com.tuhanbao.base.util.db.table.data.LongValue;
 import com.hhnz.api.cfcrm.constants.TableConstants;
 import com.tuhanbao.base.dataservice.MetaObject;
-import com.tuhanbao.util.db.table.data.LongValue;
+
 import java.util.List;
 
 public class RolePermissionMO extends ServiceBean {

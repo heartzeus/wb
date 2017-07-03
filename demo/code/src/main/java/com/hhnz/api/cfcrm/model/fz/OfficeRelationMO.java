@@ -1,11 +1,12 @@
 package com.hhnz.api.cfcrm.model.fz;
 
 import com.tuhanbao.base.dataservice.ServiceBean;
+import com.tuhanbao.base.util.db.table.data.LongValue;
+import com.tuhanbao.base.util.db.table.data.StringValue;
 import com.hhnz.api.cfcrm.constants.TableConstants;
 import com.tuhanbao.base.dataservice.MetaObject;
-import com.tuhanbao.util.db.table.data.StringValue;
+
 import java.util.List;
-import com.tuhanbao.util.db.table.data.LongValue;
 
 public class OfficeRelationMO extends ServiceBean {
     protected OfficeRelationMO() {

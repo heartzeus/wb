@@ -1,6 +1,6 @@
 package com.tuhanbao.web.filter;
 
-import com.tuhanbao.util.db.table.Column;
+import com.tuhanbao.base.util.db.table.Column;
 
 /**
  * 不需要特定转换的column

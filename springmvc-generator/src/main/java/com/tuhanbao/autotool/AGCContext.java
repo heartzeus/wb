@@ -1,7 +1,7 @@
 package com.tuhanbao.autotool;
 
 import com.tuhanbao.base.chain.Context;
-import com.tuhanbao.util.config.Config;
+import com.tuhanbao.base.util.config.Config;
 
 /**
  * AutoGenratorCode

@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.io.objutil.StringUtil;
-import com.tuhanbao.util.config.Config;
-import com.tuhanbao.util.config.ConfigManager;
+import com.tuhanbao.base.Constants;
+import com.tuhanbao.base.util.config.Config;
+import com.tuhanbao.base.util.config.ConfigManager;
+import com.tuhanbao.base.util.objutil.StringUtil;
 import com.tuhanbao.web.controller.authority.UserAccessApiInterceptor;
 import com.tuhanbao.web.controller.helper.JsonHttpMessageConverter;
 

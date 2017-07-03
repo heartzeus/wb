@@ -32,7 +32,7 @@ import org.apache.ibatis.type.TypeException;
 import org.apache.ibatis.type.TypeHandler;
 import org.apache.ibatis.type.TypeHandlerRegistry;
 
-import com.tuhanbao.util.db.table.data.DataValue;
+import com.tuhanbao.base.util.db.table.data.DataValue;
 
 /**
  * @author Clinton Begin

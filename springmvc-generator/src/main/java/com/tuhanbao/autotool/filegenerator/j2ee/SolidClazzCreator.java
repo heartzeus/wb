@@ -15,20 +15,20 @@ import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
 import com.tuhanbao.base.chain.IEvent;
 import com.tuhanbao.base.chain.event.CreateFileEvent;
 import com.tuhanbao.base.dataservice.ServiceBean;
-import com.tuhanbao.io.impl.tableUtil.DBType;
-import com.tuhanbao.io.impl.tableUtil.ImportTable;
-import com.tuhanbao.io.objutil.FileUtil;
-import com.tuhanbao.io.objutil.StringUtil;
-import com.tuhanbao.io.txt.util.TxtUtil;
+import com.tuhanbao.base.util.clazz.ClazzUtil;
+import com.tuhanbao.base.util.config.ConfigManager;
+import com.tuhanbao.base.util.config.ConfigPattern;
+import com.tuhanbao.base.util.db.conn.DBSrc;
+import com.tuhanbao.base.util.db.table.CacheType;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.DBType;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportTable;
+import com.tuhanbao.base.util.io.txt.TxtUtil;
+import com.tuhanbao.base.util.objutil.FileUtil;
+import com.tuhanbao.base.util.objutil.StringUtil;
 import com.tuhanbao.thirdapi.cache.CacheManager;
-import com.tuhanbao.util.config.ConfigManager;
-import com.tuhanbao.util.config.ConfigPattern;
-import com.tuhanbao.util.db.conn.DBSrc;
-import com.tuhanbao.util.db.table.CacheType;
-import com.tuhanbao.util.exception.MyException;
-import com.tuhanbao.util.util.clazz.ClazzUtil;
 import com.tuhanbao.web.filter.SelectorFactory;
-import com.tuhanbao.web.filter.SelectorFilter;
+import com.tuhanbao.web.filter.MyBatisSelectorFilter;
 
 public class SolidClazzCreator implements IFileGenerator {
 
@@ -312,7 +312,7 @@ public class SolidClazzCreator implements IFileGenerator {
 
             if (!modules.isEmpty()) {
                 importMapper.append("import ").append(SelectorFactory.class.getName()).append(";").append(Constants.ENTER);
-                importMapper.append("import ").append(SelectorFilter.class.getName()).append(";").append(Constants.ENTER);
+                importMapper.append("import ").append(MyBatisSelectorFilter.class.getName()).append(";").append(Constants.ENTER);
                 importMapper.append("import ").append(ServiceBean.class.getName()).append(";").append(Constants.ENTER);
                 importMapper.append("import ").append(CacheManager.class.getName()).append(";").append(Constants.ENTER);
                 importMapper.append("import com.hhnz.api.{projectName}.constants.TableConstants;").append(Constants.ENTER);

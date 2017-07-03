@@ -1,6 +1,6 @@
 package com.tuhanbao.base.dataservice.filter;
 
-import com.tuhanbao.util.db.IField;
+import com.tuhanbao.base.util.db.IField;
 
 public class OrderField {
 

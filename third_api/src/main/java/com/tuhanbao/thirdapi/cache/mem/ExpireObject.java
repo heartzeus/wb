@@ -2,7 +2,7 @@ package com.tuhanbao.thirdapi.cache.mem;
 
 import java.util.concurrent.TimeUnit;
 
-import com.tuhanbao.io.objutil.TimeUtil;
+import com.tuhanbao.base.util.objutil.TimeUtil;
 
 public class ExpireObject {
 

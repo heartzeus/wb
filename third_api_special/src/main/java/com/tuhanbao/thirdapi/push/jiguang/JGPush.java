@@ -3,7 +3,7 @@ package com.tuhanbao.thirdapi.push.jiguang;
 import java.util.List;
 import java.util.Map;
 
-import com.tuhanbao.util.log.LogManager;
+import com.tuhanbao.base.util.log.LogManager;
 
 import cn.jiguang.common.ClientConfig;
 import cn.jiguang.common.resp.APIConnectionException;

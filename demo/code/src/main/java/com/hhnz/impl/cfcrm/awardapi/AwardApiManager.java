@@ -8,8 +8,8 @@ import java.util.TreeMap;
 import com.hhnz.api.cfcrm.constants.ConstantsConfig;
 import com.hhnz.api.cfcrm.constants.enums.AwardType;
 import com.hhnz.api.cfcrm.model.cfcrm.AwardItem;
-import com.tuhanbao.io.MD5Util;
-import com.tuhanbao.util.exception.MyException;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.io.MD5Util;
 
 public class AwardApiManager {
     private static final Map<AwardType, IAwardApi> APIS = new HashMap<AwardType, IAwardApi>();

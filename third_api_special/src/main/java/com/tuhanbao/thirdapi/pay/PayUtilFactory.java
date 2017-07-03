@@ -3,9 +3,9 @@
  */
 package com.tuhanbao.thirdapi.pay;
 
+import com.tuhanbao.base.util.exception.MyException;
 import com.tuhanbao.thirdapi.pay.abc.ABCPayUtil;
 import com.tuhanbao.thirdapi.pay.zhongjin.ZhongJinPayUtil;
-import com.tuhanbao.util.exception.MyException;
 
 /**
  * 2016年11月22日

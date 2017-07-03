@@ -1,6 +1,6 @@
 package com.tuhanbao.web.controller.authority;
 
-import com.tuhanbao.util.exception.MyException;
+import com.tuhanbao.base.util.exception.MyException;
 
 /**
  * 权限项

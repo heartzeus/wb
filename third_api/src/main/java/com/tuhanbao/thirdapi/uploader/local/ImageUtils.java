@@ -12,12 +12,12 @@ import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
 
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.io.base.RandomUtil;
-import com.tuhanbao.io.objutil.FileUtil;
-import com.tuhanbao.io.objutil.TimeUtil;
+import com.tuhanbao.base.Constants;
+import com.tuhanbao.base.util.log.LogManager;
+import com.tuhanbao.base.util.objutil.FileUtil;
+import com.tuhanbao.base.util.objutil.RandomUtil;
+import com.tuhanbao.base.util.objutil.TimeUtil;
 import com.tuhanbao.thirdapi.ProjectType;
-import com.tuhanbao.util.log.LogManager;
 
 /**
  * 整个类带整改

@@ -1,8 +1,8 @@
 package com.tuhanbao.autotool.mvc;
 
-import com.tuhanbao.util.config.Config;
-import com.tuhanbao.util.config.ConfigManager;
-import com.tuhanbao.util.config.ConfigRefreshListener;
+import com.tuhanbao.base.util.config.Config;
+import com.tuhanbao.base.util.config.ConfigManager;
+import com.tuhanbao.base.util.config.ConfigRefreshListener;
 
 public class ProjectConfig implements ConfigRefreshListener {
 	public static String CONFIG_URL;

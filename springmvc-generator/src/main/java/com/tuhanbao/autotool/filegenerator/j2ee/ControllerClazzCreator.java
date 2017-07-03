@@ -4,13 +4,13 @@ import com.tuhanbao.Constants;
 import com.tuhanbao.autotool.mvc.J2EETable;
 import com.tuhanbao.autotool.mvc.ProjectConfig;
 import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
-import com.tuhanbao.io.impl.classUtil.ClassInfo;
-import com.tuhanbao.io.impl.classUtil.MethodInfo;
-import com.tuhanbao.io.impl.classUtil.PackageEnum;
-import com.tuhanbao.io.impl.classUtil.VarInfo;
-import com.tuhanbao.io.impl.tableUtil.ImportColumn;
-import com.tuhanbao.io.objutil.OverwriteStrategy;
-import com.tuhanbao.util.util.clazz.ClazzUtil;
+import com.tuhanbao.base.util.clazz.ClazzUtil;
+import com.tuhanbao.base.util.io.codeGenarator.classUtil.ClassInfo;
+import com.tuhanbao.base.util.io.codeGenarator.classUtil.MethodInfo;
+import com.tuhanbao.base.util.io.codeGenarator.classUtil.PackageEnum;
+import com.tuhanbao.base.util.io.codeGenarator.classUtil.VarInfo;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportColumn;
+import com.tuhanbao.base.util.objutil.OverwriteStrategy;
 
 
 public class ControllerClazzCreator extends J2EETableClazzCreator {

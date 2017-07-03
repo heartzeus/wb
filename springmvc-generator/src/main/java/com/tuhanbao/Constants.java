@@ -2,7 +2,7 @@ package com.tuhanbao;
 
 import com.tuhanbao.web.service.IService;
 
-public class Constants extends com.tuhanbao.io.base.Constants {
+public class Constants extends com.tuhanbao.base.Constants {
 	public static final String CONTROLLER = "controller";
 
 	public static final String CONSTANTS = "constants";

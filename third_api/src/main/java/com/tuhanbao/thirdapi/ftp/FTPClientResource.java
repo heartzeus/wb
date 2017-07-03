@@ -5,9 +5,9 @@ import java.io.InputStream;
 
 import org.apache.commons.net.ftp.FTPClient;
 
-import com.tuhanbao.util.IResource;
-import com.tuhanbao.util.IResourceManager;
-import com.tuhanbao.util.exception.MyException;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.rm.IResource;
+import com.tuhanbao.base.util.rm.IResourceManager;
 
 public class FTPClientResource extends IResource {
 

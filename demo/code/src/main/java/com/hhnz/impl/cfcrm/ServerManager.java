@@ -7,7 +7,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import com.tuhanbao.web.IServerManager;
 import com.hhnz.impl.cfcrm.mapper.cfcrm.CfcrmMapper;
 import com.tuhanbao.web.filter.SelectorFactory;
-import com.tuhanbao.web.filter.SelectorFilter;
+import com.tuhanbao.web.filter.MyBatisSelectorFilter;
 import com.tuhanbao.base.dataservice.ServiceBean;
 import com.tuhanbao.thirdapi.cache.CacheManager;
 import com.hhnz.api.cfcrm.constants.TableConstants;
@@ -31,7 +31,7 @@ public class ServerManager implements ApplicationListener<ContextRefreshedEvent>
         if (!isInit) {
             //初始化redis缓存
             if (!CacheManager.hasCacheDataGroup(TableConstants.T_VIP_PRIMARY_INFO.TABLE)) {
-                CacheManager.save(cfcrmMapper.select(new SelectorFilter(SelectorFactory.getTablesSelector(TableConstants.T_VIP_PRIMARY_INFO.TABLE))));
+                CacheManager.save(cfcrmMapper.select(new MyBatisSelectorFilter(SelectorFactory.getTablesSelector(TableConstants.T_VIP_PRIMARY_INFO.TABLE))));
             }
 
 

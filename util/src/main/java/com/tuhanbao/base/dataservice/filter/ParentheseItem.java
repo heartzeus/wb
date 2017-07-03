@@ -2,7 +2,7 @@ package com.tuhanbao.base.dataservice.filter;
 
 import java.util.Collection;
 
-import com.tuhanbao.io.base.Constants;
+import com.tuhanbao.base.Constants;
 
 public enum ParentheseItem implements IFilterItem {
 	

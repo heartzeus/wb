@@ -5,9 +5,9 @@ import java.util.List;
 import com.tuhanbao.base.dataservice.IData;
 import com.tuhanbao.base.dataservice.IDataGroup;
 import com.tuhanbao.base.dataservice.ISyncData;
+import com.tuhanbao.base.util.config.ConfigManager;
 import com.tuhanbao.thirdapi.cache.mem.MemCacheManager;
 import com.tuhanbao.thirdapi.cache.redis.RedisResourceManager;
-import com.tuhanbao.util.config.ConfigManager;
 
 public class CacheManager {
     private static final String REDIS_KEY = "redis";

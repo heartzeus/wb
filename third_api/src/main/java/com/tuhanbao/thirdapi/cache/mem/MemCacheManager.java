@@ -1,10 +1,10 @@
 package com.tuhanbao.thirdapi.cache.mem;
 
 import com.tuhanbao.thirdapi.cache.ICacheResource;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.rm.IResource;
+import com.tuhanbao.base.util.rm.IResourceManager;
 import com.tuhanbao.thirdapi.cache.CacheResourceFactory;
-import com.tuhanbao.util.IResource;
-import com.tuhanbao.util.IResourceManager;
-import com.tuhanbao.util.exception.MyException;
 
 public class MemCacheManager extends IResourceManager implements CacheResourceFactory {
     

@@ -3,11 +3,11 @@ package com.tuhanbao.autotool.mvc;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.io.objutil.StringUtil;
-import com.tuhanbao.util.config.ConfigManager;
-import com.tuhanbao.util.config.ConfigPattern;
-import com.tuhanbao.util.db.conn.DBSrc;
+import com.tuhanbao.base.Constants;
+import com.tuhanbao.base.util.config.ConfigManager;
+import com.tuhanbao.base.util.config.ConfigPattern;
+import com.tuhanbao.base.util.db.conn.DBSrc;
+import com.tuhanbao.base.util.objutil.StringUtil;
 
 public class ModuleManager {
 	private static final Map<ConfigPattern, Map<String, DBSrc>> MODULES = new HashMap<>();

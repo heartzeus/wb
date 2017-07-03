@@ -11,13 +11,13 @@ import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.GeneratePresignedUrlRequest;
 import com.aliyun.oss.model.OSSObjectSummary;
 import com.aliyun.oss.model.ObjectListing;
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.io.objutil.TimeUtil;
-import com.tuhanbao.util.exception.BaseErrorCode;
-import com.tuhanbao.util.exception.MyException;
-import com.tuhanbao.util.log.LogManager;
-import com.tuhanbao.util.thread.TimerEvent;
-import com.tuhanbao.util.thread.TimerThreadFactory;
+import com.tuhanbao.base.Constants;
+import com.tuhanbao.base.util.exception.BaseErrorCode;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.log.LogManager;
+import com.tuhanbao.base.util.objutil.TimeUtil;
+import com.tuhanbao.base.util.thread.TimerEvent;
+import com.tuhanbao.base.util.thread.TimerThreadFactory;
 
 public class OSSManager extends TimerEvent {
     private Map<String, OSSObject> OSS_MAP = new HashMap<String, OSSObject>();

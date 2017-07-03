@@ -10,7 +10,7 @@ import com.hhnz.api.cfcrm.constants.TableConstants;
 import com.hhnz.api.cfcrm.model.cfcrm.Permission;
 import com.hhnz.api.cfcrm.service.cfcrm.IPermissionService;
 import com.tuhanbao.base.dataservice.filter.Filter;
-import com.tuhanbao.util.exception.MyException;
+import com.tuhanbao.base.util.exception.MyException;
 import com.tuhanbao.web.filter.MyBatisSelector;
 
 @Service("permissionService")

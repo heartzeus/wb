@@ -7,11 +7,11 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.io.objutil.FileUtil;
-import com.tuhanbao.io.objutil.StringUtil;
-import com.tuhanbao.util.config.ConfigManager;
-import com.tuhanbao.util.log.LogManager;
+import com.tuhanbao.base.Constants;
+import com.tuhanbao.base.util.config.ConfigManager;
+import com.tuhanbao.base.util.log.LogManager;
+import com.tuhanbao.base.util.objutil.FileUtil;
+import com.tuhanbao.base.util.objutil.StringUtil;
 import com.tuhanbao.web.ServerManager;
 
 public class MyPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {

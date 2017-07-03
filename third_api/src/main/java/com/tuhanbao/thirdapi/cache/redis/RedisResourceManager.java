@@ -3,10 +3,10 @@ package com.tuhanbao.thirdapi.cache.redis;
 import java.sql.SQLException;
 
 import com.tuhanbao.thirdapi.cache.ICacheResource;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.rm.IResource;
+import com.tuhanbao.base.util.rm.IResourceManager;
 import com.tuhanbao.thirdapi.cache.CacheResourceFactory;
-import com.tuhanbao.util.IResource;
-import com.tuhanbao.util.IResourceManager;
-import com.tuhanbao.util.exception.MyException;
 
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;

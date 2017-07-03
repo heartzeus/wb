@@ -2,8 +2,8 @@ package com.tuhanbao.autotool.mvc;
 
 import java.util.List;
 
-import com.tuhanbao.io.objutil.OverwriteStrategy;
-import com.tuhanbao.util.db.table.CacheType;
+import com.tuhanbao.base.util.db.table.CacheType;
+import com.tuhanbao.base.util.objutil.OverwriteStrategy;
 
 public class TableConfig {
 

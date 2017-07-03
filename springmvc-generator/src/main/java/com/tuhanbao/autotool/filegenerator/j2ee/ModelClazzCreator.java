@@ -2,10 +2,10 @@ package com.tuhanbao.autotool.filegenerator.j2ee;
 
 import com.tuhanbao.autotool.mvc.J2EETable;
 import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
-import com.tuhanbao.io.impl.classUtil.ClassInfo;
-import com.tuhanbao.io.impl.classUtil.MethodInfo;
-import com.tuhanbao.io.impl.classUtil.PackageEnum;
-import com.tuhanbao.io.objutil.OverwriteStrategy;
+import com.tuhanbao.base.util.io.codeGenarator.classUtil.ClassInfo;
+import com.tuhanbao.base.util.io.codeGenarator.classUtil.MethodInfo;
+import com.tuhanbao.base.util.io.codeGenarator.classUtil.PackageEnum;
+import com.tuhanbao.base.util.objutil.OverwriteStrategy;
 
 public class ModelClazzCreator extends J2EETableClazzCreator {
     private static final String MOCLASS_SUFFIX = "MO";

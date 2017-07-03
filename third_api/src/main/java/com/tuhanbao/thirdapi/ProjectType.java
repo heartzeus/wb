@@ -1,6 +1,6 @@
 package com.tuhanbao.thirdapi;
 
-import com.tuhanbao.io.objutil.StringUtil;
+import com.tuhanbao.base.util.objutil.StringUtil;
 
 public enum ProjectType {
     YYT("yyt_fz");

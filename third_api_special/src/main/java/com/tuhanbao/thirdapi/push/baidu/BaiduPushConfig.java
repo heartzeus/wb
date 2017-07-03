@@ -3,10 +3,10 @@
  */
 package com.tuhanbao.thirdapi.push.baidu;
 
-import com.tuhanbao.util.config.Config;
-import com.tuhanbao.util.config.ConfigManager;
-import com.tuhanbao.util.config.ConfigRefreshListener;
-import com.tuhanbao.util.log.LogManager;
+import com.tuhanbao.base.util.config.Config;
+import com.tuhanbao.base.util.config.ConfigManager;
+import com.tuhanbao.base.util.config.ConfigRefreshListener;
+import com.tuhanbao.base.util.log.LogManager;
 
 /**
  * 2016年10月25日

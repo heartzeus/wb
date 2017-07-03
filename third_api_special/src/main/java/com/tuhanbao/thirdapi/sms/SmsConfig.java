@@ -1,9 +1,9 @@
 package com.tuhanbao.thirdapi.sms;
 
-import com.tuhanbao.util.config.ConfigRefreshListener;
-import com.tuhanbao.util.log.LogManager;
-import com.tuhanbao.util.config.ConfigManager;
-import com.tuhanbao.util.config.Config;
+import com.tuhanbao.base.util.config.Config;
+import com.tuhanbao.base.util.config.ConfigManager;
+import com.tuhanbao.base.util.config.ConfigRefreshListener;
+import com.tuhanbao.base.util.log.LogManager;
 
 public class SmsConfig implements ConfigRefreshListener {
     private static final String KEY = "sms";

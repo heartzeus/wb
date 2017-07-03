@@ -5,12 +5,12 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.tuhanbao.util.db.table.Table;
 import com.tuhanbao.web.db.MyBatisSqlSentence;
-import com.tuhanbao.web.filter.SelectorFilter;
+import com.tuhanbao.web.filter.MyBatisSelectorFilter;
 import com.tuhanbao.base.dataservice.SeqBean;
 import com.tuhanbao.base.dataservice.ServiceBean;
 import com.tuhanbao.base.dataservice.filter.Filter;
+import com.tuhanbao.base.util.db.table.Table;
 
 public interface FzMapper<T extends ServiceBean> {
     int insert(T model);
@@ -21,9 +21,9 @@ public interface FzMapper<T extends ServiceBean> {
 
     int updateSelective(@Param("model") T model, @Param("filter") Filter filter);
 
-    int countByFilter(SelectorFilter selector);
+    int countByFilter(MyBatisSelectorFilter selector);
 
-    List<T> select(SelectorFilter selector);
+    List<T> select(MyBatisSelectorFilter selector);
     
     List<Map<String, Object>> excuteSql(MyBatisSqlSentence sqlSentece);
     

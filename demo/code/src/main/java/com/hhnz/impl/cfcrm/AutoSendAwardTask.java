@@ -7,7 +7,7 @@ import com.hhnz.api.cfcrm.model.cfcrm.AwardItem;
 import com.hhnz.api.cfcrm.model.cfcrm.AwardVip;
 import com.hhnz.api.cfcrm.model.cfcrm.VipAwardManage;
 import com.hhnz.api.cfcrm.service.cfcrm.IVipAwardManageService;
-import com.tuhanbao.util.thread.ExcuteOnceTimerTask;
+import com.tuhanbao.base.util.thread.ExcuteOnceTimerTask;
 
 public class AutoSendAwardTask extends ExcuteOnceTimerTask {
     

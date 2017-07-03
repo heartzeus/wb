@@ -6,14 +6,14 @@ import java.util.Map;
 
 import com.tuhanbao.base.dataservice.IDataService;
 import com.tuhanbao.base.dataservice.ServiceBean;
-import com.tuhanbao.util.db.table.data.DataValue;
-import com.tuhanbao.web.filter.SelectorFilter;
+import com.tuhanbao.base.util.db.table.data.DataValue;
+import com.tuhanbao.web.filter.MyBatisSelectorFilter;
 
 public interface IService<T extends ServiceBean> extends IDataService<T>
 {
     int deleteById(Object pkValue);
 
-    int count(SelectorFilter selectorFilter);
+    int count(MyBatisSelectorFilter selectorFilter);
     
 	T selectById(Object pkValue);
 

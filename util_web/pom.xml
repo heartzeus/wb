@@ -12,6 +12,12 @@
 			<groupId>com.tuhanbao</groupId>
 			<artifactId>third_api</artifactId>
 			<version>0.0.2-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>servlet-api</artifactId>
+					<groupId>javax.servlet</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- ibatis依赖的包 -->
@@ -98,8 +104,8 @@
 		<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
 		<dependency>
 		    <groupId>javax.servlet</groupId>
-		    <artifactId>servlet-api</artifactId>
-		    <version>2.5</version>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>3.0.1</version>
 		</dependency>
 		
 		<!-- ControllerAdvice依赖 -->

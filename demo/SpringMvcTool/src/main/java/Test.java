@@ -1,7 +1,7 @@
 import com.tuhanbao.autotool.AGCContext;
 import com.tuhanbao.autotool.mvc.ProjectConfig;
 import com.tuhanbao.base.chain.Context;
-import com.tuhanbao.util.config.ConfigManager;
+import com.tuhanbao.base.util.config.ConfigManager;
 import com.tuhanbao.web.controller.helper.MyPropertyPlaceholderConfigurer;
 
 //TODO ,  主键序列，分页，redis, 地区，枚举，常量（配置文件）

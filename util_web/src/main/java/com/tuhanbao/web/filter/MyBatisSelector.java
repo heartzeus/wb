@@ -7,9 +7,9 @@ import java.util.Map;
 import com.tuhanbao.base.dataservice.filter.Filter;
 import com.tuhanbao.base.dataservice.filter.JoinType;
 import com.tuhanbao.base.dataservice.filter.Selector;
-import com.tuhanbao.util.db.table.Column;
-import com.tuhanbao.util.db.table.Table;
-import com.tuhanbao.util.exception.MyException;
+import com.tuhanbao.base.util.db.table.Column;
+import com.tuhanbao.base.util.db.table.Table;
+import com.tuhanbao.base.util.exception.MyException;
 
 /**
  * 大部分情况下，一个表的查询关联关系是固定的， 此类用于固化这些信息，避免创建Selector时重复创建

@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.tuhanbao.base.dataservice.IDataGroup;
-import com.tuhanbao.util.db.IField;
+import com.tuhanbao.base.util.db.IField;
 
 /**
  * 查询的字段和表

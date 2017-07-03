@@ -9,14 +9,14 @@ import java.util.Map;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.io.impl.tableUtil.DataType;
-import com.tuhanbao.util.db.table.Column;
-import com.tuhanbao.util.db.table.DataValueFactory;
-import com.tuhanbao.util.db.table.ServiceBeanKeyManager;
-import com.tuhanbao.util.db.table.Table;
-import com.tuhanbao.util.db.table.data.DataValue;
-import com.tuhanbao.util.util.json.JsonUtil;
+import com.tuhanbao.base.Constants;
+import com.tuhanbao.base.util.db.table.Column;
+import com.tuhanbao.base.util.db.table.DataValueFactory;
+import com.tuhanbao.base.util.db.table.ServiceBeanKeyManager;
+import com.tuhanbao.base.util.db.table.Table;
+import com.tuhanbao.base.util.db.table.data.DataValue;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.DataType;
+import com.tuhanbao.base.util.json.JsonUtil;
 
 public class ServiceBean implements ISyncData
 {

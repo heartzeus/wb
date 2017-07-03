@@ -1,7 +1,7 @@
 package com.tuhanbao.web.controller.authority;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.tuhanbao.util.db.table.data.BooleanValue;
+import com.tuhanbao.base.util.db.table.data.BooleanValue;
 
 public class Permission implements IPermission{
 

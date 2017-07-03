@@ -42,7 +42,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-import com.tuhanbao.io.base.Constants;
+import com.tuhanbao.base.Constants;
 
 /**
  * This example demonstrates how to create secure connections with a custom SSL

@@ -3,7 +3,7 @@ package com.tuhanbao.web.filter;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.tuhanbao.util.db.table.Table;
+import com.tuhanbao.base.util.db.table.Table;
 
 /**
  * 此类主要为了避免业务人员私自创建selector

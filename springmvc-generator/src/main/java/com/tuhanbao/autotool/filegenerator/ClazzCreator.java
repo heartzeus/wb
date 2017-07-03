@@ -5,11 +5,11 @@ import java.util.List;
 
 import com.tuhanbao.base.chain.IEvent;
 import com.tuhanbao.base.chain.event.CreateFileEvent;
-import com.tuhanbao.io.impl.ProjectInfo;
-import com.tuhanbao.io.impl.classUtil.ClassInfo;
-import com.tuhanbao.io.impl.tableUtil.DataType;
-import com.tuhanbao.io.objutil.OverwriteStrategy;
-import com.tuhanbao.io.objutil.StringUtil;
+import com.tuhanbao.base.util.io.codeGenarator.ProjectInfo;
+import com.tuhanbao.base.util.io.codeGenarator.classUtil.ClassInfo;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.DataType;
+import com.tuhanbao.base.util.objutil.OverwriteStrategy;
+import com.tuhanbao.base.util.objutil.StringUtil;
 
 public abstract class ClazzCreator implements IFileGenerator {
 	

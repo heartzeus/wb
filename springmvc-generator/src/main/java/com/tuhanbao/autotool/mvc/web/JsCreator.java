@@ -2,10 +2,10 @@ package com.tuhanbao.autotool.mvc.web;
 
 import java.util.List;
 
-import com.tuhanbao.util.util.clazz.ClazzUtil;
 import com.tuhanbao.Constants;
 import com.tuhanbao.autotool.mvc.J2EETable;
-import com.tuhanbao.io.impl.tableUtil.DataType;
+import com.tuhanbao.base.util.clazz.ClazzUtil;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.DataType;
 public class JsCreator {
 
 	private static final String gap = "    ";
@@ -63,13 +63,13 @@ public class JsCreator {
 		sb.append(gap2).append("singleSelect:false,").append(Constants.ENTER);
 		sb.append(gap2).append("columns: [").append(Constants.ENTER);
 
-		List<com.tuhanbao.io.impl.tableUtil.ImportColumn> list  = table.getColumns();
-		for(com.tuhanbao.io.impl.tableUtil.ImportColumn column : list){
+		List<com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportColumn> list  = table.getColumns();
+		for(com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportColumn column : list){
 			if(column.isPK()){
 				sb.append(gap2).append("{ field: 'ck', title: '编号', radio:true },").append(Constants.ENTER);
-			}else if(!column.isPK() && column.getDataType().equals(com.tuhanbao.io.impl.tableUtil.DataType.BOOLEAN)){
+			}else if(!column.isPK() && column.getDataType().equals(com.tuhanbao.base.util.io.codeGenarator.tableUtil.DataType.BOOLEAN)){
 				sb.append(gap2).append("{ field: '"+ ClazzUtil.getVarName(column.getName()) +"', title: '" + column.getComment() + "', align: 'left',  formatter:function(value,index,row){ return genBoolean(value)}").append(Constants.ENTER);
-			}else if(!column.isPK() && column.getDataType().equals(com.tuhanbao.io.impl.tableUtil.DataType.DATE)){
+			}else if(!column.isPK() && column.getDataType().equals(com.tuhanbao.base.util.io.codeGenarator.tableUtil.DataType.DATE)){
 				sb.append(gap2).append("{ field: '"+ ClazzUtil.getVarName(column.getName()) +"', title: '" + column.getComment() + "', align: 'left', formatter:parsedate},").append(Constants.ENTER);
 			}else{
 				sb.append(gap2).append("{ field: '"+ ClazzUtil.getVarName(column.getName()) +"', title: '" + column.getComment() + "', align: 'left' },").append(Constants.ENTER);
@@ -124,8 +124,8 @@ public class JsCreator {
 		sb.append("function initValidate(formId){").append(Constants.ENTER);
 		sb.append(gap).append("var validator = $(formId).validate({").append(Constants.ENTER);
 		sb.append(gap2).append("rules: {").append(Constants.ENTER);
-		List<com.tuhanbao.io.impl.tableUtil.ImportColumn> list  = table.getColumns();
-		for(com.tuhanbao.io.impl.tableUtil.ImportColumn column : list){
+		List<com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportColumn> list  = table.getColumns();
+		for(com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportColumn column : list){
 			if(!column.isPK() && (column.getDataType().equals(DataType.BIGDEECIMAL) || column.getDataType().equals(DataType.FLOAT)
 					 || column.getDataType().equals(DataType.INT)|| column.getDataType().equals(DataType.LONG)
 					 || column.getDataType().equals(DataType.SHORT)|| column.getDataType().equals(DataType.DOUBLE))){
@@ -145,8 +145,8 @@ public class JsCreator {
 		sb.append(gap).append("var rows =table.bootstrapTable(\"getSelections\");").append(Constants.ENTER);
 		
 		sb.append(gap).append("if(rows && rows.length ==1){").append(Constants.ENTER);
-		List<com.tuhanbao.io.impl.tableUtil.ImportColumn> list  = table.getColumns();
-		for (com.tuhanbao.io.impl.tableUtil.ImportColumn column : list) {
+		List<com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportColumn> list  = table.getColumns();
+		for (com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportColumn column : list) {
 			if (column.getDataType().equals(DataType.DATE)) {
 				sb.append(gap2).append("rows[0]." + ClazzUtil.getVarName(column.getName()) +" = parsedate(rows[0]."
 			    + ClazzUtil.getVarName(column.getName()) +",null,null);").append(Constants.ENTER);
@@ -213,8 +213,8 @@ public class JsCreator {
 	
 	private void getDatePicker(StringBuilder sb, J2EETable table) {
 		sb.append("$(document).ready(function(){").append(Constants.ENTER);
-		List<com.tuhanbao.io.impl.tableUtil.ImportColumn> list = table.getColumns();
-		for (com.tuhanbao.io.impl.tableUtil.ImportColumn column : list) {
+		List<com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportColumn> list = table.getColumns();
+		for (com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportColumn column : list) {
 			//新增
 			if (!column.isPK() && column.getDataType().equals(DataType.DATE)) {
 				sb.append(gap).append("$(\"#"+ ClazzUtil.getVarName(column.getName()) +"\").datetimepicker({").append(Constants.ENTER);

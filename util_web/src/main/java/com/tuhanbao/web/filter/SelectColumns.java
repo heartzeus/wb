@@ -3,7 +3,7 @@ package com.tuhanbao.web.filter;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.tuhanbao.util.db.table.Column;
+import com.tuhanbao.base.util.db.table.Column;
 
 public class SelectColumns {
 	private Set<Column> columns = new HashSet<Column>();

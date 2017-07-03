@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.util.exception.MyException;
-import com.tuhanbao.util.log.LogManager;
+import com.tuhanbao.base.Constants;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.log.LogManager;
 import com.tuhanbao.web.controller.helper.ResultBean;
 
 /**

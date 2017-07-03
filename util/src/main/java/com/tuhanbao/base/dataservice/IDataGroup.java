@@ -2,7 +2,7 @@ package com.tuhanbao.base.dataservice;
 
 import java.util.List;
 
-import com.tuhanbao.util.db.IField;
+import com.tuhanbao.base.util.db.IField;
 
 public interface IDataGroup<T extends IField> {
     String getName();

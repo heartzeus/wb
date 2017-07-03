@@ -1,10 +1,10 @@
 package com.tuhanbao.web.filter;
 
+import com.tuhanbao.base.Constants;
 import com.tuhanbao.base.dataservice.filter.Filter;
 import com.tuhanbao.base.dataservice.filter.operator.Operator;
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.io.objutil.StringUtil;
-import com.tuhanbao.util.db.table.Column;
+import com.tuhanbao.base.util.db.table.Column;
+import com.tuhanbao.base.util.objutil.StringUtil;
 
 public class FilterUtil {
 

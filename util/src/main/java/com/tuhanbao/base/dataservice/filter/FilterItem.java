@@ -5,11 +5,11 @@ import java.util.Collection;
 import java.util.List;
 
 import com.tuhanbao.base.dataservice.filter.operator.Operator;
-import com.tuhanbao.io.impl.tableUtil.DataType;
-import com.tuhanbao.util.db.IField;
-import com.tuhanbao.util.db.table.DataValueFactory;
-import com.tuhanbao.util.exception.BaseErrorCode;
-import com.tuhanbao.util.exception.MyException;
+import com.tuhanbao.base.util.db.IField;
+import com.tuhanbao.base.util.db.table.DataValueFactory;
+import com.tuhanbao.base.util.exception.BaseErrorCode;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.DataType;
 
 /**
  * 过滤表达式 常见的过滤表达式都是二元比较，但是也有类似与between，in等三元的比较符

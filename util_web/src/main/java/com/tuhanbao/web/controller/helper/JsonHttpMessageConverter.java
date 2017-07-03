@@ -15,10 +15,10 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 
 import com.alibaba.fastjson.JSON;
-import com.tuhanbao.io.IOUtil;
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.util.exception.BaseErrorCode;
-import com.tuhanbao.util.exception.ErrorCodeMsgManager;
+import com.tuhanbao.base.Constants;
+import com.tuhanbao.base.util.exception.BaseErrorCode;
+import com.tuhanbao.base.util.exception.ErrorCodeMsgManager;
+import com.tuhanbao.base.util.io.IOUtil;
 
 /**
  * Created by dell on 2016/6/16.

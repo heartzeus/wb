@@ -1,7 +1,7 @@
 package com.tuhanbao.thirdapi.push.jiguang;
 
 import com.google.gson.JsonObject;
-import com.tuhanbao.util.log.LogManager;
+import com.tuhanbao.base.util.log.LogManager;
 
 import cn.jiguang.common.ClientConfig;
 import cn.jiguang.common.resp.APIConnectionException;

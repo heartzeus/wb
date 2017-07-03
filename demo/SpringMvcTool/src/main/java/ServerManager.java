@@ -1,6 +1,6 @@
 
-import com.tuhanbao.util.config.ConfigManager;
-import com.tuhanbao.util.log.LogManager;
+import com.tuhanbao.base.util.config.ConfigManager;
+import com.tuhanbao.base.util.log.LogManager;
 
 public class ServerManager
 {

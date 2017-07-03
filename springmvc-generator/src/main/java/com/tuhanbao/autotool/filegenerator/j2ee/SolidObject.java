@@ -1,6 +1,6 @@
 package com.tuhanbao.autotool.filegenerator.j2ee;
 
-import com.tuhanbao.io.objutil.OverwriteStrategy;
+import com.tuhanbao.base.util.objutil.OverwriteStrategy;
 
 public class SolidObject {
     private String key;

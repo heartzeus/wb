@@ -3,10 +3,10 @@ package com.tuhanbao.base.dataservice;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.util.db.table.Column;
-import com.tuhanbao.util.db.table.Table;
-import com.tuhanbao.util.db.table.data.DataValue;
+import com.tuhanbao.base.Constants;
+import com.tuhanbao.base.util.db.table.Column;
+import com.tuhanbao.base.util.db.table.Table;
+import com.tuhanbao.base.util.db.table.data.DataValue;
 
 /**
  * 元数据对象

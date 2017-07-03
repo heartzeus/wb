@@ -1,6 +1,6 @@
 package com.tuhanbao.thirdapi.pay.zhongjin;
 
-import com.tuhanbao.io.base.Constants;
+import com.tuhanbao.base.Constants;
 import com.tuhanbao.thirdapi.pay.FlowStatus;
 
 public enum ZhongJinPayStatus {

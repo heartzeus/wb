@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import com.tuhanbao.util.log.LogManager;
+import com.tuhanbao.base.util.log.LogManager;
 
 /**  
  *  缩略图实现，将图片(jpg、bmp、png、gif等等)真实的变成想要的大小  

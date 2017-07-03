@@ -28,7 +28,7 @@ import org.apache.ibatis.reflection.wrapper.ObjectWrapper;
 import org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory;
 
 import com.tuhanbao.base.dataservice.ServiceBean;
-import com.tuhanbao.util.db.table.data.DataValue;
+import com.tuhanbao.base.util.db.table.data.DataValue;
 
 /**
  * @author Clinton Begin

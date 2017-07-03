@@ -8,7 +8,7 @@ import java.util.List;
 import com.tuhanbao.base.dataservice.IDataGroup;
 import com.tuhanbao.base.dataservice.filter.operator.Operator;
 import com.tuhanbao.base.dataservice.filter.page.Page;
-import com.tuhanbao.util.db.IField;
+import com.tuhanbao.base.util.db.IField;
 
 /**
  * 过滤条件

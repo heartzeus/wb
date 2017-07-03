@@ -1,9 +1,9 @@
 package com.tuhanbao.web.filter;
 
-import com.tuhanbao.io.impl.tableUtil.DataType;
-import com.tuhanbao.io.objutil.StringUtil;
-import com.tuhanbao.util.db.table.Column;
-import com.tuhanbao.util.db.table.Table;
+import com.tuhanbao.base.util.db.table.Column;
+import com.tuhanbao.base.util.db.table.Table;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.DataType;
+import com.tuhanbao.base.util.objutil.StringUtil;
 
 /**
  * 连表的时候会有别名，需要扩展column

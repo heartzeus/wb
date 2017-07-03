@@ -8,14 +8,14 @@ import java.net.SocketException;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.io.objutil.FileUtil;
-import com.tuhanbao.io.objutil.StringUtil;
+import com.tuhanbao.base.Constants;
+import com.tuhanbao.base.util.config.Config;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.log.LogManager;
+import com.tuhanbao.base.util.objutil.FileUtil;
+import com.tuhanbao.base.util.objutil.StringUtil;
+import com.tuhanbao.base.util.rm.IResourceManager;
 import com.tuhanbao.thirdapi.uploader.FileUploader;
-import com.tuhanbao.util.IResourceManager;
-import com.tuhanbao.util.config.Config;
-import com.tuhanbao.util.exception.MyException;
-import com.tuhanbao.util.log.LogManager;
 
 public class FTPManager extends IResourceManager implements FileUploader {
     private Config config = null;

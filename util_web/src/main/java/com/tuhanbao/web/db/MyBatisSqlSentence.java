@@ -2,8 +2,8 @@ package com.tuhanbao.web.db;
 
 import java.lang.reflect.Method;
 
-import com.tuhanbao.util.db.table.data.DataValue;
-import com.tuhanbao.util.exception.MyException;
+import com.tuhanbao.base.util.db.table.data.DataValue;
+import com.tuhanbao.base.util.exception.MyException;
 
 public class MyBatisSqlSentence {
     private String sql;

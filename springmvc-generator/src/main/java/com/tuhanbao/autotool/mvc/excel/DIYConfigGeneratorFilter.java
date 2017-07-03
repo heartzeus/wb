@@ -7,18 +7,18 @@ import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
 import com.tuhanbao.base.chain.Context;
 import com.tuhanbao.base.chain.FilterAnnotation;
 import com.tuhanbao.base.chain.event.CreateFileEvent;
-import com.tuhanbao.io.impl.classUtil.ClassInfo;
-import com.tuhanbao.io.impl.classUtil.MethodInfo;
-import com.tuhanbao.io.impl.classUtil.PackageEnum;
-import com.tuhanbao.io.impl.classUtil.VarInfo;
-import com.tuhanbao.io.impl.codeUtil.Xls2CodeUtil;
-import com.tuhanbao.io.objutil.ArrayUtil;
-import com.tuhanbao.io.objutil.FileUtil;
-import com.tuhanbao.io.objutil.StringUtil;
-import com.tuhanbao.util.config.ConfigManager;
-import com.tuhanbao.util.config.ConfigPattern;
-import com.tuhanbao.util.db.table.data.BooleanValue;
-import com.tuhanbao.util.util.clazz.ClazzUtil;
+import com.tuhanbao.base.util.clazz.ClazzUtil;
+import com.tuhanbao.base.util.config.ConfigManager;
+import com.tuhanbao.base.util.config.ConfigPattern;
+import com.tuhanbao.base.util.db.table.data.BooleanValue;
+import com.tuhanbao.base.util.io.codeGenarator.classUtil.ClassInfo;
+import com.tuhanbao.base.util.io.codeGenarator.classUtil.MethodInfo;
+import com.tuhanbao.base.util.io.codeGenarator.classUtil.PackageEnum;
+import com.tuhanbao.base.util.io.codeGenarator.classUtil.VarInfo;
+import com.tuhanbao.base.util.io.codeGenarator.codeUtil.Xls2CodeUtil;
+import com.tuhanbao.base.util.objutil.ArrayUtil;
+import com.tuhanbao.base.util.objutil.FileUtil;
+import com.tuhanbao.base.util.objutil.StringUtil;
 
 @FilterAnnotation("diyConfig")
 @SuppressWarnings("unchecked")

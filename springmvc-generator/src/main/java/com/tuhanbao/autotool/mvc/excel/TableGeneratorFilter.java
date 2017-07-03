@@ -9,7 +9,7 @@ import com.tuhanbao.autotool.mvc.ProjectConfig;
 import com.tuhanbao.autotool.mvc.SpringMvcProjectInfo;
 import com.tuhanbao.base.chain.Context;
 import com.tuhanbao.base.chain.FilterAnnotation;
-import com.tuhanbao.io.impl.tableUtil.ImportTable;
+import com.tuhanbao.base.util.io.codeGenarator.tableUtil.ImportTable;
 
 @FilterAnnotation("table")
 public class TableGeneratorFilter extends ExcelAGCFilter {

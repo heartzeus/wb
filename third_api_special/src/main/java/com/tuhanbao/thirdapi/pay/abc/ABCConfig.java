@@ -3,10 +3,10 @@ package com.tuhanbao.thirdapi.pay.abc;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.tuhanbao.util.config.Config;
-import com.tuhanbao.util.config.ConfigManager;
-import com.tuhanbao.util.config.ConfigRefreshListener;
-import com.tuhanbao.util.log.LogManager;
+import com.tuhanbao.base.util.config.Config;
+import com.tuhanbao.base.util.config.ConfigManager;
+import com.tuhanbao.base.util.config.ConfigRefreshListener;
+import com.tuhanbao.base.util.log.LogManager;
 
 public final class ABCConfig implements ConfigRefreshListener {
     

@@ -9,11 +9,11 @@ import java.util.StringTokenizer;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.io.objutil.StringUtil;
-import com.tuhanbao.util.log.LogManager;
-import com.tuhanbao.util.util.clazz.ClazzUtil;
-import com.tuhanbao.util.util.clazz.IClassFilter;
+import com.tuhanbao.base.Constants;
+import com.tuhanbao.base.util.clazz.ClazzUtil;
+import com.tuhanbao.base.util.clazz.IClassFilter;
+import com.tuhanbao.base.util.log.LogManager;
+import com.tuhanbao.base.util.objutil.StringUtil;
 
 public class ResponseAdapterManager {
 

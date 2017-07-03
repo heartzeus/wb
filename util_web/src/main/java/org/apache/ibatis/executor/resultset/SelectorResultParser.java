@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.Map;
 
 import com.tuhanbao.base.dataservice.ServiceBean;
-import com.tuhanbao.util.db.table.Column;
-import com.tuhanbao.util.db.table.DataValueFactory;
-import com.tuhanbao.util.db.table.Table;
-import com.tuhanbao.util.db.table.data.DataValue;
-import com.tuhanbao.util.exception.MyException;
+import com.tuhanbao.base.util.db.table.Column;
+import com.tuhanbao.base.util.db.table.DataValueFactory;
+import com.tuhanbao.base.util.db.table.Table;
+import com.tuhanbao.base.util.db.table.data.DataValue;
+import com.tuhanbao.base.util.exception.MyException;
 import com.tuhanbao.web.filter.AsColumn;
 import com.tuhanbao.web.filter.SelectTable;
-import com.tuhanbao.web.filter.SelectorFilter;
+import com.tuhanbao.web.filter.MyBatisSelectorFilter;
 
 public class SelectorResultParser {
 	
@@ -33,7 +33,7 @@ public class SelectorResultParser {
      * @return
      * @throws SQLException
      */
-	public static List<ServiceBean> parser(SelectorFilter selector, ResultSetWrapper rsw) throws SQLException {
+	public static List<ServiceBean> parser(MyBatisSelectorFilter selector, ResultSetWrapper rsw) throws SQLException {
 		List<ServiceBean> list = new ArrayList<ServiceBean>();
 		
 		while (rsw.getResultSet().next()) {
@@ -56,7 +56,7 @@ public class SelectorResultParser {
 		return list;
 	}
 	
-	private static void initValue(SelectorFilter selector, ResultSet rs, Column col, Map<String, ServiceBean> map) throws SQLException {
+	private static void initValue(MyBatisSelectorFilter selector, ResultSet rs, Column col, Map<String, ServiceBean> map) throws SQLException {
 		DataValue dataValue = DataValueFactory.read(col, rs);
 		if (dataValue == null) return;
 		
@@ -74,7 +74,7 @@ public class SelectorResultParser {
      * @param table
      * @return
      */
-	private static ServiceBean createParentBean(Map<String, ServiceBean> map, SelectorFilter selector, String key, Table table) {
+	private static ServiceBean createParentBean(Map<String, ServiceBean> map, MyBatisSelectorFilter selector, String key, Table table) {
 		if (map.containsKey(key)) {
 			return map.get(key);
 		}

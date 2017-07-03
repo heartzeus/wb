@@ -7,9 +7,9 @@ import com.tuhanbao.base.dataservice.IData;
 import com.tuhanbao.base.dataservice.IDataGroup;
 import com.tuhanbao.base.dataservice.ISyncData;
 import com.tuhanbao.base.dataservice.filter.Filter;
-import com.tuhanbao.util.IResource;
-import com.tuhanbao.util.IResourceManager;
-import com.tuhanbao.util.exception.MyException;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.rm.IResource;
+import com.tuhanbao.base.util.rm.IResourceManager;
 
 public abstract class CacheResource extends IResource implements ICacheResource {
     

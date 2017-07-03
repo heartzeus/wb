@@ -3,14 +3,14 @@ package com.tuhanbao.web.filter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tuhanbao.base.Constants;
 import com.tuhanbao.base.dataservice.IDataGroup;
 import com.tuhanbao.base.dataservice.filter.Filter;
 import com.tuhanbao.base.dataservice.filter.IFilterItem;
 import com.tuhanbao.base.dataservice.filter.OrderField;
 import com.tuhanbao.base.dataservice.filter.operator.Operator;
 import com.tuhanbao.base.dataservice.filter.page.Page;
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.util.db.IField;
+import com.tuhanbao.base.util.db.IField;
 
 /**
  * 由于mybatis使用的是mapper文件配置的方法，为了不污染filter类，特创建此类

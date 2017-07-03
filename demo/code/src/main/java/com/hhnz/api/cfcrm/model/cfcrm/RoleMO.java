@@ -1,12 +1,13 @@
 package com.hhnz.api.cfcrm.model.cfcrm;
 
 import com.tuhanbao.base.dataservice.ServiceBean;
+import com.tuhanbao.base.util.db.table.data.LongValue;
+import com.tuhanbao.base.util.db.table.data.StringValue;
+import com.tuhanbao.base.util.db.table.data.TimeValue;
 import com.hhnz.api.cfcrm.constants.TableConstants;
 import com.tuhanbao.base.dataservice.MetaObject;
-import com.tuhanbao.util.db.table.data.LongValue;
-import com.tuhanbao.util.db.table.data.StringValue;
+
 import java.util.Date;
-import com.tuhanbao.util.db.table.data.TimeValue;
 import java.util.List;
 
 public class RoleMO extends ServiceBean {

@@ -2,14 +2,14 @@ package com.tuhanbao.web.controller.authority;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.io.impl.encipherUtil.Encipher;
-import com.tuhanbao.io.impl.encipherUtil.EncipherType;
-import com.tuhanbao.io.objutil.StringUtil;
-import com.tuhanbao.io.objutil.TimeUtil;
+import com.tuhanbao.base.Constants;
+import com.tuhanbao.base.util.encipher.Encipher;
+import com.tuhanbao.base.util.encipher.EncipherType;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.objutil.StringUtil;
+import com.tuhanbao.base.util.objutil.TimeUtil;
 import com.tuhanbao.thirdapi.cache.CacheKey;
 import com.tuhanbao.thirdapi.cache.CacheManager;
-import com.tuhanbao.util.exception.MyException;
 
 public class TokenService {
     

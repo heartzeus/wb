@@ -7,9 +7,9 @@ import java.util.TreeMap;
 
 import com.hhnz.api.cfcrm.model.cfcrm.AwardItem;
 import com.hhnz.api.cfcrm.model.cfcrm.VipPrimaryInfo;
-import com.tuhanbao.io.base.Constants;
-import com.tuhanbao.io.http.HttpSendUtil;
-import com.tuhanbao.util.log.LogManager;
+import com.tuhanbao.base.Constants;
+import com.tuhanbao.base.util.http.HttpSendUtil;
+import com.tuhanbao.base.util.log.LogManager;
 
 public abstract class JumuApi implements IAwardApi {
 

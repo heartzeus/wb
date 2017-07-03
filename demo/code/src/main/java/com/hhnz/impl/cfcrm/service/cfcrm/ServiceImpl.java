@@ -19,21 +19,21 @@ import com.tuhanbao.base.dataservice.filter.Filter;
 import com.tuhanbao.base.dataservice.filter.FilterItem;
 import com.tuhanbao.base.dataservice.filter.IFilterItem;
 import com.tuhanbao.base.dataservice.filter.page.Page;
-import com.tuhanbao.io.objutil.ArrayUtil;
-import com.tuhanbao.io.objutil.StringUtil;
+import com.tuhanbao.base.util.db.table.CacheType;
+import com.tuhanbao.base.util.db.table.Column;
+import com.tuhanbao.base.util.db.table.Table;
+import com.tuhanbao.base.util.db.table.data.DataValue;
+import com.tuhanbao.base.util.db.table.data.LongValue;
+import com.tuhanbao.base.util.exception.MyException;
+import com.tuhanbao.base.util.objutil.ArrayUtil;
+import com.tuhanbao.base.util.objutil.StringUtil;
 import com.tuhanbao.thirdapi.cache.CacheManager;
-import com.tuhanbao.util.db.table.CacheType;
-import com.tuhanbao.util.db.table.Column;
-import com.tuhanbao.util.db.table.Table;
-import com.tuhanbao.util.db.table.data.DataValue;
-import com.tuhanbao.util.db.table.data.LongValue;
-import com.tuhanbao.util.exception.MyException;
 import com.tuhanbao.web.db.MyBatisSqlSentence;
 import com.tuhanbao.web.filter.MyBatisFilter;
 import com.tuhanbao.web.filter.MyBatisSelector;
 import com.tuhanbao.web.filter.SelectTable;
 import com.tuhanbao.web.filter.SelectorFactory;
-import com.tuhanbao.web.filter.SelectorFilter;
+import com.tuhanbao.web.filter.MyBatisSelectorFilter;
 import com.tuhanbao.web.service.IService;
 
 @Transactional
@@ -119,7 +119,7 @@ public class ServiceImpl<E extends ServiceBean> implements IService<E> {
     }
 
     @Override
-    public int count(SelectorFilter selectorFilter) {
+    public int count(MyBatisSelectorFilter selectorFilter) {
         Table table = selectorFilter.getTable().getTable();
         Filter filter = selectorFilter.getFilter();
         List<SelectTable> children = selectorFilter.getTable().getChildren();
@@ -159,7 +159,7 @@ public class ServiceImpl<E extends ServiceBean> implements IService<E> {
             throw new MyException("you canot invoke select(selector, filter) to a cache all table!");
         }
         Page page = filter != null ? filter.getPage() : null;
-        SelectorFilter selectorFilter = new SelectorFilter(selector, filter);
+        MyBatisSelectorFilter selectorFilter = new MyBatisSelectorFilter(selector, filter);
         if (page != null) {
             page.setTotalCount(count(selectorFilter));
         }
